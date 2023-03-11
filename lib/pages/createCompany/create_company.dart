@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'package:dio/dio.dart';
+import 'package:connectify/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 
 class CreateBusinessScreen extends StatefulWidget {
   static const id = '/id';
+
   const CreateBusinessScreen(
       {super.key,
       this.businessName,
@@ -19,6 +20,7 @@ class CreateBusinessScreen extends StatefulWidget {
       this.addressId,
       this.contactDet,
       this.kitchenId});
+
   final Map<dynamic, dynamic>? businessName;
   final bool? update;
 
@@ -45,15 +47,16 @@ class _CreateBusinessScreenState extends State<CreateBusinessScreen> {
   bool loading = true;
   String contactIdMobile = "";
   String contactIdEmail = "";
-  Map<dynamic, dynamic> profiledata = {};
+  Map<dynamic, dynamic> profileData = {};
+
   // String contactIdPhone = "";
-  final categorycontroller = TextEditingController();
+  final categoryController = TextEditingController();
   final roleController = TextEditingController();
-  final establishmentcontroller = TextEditingController();
-  final businessNamecontroller = TextEditingController();
-  final businessDesccontroller = TextEditingController();
-  final mobileNumbercontroller = TextEditingController();
-  final emailAddresscontroller = TextEditingController();
+  final establishmentController = TextEditingController();
+  final businessNameController = TextEditingController();
+  final businessDescController = TextEditingController();
+  final mobileNumberController = TextEditingController();
+  final emailAddressController = TextEditingController();
   final roomController = TextEditingController();
   final localityController = TextEditingController();
   final whatsappController = TextEditingController();
@@ -111,25 +114,18 @@ class _CreateBusinessScreenState extends State<CreateBusinessScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          body: ListView(
+    return Scaffold(
+      body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 50),
-            child: Stack(
-              alignment: Alignment.center,
-              clipBehavior: Clip.none,
-              children: [
-                if (cover != null)
-                  Image.file(
+          Container(
+            child: (cover != null)
+                ? Image.file(
                     cover!.absolute,
                     width: double.infinity,
                     height: 220,
                     fit: BoxFit.fill,
-                  ),
-                if (cover == null)
-                  InkWell(
+                  )
+                : InkWell(
                     onTap: () async {
                       onPickImageButtonClicked();
                     },
@@ -140,236 +136,204 @@ class _CreateBusinessScreenState extends State<CreateBusinessScreen> {
                       fit: BoxFit.fill,
                     ),
                   ),
-                if (cover == null)
-                  // InkWell(
-                  //   onTap: () {
-                  //     onPickImageButtonClicked();
-                  //   },
-                  //   child: Image.network(
-                  //     widget.businessName!["media"]["mediaList"].length >= 1
-                  //         ? "${widget.businessName!["media"]["mediaList"][0]["mediaUrls"][0]}"
-                  //         : "https://as1.ftcdn.net/v2/jpg/03/57/21/96/1000_F_357219656_729YVCFiuzUTicH8m1ESxfEGELbQhUHe.jpg",
-                  //     width: double.infinity,
-                  //     height: 220,
-                  //     fit: BoxFit.fitWidth,
-                  //   ),
-                  // ),
-                  if (cover != null)
-                    Image.file(
-                      cover!.absolute,
-                      width: double.infinity,
-                      height: 220,
-                      fit: BoxFit.fill,
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 170),
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 60),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        decoration: const BoxDecoration(
+                          color: AppColors.greyDarker,
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
+                        child: SafeArea(
+                          child: Column(
+                            children: [
+                              const Text('Microsoft', style: TextStyle(fontSize: 36),),
+                              const SizedBox(height: 20),
+                              TextField(
+                                controller: businessNameController,
+                                decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Enter Company Name',
+                                    hintText: 'Enter Your Company Name'),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                controller: businessDescController,
+                                decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Enter Description',
+                                    hintText: 'Enter Your Description'),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                readOnly: true,
+                                controller: categoryController,
+                                onTap: () {},
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  prefixIcon: Icon(Icons.search),
+                                  labelText: 'Enter Category',
+                                  hintText: 'Enter Your Category',
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                controller: establishmentController,
+                                readOnly: true,
+                                onTap: () {
+                                  var status = checkId();
+                                },
+                                // onChanged: (value) {},
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  prefixIcon: Icon(Icons.search),
+                                  labelText: 'Enter Establishment',
+                                  hintText:
+                                      'Enter Your Establishment Type',
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                controller: mobileNumberController,
+                                keyboardType: TextInputType.number,
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  prefixIcon: Icon(Icons.phone),
+                                  labelText: 'Enter Number',
+                                  hintText: 'Enter Your Mobile Number',
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                controller: whatsappController,
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Enter Whatsapp Number',
+                                  hintText: 'Whatsapp',
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                controller: emailAddressController,
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  prefixIcon: Icon(Icons.email),
+                                  labelText: 'Enter Email',
+                                  hintText: 'Enter Your Email',
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                controller: roomController,
+                                maxLines: 1,
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Room/House No.',
+                                  hintText: 'Enter Your Room/House No.',
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                controller: localityController,
+                                maxLines: 1,
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Locality',
+                                  hintText: 'Enter Your Locality',
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              if (widget.update == false)
+                                TextField(
+                                  readOnly: true,
+                                  controller: roleController,
+                                  onTap: () {
+                                    // showDialog(
+                                    //     context: context,
+                                    //     builder: (context) =>
+                                    //         getProfileRole(userdetails));
+                                  },
+                                  decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    prefixIcon: Icon(Icons.search),
+                                    labelText: 'Enter Role',
+                                    hintText: 'Enter Your Role',
+                                  ),
+                                ),
+                              const SizedBox(
+                                height: 80,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
-                Positioned(
-                  bottom: -51,
-                  child: CircleAvatar(
-                    radius: 57,
-                    backgroundColor: Colors.black,
-                  ),
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        clipBehavior: Clip.none,
+                        children: [
+                          const CircleAvatar(
+                            radius: 60,
+                            backgroundColor: AppColors.greyDarker,
+                          ),
+                          (profile != null)
+                              ? CircleAvatar(
+                                  radius: 55,
+                                  backgroundColor: Colors.white,
+                                  backgroundImage: FileImage(
+                                    profile!.absolute,
+                                  ),
+                                )
+                              : InkWell(
+                                  onTap: () async {
+                                    onPickProfileButtonClicked();
+                                  },
+                                  child: const CircleAvatar(
+                                    radius: 50,
+                                    backgroundColor: Colors.white,
+                                    backgroundImage: AssetImage(
+                                      "assets/user.png",
+                                    ),
+                                  ),
+                                ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                if (profile != null)
-                  Positioned(
-                      bottom: -49,
-                      child: CircleAvatar(
-                        radius: 55,
-                        backgroundColor: Colors.white,
-                        backgroundImage: FileImage(
-                          profile!.absolute,
-                        ),
-                      )),
-                if (profile == null)
-                  Positioned(
-                      bottom: -49,
-                      child: InkWell(
-                        onTap: () async {
-                          onPickProfileButtonClicked();
-                        },
-                        child: CircleAvatar(
-                          radius: 55,
-                          backgroundColor: Colors.white,
-                          backgroundImage: AssetImage(
-                            "assets/profile.png",
-                          ),
-                        ),
-                      )),
-                if (profile == null)
-                  // Positioned(
-                  //     bottom: -49,
-                  //     child: InkWell(
-                  //       onTap: () async {
-                  //         // onPickProfileButtonClicked();
-                  //       },
-                  //       child: CircleAvatar(
-                  //         radius: 55,
-                  //         backgroundColor: Colors.white,
-                  //         backgroundImage: NetworkImage(
-                  //           widget.businessName!["media"]["mediaList"]
-                  //                       .length >=
-                  //                   2
-                  //               ? "${widget.businessName!["media"]["mediaList"][1]["mediaUrls"][0]}"
-                  //               : "https://as1.ftcdn.net/v2/jpg/03/57/21/96/1000_F_357219656_729YVCFiuzUTicH8m1ESxfEGELbQhUHe.jpg",
-                  //         ),
-                  //       ),
-                  //     )),
-
-                  if (profile != null)
-                    Positioned(
-                        bottom: -49,
-                        child: CircleAvatar(
-                          radius: 55,
-                          backgroundColor: Colors.white,
-                          backgroundImage: FileImage(
-                            profile!.absolute,
-                          ),
-                        )),
-              ],
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                TextField(
-                  controller: businessNamecontroller,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Enter Company Name',
-                      hintText: 'Enter Your Company Name'),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  controller: businessDesccontroller,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Enter Description',
-                      hintText: 'Enter Your Description'),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  readOnly: true,
-                  controller: categorycontroller,
-                  onTap: () {},
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.search),
-                    labelText: 'Enter Category',
-                    hintText: 'Enter Your Category',
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  controller: establishmentcontroller,
-                  readOnly: true,
-                  onTap: () {
-                    var status = checkId();
-                  },
-                  // onChanged: (value) {},
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.search),
-                    labelText: 'Enter Establishment',
-                    hintText: 'Enter Your Establishment Type',
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  controller: mobileNumbercontroller,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.phone),
-                    labelText: 'Enter Number',
-                    hintText: 'Enter Your Mobile Number',
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  controller: whatsappController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Enter Whatsapp Number',
-                    hintText: 'Whatsapp',
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  controller: emailAddresscontroller,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.email),
-                    labelText: 'Enter Email',
-                    hintText: 'Enter Your Email',
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  controller: roomController,
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Room/House No.',
-                    hintText: 'Enter Your Room/House No.',
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  controller: localityController,
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Locality',
-                    hintText: 'Enter Your Locality',
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                if (widget.update == false)
-                  TextField(
-                    readOnly: true,
-                    controller: roleController,
-                    onTap: () {
-                      // showDialog(
-                      //     context: context,
-                      //     builder: (context) =>
-                      //         getProfileRole(userdetails));
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.search),
-                      labelText: 'Enter Role',
-                      hintText: 'Enter Your Role',
-                    ),
-                  ),
-                SizedBox(
-                  height: 80,
-                ),
-              ],
-            ),
-          )
         ],
-      )),
+      ),
     );
   }
 }

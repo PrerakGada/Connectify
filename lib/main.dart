@@ -2,8 +2,10 @@ import 'package:connectify/pages/Profile/pofile_screen.dart';
 import 'package:connectify/pages/Profile/profile_view.dart';
 import 'package:connectify/pages/ats/ats.dart';
 import 'package:connectify/pages/createCompany/create_company.dart';
+import 'package:connectify/pages/createJob/create_job.dart';
 import 'package:connectify/pages/employeeDashBoard/employee_dashboard.dart';
 import 'package:connectify/widgets/bluetooth.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,8 @@ import 'pages/Onboarding/login_screen.dart';
 import 'pages/Onboarding/onboarding_screen.dart';
 import 'pages/Onboarding/register_screen.dart';
 import 'pages/Onboarding/splash_screen.dart';
-import 'pages/Profile/edit_profile.dart';
+// import 'pages/Profile/edit_profile.dart';
+import 'pages/Profile/profile_page.dart';
 import 'pages/Settings/settings.dart';
 import 'pages/home_screen.dart';
 import 'theme/dark_theme.dart';
@@ -71,7 +74,7 @@ class MyApp extends StatelessWidget {
         darkTheme: dark_theme(),
         themeMode: ThemeMode.dark,
         debugShowCheckedModeBanner: false,
-        initialRoute: RegisterScreen.id,
+        initialRoute: CreateJob.id,
         routes: {
           HomeScreen.id: (context) => const HomeScreen(),
           SplashScreen.id: (context) => const SplashScreen(),
@@ -83,10 +86,11 @@ class MyApp extends StatelessWidget {
           Settings.id: (context) => const Settings(),
           // LocationScreen.id: (context) => const LocationScreen(),
           ChatScreen.id: (context) => const ChatScreen(),
-          Bluetooth.id: (context) => Bluetooth(),
+          // Bluetooth.id: (context) => Bluetooth(),
           CreateBusinessScreen.id: (context) => CreateBusinessScreen(),
           EmployeeDashBoard.id: (context) => EmployeeDashBoard(),
-          AtsView.id: (context) => AtsView()
+          AtsView.id: (context) => AtsView(),
+          CreateJob.id: (context) => CreateJob(),
         },
       ),
     );

@@ -8,6 +8,7 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import '../../models/bar.dart';
 import '../../models/user.dart';
 import '../../widgets/circular_progress_indicator.dart';
+
 import '../Graph/graph.dart';
 import 'bar_chart_graph.dart';
 
@@ -337,6 +338,7 @@ class _EmployeeDashBoardState extends State<EmployeeDashBoard> {
               ),
             ),
           ),
+
           // MyGraphWidget(
           //   seriesList: [
           //     charts.Series(

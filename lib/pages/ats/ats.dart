@@ -13,6 +13,7 @@ class AtsView extends StatefulWidget {
 
 class _AtsViewState extends State<AtsView> {
   String dropdownvalue = 'New Applied';
+  String rating = '0.0';
 
   // List of items in our dropdown menu
   var items = [
@@ -23,6 +24,177 @@ class _AtsViewState extends State<AtsView> {
     'Test',
     'Hire',
   ];
+  showAlertDialog(BuildContext context) {
+    // Create button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Give Rating"),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          InkWell(
+            onTap: () {
+              setState(() {
+                rating = "5.0";
+              });
+              Navigator.of(context).pop();
+            },
+            child: Row(
+              children: [
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Outstanding")
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              setState(() {
+                rating = "4.0";
+              });
+              Navigator.of(context).pop();
+            },
+            child: Row(
+              children: [
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Excellent")
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              setState(() {
+                rating = "3.0";
+              });
+              Navigator.of(context).pop();
+            },
+            child: Row(
+              children: [
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Good")
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              setState(() {
+                rating = "2.0";
+              });
+              Navigator.of(context).pop();
+            },
+            child: Row(
+              children: [
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Average")
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              setState(() {
+                rating = "1.0";
+              });
+              Navigator.of(context).pop();
+            },
+            child: Row(
+              children: [
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Poor")
+              ],
+            ),
+          )
+        ],
+      ),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +203,7 @@ class _AtsViewState extends State<AtsView> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
@@ -40,7 +213,6 @@ class _AtsViewState extends State<AtsView> {
                 decoration: BoxDecoration(
                     color: AppColors.white,
                     borderRadius: BorderRadius.circular(10)),
-                height: 100,
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,20 +253,41 @@ class _AtsViewState extends State<AtsView> {
                             ),
                             Container(
                               child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Icon(
-                                    Icons.star,
-                                    color: Colors.yellow,
+                                    Icons.work,
+                                    color: Colors.green,
                                   ),
                                   Text(
-                                    "0.0",
+                                    "UX/UI Designer",
                                     style: TextStyle(
-                                        color: AppColors.black,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
+                                      color: AppColors.black,
+                                      fontSize: 14,
+                                    ),
                                   ),
                                 ],
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                showAlertDialog(context);
+                              },
+                              child: Container(
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.yellow,
+                                    ),
+                                    Text(
+                                      rating,
+                                      style: TextStyle(
+                                          color: AppColors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             DropdownButton(
@@ -102,13 +295,27 @@ class _AtsViewState extends State<AtsView> {
                               value: dropdownvalue,
 
                               // Down Arrow Icon
-                              icon: const Icon(Icons.keyboard_arrow_down),
+                              icon: const Icon(
+                                Icons.keyboard_arrow_down,
+                                color: AppColors.black,
+                              ),
 
                               // Array list of items
                               items: items.map((String items) {
                                 return DropdownMenuItem(
                                   value: items,
-                                  child: Text(items),
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.done,
+                                        color: Colors.green,
+                                      ),
+                                      Text(
+                                        items,
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                    ],
+                                  ),
                                 );
                               }).toList(),
                               // After selecting the desired option,it will
@@ -123,6 +330,38 @@ class _AtsViewState extends State<AtsView> {
                         ),
                       ],
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, bottom: 10),
+                      child: SizedBox(
+                        height: 30,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: AppColors.green,
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(
+                                    "1",
+                                    style: TextStyle(
+                                        color: AppColors.white,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          itemCount: 5,
+                        ),
+                      ),
+                    )
                   ],
                 ),
               )

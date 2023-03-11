@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../pages/Profile/edit_profile.dart';
+// import '../pages/Profile/edit_profile.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);
@@ -111,8 +111,7 @@ class CustomDrawer extends StatelessWidget {
                     children: [
                       ElevatedButton(
                           onPressed: () {
-                            // Navigator.push(
-                            //     context,
+                            // Navigator.push( context,
                             //     MaterialPageRoute(
                             //         builder: (context) => EditProfile()));
                           },

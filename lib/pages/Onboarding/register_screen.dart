@@ -5,7 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../Theme/app_colors.dart';
+import '../../theme/app_colors.dart';
 import '../../logic/state_management/user_store.dart';
 import '../../widgets/LabeledTextFormField.dart';
 import '../../widgets/input_field.dart';
@@ -24,11 +24,18 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   File? demo;
   // Text Editing Controllers
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController(text: "");
+  final TextEditingController _userNameController =
+      TextEditingController(text: "");
+  final TextEditingController _emailController =
+      TextEditingController(text: "");
+  final TextEditingController _passwordController =
+      TextEditingController(text: "");
   final TextEditingController _confirmPasswordController =
-      TextEditingController();
+      TextEditingController(text: "");
+  final TextEditingController _mobileNumber = TextEditingController(text: "");
+  // final TextEditingController _confirmPasswordController =
+  // TextEditingController();
 
   File? file;
   void onPickImageButtonClicked() async {
@@ -115,8 +122,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 5,
                       ),
                       InputField(
-                        initialValue: "",
+                        controller: _nameController,
                         placeholderText: "Enter Full Name",
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      RichText(
+                        text: const TextSpan(
+                            text: 'Enter Username',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                            children: [
+                              TextSpan(
+                                  text: ' *',
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12))
+                            ]),
+                        textScaleFactor: 1,
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      InputField(
+                        controller: _userNameController,
+                        placeholderText: "Enter User Name",
                       ),
                       const SizedBox(
                         height: 15,
@@ -142,8 +176,64 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 5,
                       ),
                       InputField(
-                        initialValue: "",
+                        controller: _emailController,
                         placeholderText: "Enter Email ID",
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      RichText(
+                        text: const TextSpan(
+                            text: 'Password',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                            children: [
+                              TextSpan(
+                                  text: ' *',
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12))
+                            ]),
+                        textScaleFactor: 1,
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      InputField(
+                        controller: _passwordController,
+                        placeholderText: "Enter Password",
+                        textinput: TextInputType.number,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      RichText(
+                        text: const TextSpan(
+                            text: ' Confirm Password',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                            children: [
+                              TextSpan(
+                                  text: ' *',
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12))
+                            ]),
+                        textScaleFactor: 1,
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      InputField(
+                        controller: _confirmPasswordController,
+                        textinput: TextInputType.number,
+                        placeholderText: "Enter Confirm Password",
                       ),
                       const SizedBox(
                         height: 15,
@@ -169,8 +259,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 5,
                       ),
                       InputField(
-                        initialValue: "",
+                        controller: _mobileNumber,
+                        prefix: true,
                         placeholderText: "Enter Mobile Number",
+                        textinput: TextInputType.number,
                       ),
                       const SizedBox(
                         height: 5,
@@ -203,9 +295,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 5,
                       ),
                       InputField(
-                        initialValue: "",
                         placeholderText: "Add the city you are living in",
                         condition: true,
+                        onTap: () {},
                       ),
                       const SizedBox(
                         height: 15,
@@ -231,9 +323,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 5,
                       ),
                       InputField(
-                        initialValue: "",
+                        controller: _emailController,
                         condition: true,
                         placeholderText: "Specify your total experience",
+                        onTap: () {},
                       ),
                       const SizedBox(
                         height: 15,
@@ -258,13 +351,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(
                         height: 5,
                       ),
-                      const TextField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          prefixStyle: TextStyle(color: Colors.black),
-                          hintText: 'Enter or select your key skills',
-                          suffixIcon: Icon(Icons.arrow_forward_ios_outlined),
-                        ),
+                      InputField(
+                        controller: _emailController,
+                        condition: true,
+                        placeholderText: "Enter or select your key skills",
+                        onTap: () {},
                       ),
                       const SizedBox(
                         height: 15,
@@ -290,7 +381,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 5,
                       ),
                       InputField(
-                        initialValue: "",
+                        controller: _emailController,
                         condition: true,
                         placeholderText: "Maximum 2 industries can be selected",
                       ),
@@ -318,7 +409,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 5,
                       ),
                       InputField(
-                        initialValue: "",
+                        controller: _confirmPasswordController,
                         condition: true,
                         placeholderText: "Maximum 2 functions can be selected",
                       ),
@@ -353,18 +444,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 // onPickImageButtonClicked();
                                 onPickFileButtonClicked();
                               },
-                              icon: const Icon(
-                                Icons.upload,
-                                color: Colors.purple,
-                              ),
+                              icon: file != null
+                                  ? const Icon(
+                                      Icons.done,
+                                      color: Colors.purple,
+                                    )
+                                  : const Icon(
+                                      Icons.upload,
+                                      color: Colors.purple,
+                                    ),
                               style: ButtonStyle(
                                 elevation: MaterialStateProperty.all(0),
                                 backgroundColor: MaterialStateProperty.all<
                                         Color>(
                                     const Color.fromARGB(255, 243, 229, 254)),
                               ),
-                              label: const Text(
-                                "Upload Resume",
+                              label: Text(
+                                file != null ? "Uploaded" : "Upload Resume",
                                 style: TextStyle(color: Colors.purple),
                               )),
                         ),
@@ -471,16 +567,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: ElevatedButton(
                               onPressed: () async {
                                 final status = await UserStore().register(
-                                    email: "siduaaiu@gmail.com",
+                                    email: _emailController.text,
                                     lat: 46.22,
                                     lon: 34.22,
                                     macId: "2344554",
-                                    password1: "Siddesh",
-                                    password2: "Siddesh",
+                                    password1: _passwordController.text,
+                                    password2: _confirmPasswordController.text,
                                     resume: file,
-                                    preferredDepartment: "It",
-                                    domainPreference: "software",
-                                    username: "Siddaahhey");
+                                    preferredDepartment: "It/Software",
+                                    domainPreference: "Software Developement",
+                                    username: "Sid@31");
                                 if (status) {
                                   print("done");
                                   // Navigator.popAndPushNamed(context, SplashScreen.id);

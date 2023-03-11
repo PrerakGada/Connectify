@@ -1,4 +1,4 @@
-import 'package:connectify/Theme/app_colors.dart';
+import 'package:connectify/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -207,7 +207,6 @@ class _ProfileState extends State<Profile> {
                 height: 10,
               ),
               Container(
-                height: 80,
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color: Colors.white,
