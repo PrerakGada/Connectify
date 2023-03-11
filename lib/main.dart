@@ -20,6 +20,7 @@ import 'theme/light_theme.dart';
 import 'firebase_options.dart';
 import 'logic/state_management/user_store.dart';
 import 'theme/dark_theme.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'theme/light_theme.dart';
 
 Future<void> main() async {
@@ -55,6 +56,14 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+  Future<void> requestCameraPermission() async {
+    await Permission.bluetoothAdvertise.isGranted ;
+    await Permission.bluetooth.isGranted ;
+    await Permission.bluetoothConnect.isGranted ;
+    await Permission.bluetoothScan.isGranted ;
+  }
+  
 
   @override
   Widget build(BuildContext context) {

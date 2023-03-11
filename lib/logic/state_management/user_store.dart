@@ -259,6 +259,26 @@ class UserStore extends StateKeeper {
     }
   }
 
+  Future getCompanyById({
+    required int id,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    var response = await http.get(
+        Uri.parse('https://innovative-minds.mustansirg.in/api/companies/${id}/'),
+        headers: {
+          'Authorization': 'Bearer ${prefs.getString('access')}',
+        },);
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      print(data);
+      return data;
+    } else {
+      print("Failed to get company by id");
+      print(response.body);
+      return false;
+    }
+  }
+
   Future editCompany({
     required int id,
     required String name,
@@ -326,10 +346,174 @@ class UserStore extends StateKeeper {
     required double lon,
     required String payscale,
     required String duration,
+    required String skills,
+    required String domain,
     required String timings,
     required String experience,
-    required String workCulture,
+    required String worklife_culture,
     required String sponsored,
-    required String emotionality,
-  }) async {}
+    required String emotional_requirements,
+    required String address,
+  }) async {
+    print("Create job called");
+    final prefs = await SharedPreferences.getInstance();
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            'https://innovative-minds.mustansirg.in/api/jobs/'));
+    request.headers.addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+    request.fields.addAll({
+      'company': companyId.toString(),
+      'title': title,
+      'description': description,
+      'lat': lat.toString(),
+      'lon': lon.toString(),
+      'payscale': payscale,
+      'duration': duration,
+      'timings': timings,
+      'experience': experience,
+      'worklife_culture': worklife_culture,
+      'sponsored': sponsored,
+      'emotional_requirements': emotional_requirements,
+      'skills': skills,
+      'domain': domain,
+      'address': address,
+    });
+
+    var response = await request.send();
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 201) {
+        print(body);
+        return true;
+      } else {
+        print("Failed to Create Job");
+        print(body);
+        return false;
+      }
+    });
+  }
+
+  Future getAllJobs() async {
+    print("Get all jobs called");
+    final prefs = await SharedPreferences.getInstance();
+    var request = http.MultipartRequest(
+        'GET',
+        Uri.parse(
+            'https://innovative-minds.mustansirg.in/api/jobs/'));
+    request.headers.addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+    var response = await request.send();
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 200) {
+        print(body);
+        return body;
+      } else {
+        print("Failed to get all jobs");
+        print(body);
+        return false;
+      }
+    });
+  }
+
+  Future getJobById({
+    required String id
+  }) async {
+    print("Get job called");
+    final prefs = await SharedPreferences.getInstance();
+    var request = http.MultipartRequest(
+        'GET',
+        Uri.parse(
+            'https://innovative-minds.mustansirg.in/api/jobs/${id}/'));
+    request.headers.addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+    var response = await request.send();
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 200) {
+        print(body);
+        return body;
+      } else {
+        print("Failed to get job by id");
+        print(body);
+        return false;
+      }
+    });
+  }
+
+  Future editJob({
+    required int id,
+    required String title,
+    required String description,
+    required double lat,
+    required double lon,
+    required String payscale,
+    required String duration,
+    required String skills,
+    required String domain,
+    required String timings,
+    required String experience,
+    required String worklife_culture,
+    required String sponsored,
+    required String emotional_requirements,
+    required String address,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    var request = http.MultipartRequest(
+        'PUT',
+        Uri.parse(
+            'https://innovative-minds.mustansirg.in/api/jobs/${id}/'));
+    request.headers.addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+    request.fields.addAll({
+      'title': title,
+      'description': description,
+      'lat': lat.toString(),
+      'lon': lon.toString(),
+      'payscale': payscale,
+      'duration': duration,
+      'timings': timings,
+      'experience': experience,
+      'worklife_culture': worklife_culture,
+      'sponsored': sponsored,
+      'emotional_requirements': emotional_requirements,
+      'skills': skills,
+      'domain': domain,
+      'address': address,
+    });
+
+    var response = await request.send();
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 200) {
+        print(body);
+        return true;
+      } else {
+        print("Failed to edit Job");
+        print(body);
+        return false;
+      }
+    });
+  }
+
+  Future deleteJob({
+    required int id,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    var request = http.MultipartRequest(
+        'DELETE',
+        Uri.parse(
+            'https://innovative-minds.mustansirg.in/api/jobs/${id}/'));
+    request.headers.addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+    var response = await request.send();
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 204) {
+        print(body);
+        return true;
+      } else {
+        print("Failed to Create Job");
+        print(body);
+        return false;
+      }
+    });
+  }
 }
