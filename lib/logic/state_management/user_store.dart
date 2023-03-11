@@ -169,8 +169,11 @@ class UserStore extends StateKeeper {
     required String linkedin,
     required String headquarter,
   }) async {
+    final prefs = await SharedPreferences.getInstance();
     var request = http.MultipartRequest('POST',
         Uri.parse('https://innovative-minds.mustansirg.in/api/companies/'));
+    request.headers
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
     request.files.add(
         await http.MultipartFile.fromPath('headquarters', headquarters!.path));
     request.files.add(await http.MultipartFile.fromPath('logo', logo!.path));
@@ -197,10 +200,131 @@ class UserStore extends StateKeeper {
         print(body);
         return true;
       } else {
+        print("Failed to create company");
+        print(body);
+        return false;
+      }
+    });
+  }
+
+  Future getAllCompany() async {
+    final prefs = await SharedPreferences.getInstance();
+    var response = await http.delete(
+        Uri.parse('https://innovative-minds.mustansirg.in/api/companies/'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${prefs.getString('access')}",
+        });
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      print(data);
+      return data;
+    } else {
+      print("Failed to get all companies");
+      print(response.body);
+      return false;
+    }
+  }
+
+  Future editCompany({
+    required int id,
+    required String name,
+    required String logo,
+    required String headquarters,
+    required String establishedYear,
+    required String size,
+    required int revenue,
+    required String missionStatement,
+    required String whatWeDo,
+    required String website,
+    required String instagram,
+    required String facebook,
+    required String twitter,
+    required String linkedin,
+    required String headquarter,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    var request = http.MultipartRequest('PUT',
+        Uri.parse('https://innovative-minds.mustansirg.in/api/companies/${id}'));
+    request.headers
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+    // request.files.add(
+    //     await http.MultipartFile.fromPath('headquarters', headquarters!.path));
+    // request.files.add(await http.MultipartFile.fromPath('logo', logo!.path));
+    request.fields.addAll({
+      'name': name,
+      'established_year': establishedYear,
+      'logo': logo,
+      'headquarters': headquarters,
+      'size': size,
+      'revenue': revenue.toString(),
+      'mission_statement': missionStatement,
+      'what_we_do': whatWeDo,
+      'website': website,
+      'instagram': instagram,
+      'facebook': facebook,
+      'twitter': twitter,
+      'linkedin': linkedin,
+      'headquarter': headquarter,
+    });
+
+    var response = await request.send();
+
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 201) {
+        print(body);
+        return true;
+      } else {
         print("Failed to Register");
         print(body);
         return false;
       }
     });
+  }
+
+  Future getCompanyById({
+    required int id,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    var response = await http.delete(
+        Uri.parse('https://innovative-minds.mustansirg.in/api/companies/${id}'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${prefs.getString('access')}",
+        });
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      print(data);
+      return data;
+    } else {
+      print("Failed to company by id");
+      print(response.body);
+      return false;
+    }
+  }
+
+  Future deleteCompany({
+    required int id,
+  }) async {
+    print('Inside Delete Company');
+    final prefs = await SharedPreferences.getInstance();
+    // Register
+    var response = await http.post(
+      Uri.parse("https://innovative-minds.mustansirg.in/api/companies/${id}"),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer ${prefs.getString('access')}",
+      },
+    );
+
+    if (response.statusCode == 204) {
+      print('Deleted');
+      return true;
+    } else {
+      print("Failed to Delete");
+      print(response.body);
+      return false;
+    }
   }
 }
