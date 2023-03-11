@@ -9,20 +9,20 @@ class VideoConferencing extends StatelessWidget {
   const VideoConferencing({super.key});
 
   Future<bool> getPermissions() async {
-    // if (Platform.isIOS) return true;
-    // await Permission.camera.request();
-    // await Permission.microphone.request();
-    // await Permission.bluetoothConnect.request();
-    //
-    // while ((await Permission.camera.isDenied)) {
-    //   await Permission.camera.request();
-    // }
-    // while ((await Permission.microphone.isDenied)) {
-    //   await Permission.microphone.request();
-    // }
-    // while ((await Permission.bluetoothConnect.isDenied)) {
-    //   await Permission.bluetoothConnect.request();
-    // }
+    if (Platform.isIOS) return true;
+    await Permission.camera.request();
+    await Permission.microphone.request();
+    await Permission.bluetoothConnect.request();
+
+    while ((await Permission.camera.isDenied)) {
+      await Permission.camera.request();
+    }
+    while ((await Permission.microphone.isDenied)) {
+      await Permission.microphone.request();
+    }
+    while ((await Permission.bluetoothConnect.isDenied)) {
+      await Permission.bluetoothConnect.request();
+    }
     return true;
   }
 
