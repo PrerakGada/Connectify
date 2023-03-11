@@ -15,8 +15,8 @@ ThemeData dark_theme() => ThemeData(
       drawerTheme: DrawerThemeData(backgroundColor: AppColors.greyDarker),
       primaryColor: AppColors.primary,
       primaryColorLight: AppColors.primaryAccent,
-      appBarTheme: const AppBarTheme(
-        color: AppColors.primary,
+      appBarTheme: AppBarTheme(
+        backgroundColor: AppColors.greyDarker,
         systemOverlayStyle: SystemUiOverlayStyle(
           systemStatusBarContrastEnforced: true,
           statusBarColor: AppColors.white,
@@ -30,7 +30,7 @@ ThemeData dark_theme() => ThemeData(
         bodyColor: AppColors.greyLight,
         displayColor: AppColors.white,
       ),
-      scaffoldBackgroundColor: AppColors.greyDarker,
+      scaffoldBackgroundColor: AppColors.black,
       primaryTextTheme: textTheme,
       iconTheme: const IconThemeData(color: AppColors.greyLight),
       colorScheme:

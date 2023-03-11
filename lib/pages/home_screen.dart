@@ -359,25 +359,25 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        // title: Text("Welcome ${UserStore().tokenData["username"]}!",
-        //     style: const TextStyle(fontSize: 24)),
-        actions: [
-          // Builder( builder: (context) => MaterialButton(
-          //     child: CircleAvatar(
-          //       radius: 30,
-          //       backgroundImage: NetworkImage(
-          //         "https://tourmate.mustansirg.in/static/${UserStore().tokenData['profile_photo']}",
-          //       ),
-          //     ),
-          //     onPressed: () => Scaffold.of(context).openEndDrawer(),
-          //     // tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-          //   ),
-          // ),
-        ],
-      ),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   backgroundColor: Colors.transparent,
+      //   // title: Text("Welcome ${UserStore().tokenData["username"]}!",
+      //   //     style: const TextStyle(fontSize: 24)),
+      //   actions: [
+      //     // Builder( builder: (context) => MaterialButton(
+      //     //     child: CircleAvatar(
+      //     //       radius: 30,
+      //     //       backgroundImage: NetworkImage(
+      //     //         "https://tourmate.mustansirg.in/static/${UserStore().tokenData['profile_photo']}",
+      //     //       ),
+      //     //     ),
+      //     //     onPressed: () => Scaffold.of(context).openEndDrawer(),
+      //     //     // tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+      //     //   ),
+      //     // ),
+      //   ],
+      // ),
       body: buildPageView(),
       endDrawer: const ProfileDrawer(),
       bottomNavigationBar: SafeArea(
@@ -386,7 +386,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               // color: Colors.black,
               decoration: const BoxDecoration(
-                color: AppColors.greyDarker,
+                color: AppColors.black,
               ),
               padding: const EdgeInsets.only(top: 14),
               child: Row(
