@@ -109,11 +109,11 @@ class ProfileDrawer extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.4,
                         child: ElevatedButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const EditProfile()));
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             const EditProfile()));
                             },
                             child: const Text("Edit Profile")),
                       ),

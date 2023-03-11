@@ -116,7 +116,7 @@ class _SettingsState extends State<Settings> {
                           borderRadius: BorderRadius.circular(4),
                           side: const BorderSide(color: AppColors.grey)),
                       onPressed: () {
-                        Navigator.pushNamed(context, EditProfile.id);
+                        // Navigator.pushNamed(context, EditProfile.id);
                       },
                       child: Text(
                         'Edit Profile',

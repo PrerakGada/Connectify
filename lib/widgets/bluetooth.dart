@@ -29,6 +29,13 @@ class _BluetoothState extends State<Bluetooth> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {},
+          child: Text('Scan'),
+        ),
+      ),
+    );
   }
 }

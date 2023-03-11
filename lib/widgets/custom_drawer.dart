@@ -112,10 +112,10 @@ class CustomDrawer extends StatelessWidget {
                     children: [
                       ElevatedButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EditProfile()));
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => EditProfile()));
                           },
                           child: Text("Edit Profile")),
                       ElevatedButton(
