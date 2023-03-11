@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -56,7 +57,7 @@ class UserStore extends StateKeeper {
     }
   }
 
-  Future login({
+  Future logIn({
     required String email,
     required String password,
   }) async {
@@ -101,6 +102,14 @@ class UserStore extends StateKeeper {
     required String email,
     required String password1,
     required String password2,
+    required double lat,
+    required double lon,
+    required double macId,
+    String? domainPreference,
+    String? experience,
+    String? keySkills,
+    String? address,
+    String? preferredDepartment,
     File? profilePhoto,
     File? resume,
   }) async {
@@ -124,7 +133,26 @@ class UserStore extends StateKeeper {
       'password1': password1,
       'password2': password2,
       'username': username,
+      'lat': lat.toString(),
+      'lon': lon.toString(),
+      'mac_id': macId.toString(),
     });
+
+    if (domainPreference!= null) {
+      request.fields.addAll({'domainpreference': domainPreference});
+    }
+    if (experience!= null) {
+      request.fields.addAll({'experience': experience});
+    }
+    if (address!= null) {
+      request.fields.addAll({'address': address});
+    }
+    if (keySkills != null) {
+      request.fields.addAll({'keyskills': keySkills});
+    }
+    if (preferredDepartment != null) {
+      request.fields.addAll({'preferredDepartment': preferredDepartment});
+    }
 
     var response = await request.send();
 
@@ -161,16 +189,20 @@ class UserStore extends StateKeeper {
     required String size,
     required int revenue,
     required String missionStatement,
+    required String domain,
     required String whatWeDo,
     required String website,
     required String instagram,
     required String facebook,
     required String twitter,
+    required String address,
     required String linkedin,
-    required String headquarter,
   }) async {
+    final prefs = await SharedPreferences.getInstance();
     var request = http.MultipartRequest('POST',
         Uri.parse('https://innovative-minds.mustansirg.in/api/companies/'));
+    request.headers
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
     request.files.add(
         await http.MultipartFile.fromPath('headquarters', headquarters!.path));
     request.files.add(await http.MultipartFile.fromPath('logo', logo!.path));
@@ -183,10 +215,87 @@ class UserStore extends StateKeeper {
       'what_we_do': whatWeDo,
       'website': website,
       'instagram': instagram,
+      'address': address,
       'facebook': facebook,
+      'domain': domain,
       'twitter': twitter,
       'linkedin': linkedin,
-      'headquarter': headquarter,
+    });
+
+    var response = await request.send();
+
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 201) {
+        print(body);
+        return true;
+      } else {
+        print("Failed to create company");
+        print(body);
+        return false;
+      }
+    });
+  }
+
+  Future getAllCompany() async {
+    final prefs = await SharedPreferences.getInstance();
+    var response = await http.delete(
+        Uri.parse('https://innovative-minds.mustansirg.in/api/companies/'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${prefs.getString('access')}",
+        });
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      print(data);
+      return data;
+    } else {
+      print("Failed to get all companies");
+      print(response.body);
+      return false;
+    }
+  }
+
+  Future editCompany({
+    required int id,
+    required String name,
+    required File? logo,
+    required File? headquarters,
+    required String establishedYear,
+    required String address,
+    required String size,
+    required int revenue,
+    required String missionStatement,
+    required String domain,
+    required String whatWeDo,
+    required String website,
+    required String instagram,
+    required String facebook,
+    required String twitter,
+    required String linkedin,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    var request = http.MultipartRequest('PUT',
+        Uri.parse('https://innovative-minds.mustansirg.in/api/companies/${id}'));
+    request.headers
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+    request.files.add(
+        await http.MultipartFile.fromPath('headquarters', headquarters!.path));
+    request.files.add(await http.MultipartFile.fromPath('logo', logo!.path));
+    request.fields.addAll({
+      'name': name,
+      'established_year': establishedYear,
+      'size': size,
+      'revenue': revenue.toString(),
+      'mission_statement': missionStatement,
+      'what_we_do': whatWeDo,
+      'website': website,
+      'instagram': instagram,
+      'domain': domain,
+      'facebook': facebook,
+      'twitter': twitter,
+      'address': address,
+      'linkedin': linkedin,
     });
 
     var response = await request.send();
@@ -202,5 +311,67 @@ class UserStore extends StateKeeper {
         return false;
       }
     });
+  }
+
+  Future getCompanyById({
+    required int id,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    var response = await http.delete(
+        Uri.parse('https://innovative-minds.mustansirg.in/api/companies/${id}'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${prefs.getString('access')}",
+        });
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      print(data);
+      return data;
+    } else {
+      print("Failed to company by id");
+      print(response.body);
+      return false;
+    }
+  }
+
+  Future deleteCompany({
+    required int id,
+  }) async {
+    print('Inside Delete Company');
+    final prefs = await SharedPreferences.getInstance();
+    // Register
+    var response = await http.post(
+      Uri.parse("https://innovative-minds.mustansirg.in/api/companies/${id}"),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer ${prefs.getString('access')}",
+      },
+    );
+
+    if (response.statusCode == 204) {
+      print('Deleted');
+      return true;
+    } else {
+      print("Failed to Delete");
+      print(response.body);
+      return false;
+    }
+  }
+
+  Future createJob({
+    required int companyId,
+    required String title,
+    required String description,
+    required double lat,
+    required double lon,
+    required String payscale,
+    required String duration,
+    required String timings,
+    required String experience,
+    required String workCulture,
+    required String sponsored,
+    required String emotionality,
+  }) async {
+    
   }
 }
