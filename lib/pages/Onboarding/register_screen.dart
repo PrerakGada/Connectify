@@ -471,7 +471,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: ElevatedButton(
                               onPressed: () async {
                                 final status = await UserStore().register(
-                                    email: "siddu@gmail.com",
+                                    email: "siduaaiu@gmail.com",
                                     lat: 46.22,
                                     lon: 34.22,
                                     macId: "2344554",
@@ -480,7 +480,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     resume: file,
                                     preferredDepartment: "It",
                                     domainPreference: "software",
-                                    username: "Sid");
+                                    username: "Siddaahhey");
                                 if (status) {
                                   print("done");
                                   // Navigator.popAndPushNamed(context, SplashScreen.id);

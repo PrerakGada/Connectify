@@ -1,6 +1,8 @@
 import 'package:connectify/pages/Profile/pofile_screen.dart';
 import 'package:connectify/pages/Profile/profile_view.dart';
+import 'package:connectify/pages/ats/ats.dart';
 import 'package:connectify/pages/createCompany/create_company.dart';
+import 'package:connectify/pages/employeeDashBoard/employee_dashboard.dart';
 import 'package:connectify/widgets/bluetooth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -69,7 +71,7 @@ class MyApp extends StatelessWidget {
         darkTheme: dark_theme(),
         themeMode: ThemeMode.dark,
         debugShowCheckedModeBanner: false,
-        initialRoute: CreateBusinessScreen.id,
+        initialRoute: RegisterScreen.id,
         routes: {
           HomeScreen.id: (context) => const HomeScreen(),
           SplashScreen.id: (context) => const SplashScreen(),
@@ -82,7 +84,9 @@ class MyApp extends StatelessWidget {
           // LocationScreen.id: (context) => const LocationScreen(),
           ChatScreen.id: (context) => const ChatScreen(),
           Bluetooth.id: (context) => Bluetooth(),
-          CreateBusinessScreen.id: (context) => CreateBusinessScreen()
+          CreateBusinessScreen.id: (context) => CreateBusinessScreen(),
+          EmployeeDashBoard.id: (context) => EmployeeDashBoard(),
+          AtsView.id: (context) => AtsView()
         },
       ),
     );
