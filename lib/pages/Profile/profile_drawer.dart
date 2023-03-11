@@ -48,7 +48,7 @@ class ProfileDrawer extends StatelessWidget {
                         CircleAvatar(
                           radius: 50,
                           backgroundImage: NetworkImage(
-                              "https://tourmate.mustansirg.in/static/${UserStore().tokenData['profile_photo']}"),
+                              "https://innovate-minds.mustansirg.in/static/${UserStore().tokenData['profile_photo']}"),
                         ),
                         const SizedBox(
                           height: 10.0,
