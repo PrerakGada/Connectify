@@ -207,7 +207,6 @@ class _ProfileState extends State<Profile> {
                 height: 10,
               ),
               Container(
-                height: 80,
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color: Colors.white,

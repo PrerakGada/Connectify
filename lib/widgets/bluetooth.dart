@@ -57,6 +57,17 @@ class _BluetoothState extends State<Bluetooth> {
     }
   }
 
+  void beaconBroad() {
+    beaconBroadcast
+        .setUUID('39ED98FF-2900-441A-802F-9C398FC199D2')
+        .setMajorId(1)
+        .setMinorId(100).setAdvertiseMode(AdvertiseMode.lowPower).setExtraData([7,7,77,7])
+        .start();
+    beaconBroadcast.setAdvertiseMode(AdvertiseMode.lowPower);
+    print('Broadcasting');
+    print(beaconBroadcast.setAdvertiseMode(AdvertiseMode.lowPower));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,6 +84,7 @@ class _BluetoothState extends State<Bluetooth> {
             ElevatedButton(
               onPressed: () {
                 beacon();
+                beaconBroadcast;
               },
               child: Text('Beacon Broadcast'),
             ),

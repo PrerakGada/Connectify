@@ -28,12 +28,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  TextEditingController();
 
   File? file;
   void onPickImageButtonClicked() async {
     final tempImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    await ImagePicker().pickImage(source: ImageSource.gallery);
     if (tempImage == null) {
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -360,7 +360,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               style: ButtonStyle(
                                 elevation: MaterialStateProperty.all(0),
                                 backgroundColor: MaterialStateProperty.all<
-                                        Color>(
+                                    Color>(
                                     const Color.fromARGB(255, 243, 229, 254)),
                               ),
                               label: const Text(
@@ -411,7 +411,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Switch.adaptive(
                           thumbColor: MaterialStateProperty.all(Colors.purple),
                           activeTrackColor:
-                              Colors.purpleAccent.withOpacity(0.6),
+                          Colors.purpleAccent.withOpacity(0.6),
                           inactiveTrackColor: Colors.grey,
                           inactiveThumbColor: Colors.grey,
                           value: true,
@@ -510,8 +510,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               style: ButtonStyle(
                                 elevation: MaterialStateProperty.all(0),
                                 backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        const Color.fromARGB(255, 111, 0, 190)),
+                                MaterialStateProperty.all<Color>(
+                                    const Color.fromARGB(255, 111, 0, 190)),
                               ),
                               child: const Text(
                                 "Next: Verification >",
