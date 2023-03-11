@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         onPressed: () async {
                           // Navigator.popAndPushNamed(context, HomeScreen.id);
-                          final status = await UserStore().login(
+                          final status = await UserStore().logIn(
                               email: _emailController.text,
                               password: _passwordController.text);
                           if (status) {

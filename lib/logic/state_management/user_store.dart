@@ -43,6 +43,7 @@ class UserStore extends StateKeeper {
           "refresh": prefs.getString('refresh'),
         }),
       );
+      // var decode = jsonEncode(response.body);
       var data = jsonDecode(response.body);
       print("Refresh Response: $data");
       await prefs.setString('access', data['access']);
@@ -52,7 +53,7 @@ class UserStore extends StateKeeper {
       print(data);
       tokenData = JwtDecoder.decode(data['access']);
       print("Decoded After Refresh: $tokenData");
-      print("------------------------------" + tokenData['profile_photo']);
+      // print("------------------------------" + tokenData['profile_photo']);
       notifyListeners();
     }
   }
@@ -97,14 +98,14 @@ class UserStore extends StateKeeper {
     }
   }
 
-  Future register({
+  Future<bool> register({
     required String username,
     required String email,
     required String password1,
     required String password2,
     required double lat,
     required double lon,
-    required double macId,
+    required String macId,
     String? domainPreference,
     String? experience,
     String? keySkills,
@@ -133,18 +134,17 @@ class UserStore extends StateKeeper {
       'password1': password1,
       'password2': password2,
       'username': username,
-      'lat': lat.toString(),
-      'lon': lon.toString(),
+      'location': "${[lat, lon]}",
       'mac_id': macId.toString(),
     });
 
-    if (domainPreference!= null) {
+    if (domainPreference != null) {
       request.fields.addAll({'domainpreference': domainPreference});
     }
-    if (experience!= null) {
+    if (experience != null) {
       request.fields.addAll({'experience': experience});
     }
-    if (address!= null) {
+    if (address != null) {
       request.fields.addAll({'address': address});
     }
     if (keySkills != null) {
@@ -172,6 +172,7 @@ class UserStore extends StateKeeper {
         return false;
       }
     });
+    return false;
   }
 
   Future logout() async {
@@ -275,8 +276,10 @@ class UserStore extends StateKeeper {
     required String linkedin,
   }) async {
     final prefs = await SharedPreferences.getInstance();
-    var request = http.MultipartRequest('PUT',
-        Uri.parse('https://innovative-minds.mustansirg.in/api/companies/${id}'));
+    var request = http.MultipartRequest(
+        'PUT',
+        Uri.parse(
+            'https://innovative-minds.mustansirg.in/api/companies/${id}'));
     request.headers
         .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
     request.files.add(
@@ -371,7 +374,5 @@ class UserStore extends StateKeeper {
     required String workCulture,
     required String sponsored,
     required String emotionality,
-  }) async {
-    
-  }
+  }) async {}
 }

@@ -351,6 +351,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: ElevatedButton.icon(
                               onPressed: () async {
                                 // onPickImageButtonClicked();
+                                onPickFileButtonClicked();
                               },
                               icon: const Icon(
                                 Icons.upload,
@@ -469,27 +470,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 50,
                           child: ElevatedButton(
                               onPressed: () async {
-                                print("pressed");
-                                if (demo != null) {
-                                  var request = http.MultipartRequest(
-                                      'POST',
-                                      Uri.parse(
-                                          'https://innovative-minds.mustansirg.in/api/companies/'));
-
-                                  request.files.add(
-                                      await http.MultipartFile.fromPath(
-                                          'headquarters', demo!.path));
-                                  request.files.add(
-                                      await http.MultipartFile.fromPath(
-                                          'logo', demo!.path));
-                                  request.fields.addAll(
-                                      {'name': 'Amazon', 'admins': '1'});
-                                  var response = await request.send();
-                                  await http.Response.fromStream(response)
-                                      .then((value) {
-                                    var body = jsonDecode(value.body);
-                                  });
+                                final status = await UserStore().register(
+                                    email: "siddu@gmail.com",
+                                    lat: 46.22,
+                                    lon: 34.22,
+                                    macId: "2344554",
+                                    password1: "Siddesh",
+                                    password2: "Siddesh",
+                                    resume: file,
+                                    preferredDepartment: "It",
+                                    domainPreference: "software",
+                                    username: "Sid");
+                                if (status) {
+                                  print("done");
+                                  // Navigator.popAndPushNamed(context, SplashScreen.id);
                                 }
+                                // print("pressed");
+                                // if (demo != null) {
+                                //   var request = http.MultipartRequest(
+                                //       'POST',
+                                //       Uri.parse(
+                                //           'https://innovative-minds.mustansirg.in/api/companies/'));
+
+                                //   request.files.add(
+                                //       await http.MultipartFile.fromPath(
+                                //           'headquarters', demo!.path));
+                                //   request.files.add(
+                                //       await http.MultipartFile.fromPath(
+                                //           'logo', demo!.path));
+                                //   request.fields.addAll(
+                                //       {'name': 'Amazon', 'admins': '1'});
+                                //   var response = await request.send();
+                                //   await http.Response.fromStream(response)
+                                //       .then((value) {
+                                //     var body = jsonDecode(value.body);
+                                //   });
+                                // }
                               },
                               style: ButtonStyle(
                                 elevation: MaterialStateProperty.all(0),
