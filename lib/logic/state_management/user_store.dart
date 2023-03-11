@@ -131,12 +131,11 @@ class UserStore extends StateKeeper {
     await http.Response.fromStream(response).then((value) async {
       var body = jsonDecode(value.body);
       if (response.statusCode == 201) {
-        var data = jsonDecode(body);
-        print(data);
-        await prefs.setString('access', data['access_token']);
-        await prefs.setString('refresh', data['refresh_token']);
-        Access = data['access'];
-        Refresh = data['refresh'];
+        print(body);
+        await prefs.setString('access', body['access_token']);
+        await prefs.setString('refresh', body['refresh_token']);
+        Access = body['access'];
+        Refresh = body['refresh'];
         refreshTheToken();
         return true;
       } else {
@@ -152,5 +151,56 @@ class UserStore extends StateKeeper {
     prefs.clear();
     tokenData = null;
     notifyListeners();
+  }
+
+  Future createCompany({
+    required String name,
+    required File? logo,
+    required File? headquarters,
+    required String establishedYear,
+    required String size,
+    required int revenue,
+    required String missionStatement,
+    required String whatWeDo,
+    required String website,
+    required String instagram,
+    required String facebook,
+    required String twitter,
+    required String linkedin,
+    required String headquarter,
+  }) async {
+    var request = http.MultipartRequest('POST',
+        Uri.parse('https://innovative-minds.mustansirg.in/api/companies/'));
+    request.files.add(
+        await http.MultipartFile.fromPath('headquarters', headquarters!.path));
+    request.files.add(await http.MultipartFile.fromPath('logo', logo!.path));
+    request.fields.addAll({
+      'name': name,
+      'established_year': establishedYear,
+      'size': size,
+      'revenue': revenue.toString(),
+      'mission_statement': missionStatement,
+      'what_we_do': whatWeDo,
+      'website': website,
+      'instagram': instagram,
+      'facebook': facebook,
+      'twitter': twitter,
+      'linkedin': linkedin,
+      'headquarter': headquarter,
+    });
+
+    var response = await request.send();
+
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 201) {
+        print(body);
+        return true;
+      } else {
+        print("Failed to Register");
+        print(body);
+        return false;
+      }
+    });
   }
 }
