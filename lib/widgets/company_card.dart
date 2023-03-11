@@ -7,6 +7,7 @@ import 'package:delayed_display/delayed_display.dart';
 
 class CompanyCard extends StatefulWidget {
   CompCard details;
+
   CompanyCard({
     super.key,
     required this.details,
@@ -72,9 +73,7 @@ class _CompanyCardState extends State<CompanyCard> {
                             fit: BoxFit.fitWidth,
                             widget.details.companyPhoto,
                           ),
-                          SizedBox(
-                            width: 6,
-                          ),
+                          SizedBox(width: 6),
                           Text(
                             widget.details.company,
                             style: textTheme.headlineMedium!,
@@ -83,12 +82,7 @@ class _CompanyCardState extends State<CompanyCard> {
                       )
                     ],
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
+                  SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -130,9 +124,7 @@ class _CompanyCardState extends State<CompanyCard> {
                       // ),
                     ],
                   ),
-                  SizedBox(
-                    height: 12,
-                  ),
+                  SizedBox(height: 8),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Wrap(

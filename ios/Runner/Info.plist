@@ -2,13 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>This app requires Mic permission.</string><key>NSBluetoothAlwaysUsageDescription</key>
-	<string>A message that tells the user why the app needs access to Bluetooth.</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>An anonymous token is advertised via Bluetooth to discover nearby devices</string>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -31,30 +24,6 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Need BLE permission</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Need BLE permission</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Take photo from camera</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Need Location permission</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Need Location permission</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Need Location permission</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Use capture audio for image picker plugin</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Choose photo from gallery</string>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>fetch</string>
-		<string>location</string>
-		<string>remote-notification</string>
-	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -105,19 +74,5 @@
     <string>Need Location permission</string>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>Need Location permission</string>
-
-    <key>NSMicrophoneUsageDescription</key>
-    <string>{YourAppName} wants to use your microphone</string>
-    <key>NSCameraUsageDescription</key>
-    <string>{YourAppName} wants to use your camera</string>
-    <key>NSLocalNetworkUsageDescription</key>
-    <string>{YourAppName} App wants to use your local network</string>
-	
-	 <key>NSAppTransportSecurity</key>
-	 <dict>
-		 <key>NSAllowsArbitraryLoads</key>
-		 <true/>
-	 </dict>
-
 </dict>
 </plist>

@@ -149,7 +149,7 @@ class _CreateBusinessScreenState extends State<CreateBusinessScreen> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         decoration: const BoxDecoration(
-                          color: AppColors.greyDarker,
+                          color: AppColors.black,
                           borderRadius: BorderRadius.all(Radius.circular(16)),
                         ),
                         child: SafeArea(
