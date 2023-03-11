@@ -167,7 +167,6 @@ class UserStore extends StateKeeper {
     required String facebook,
     required String twitter,
     required String linkedin,
-    required String headquarter,
   }) async {
     final prefs = await SharedPreferences.getInstance();
     var request = http.MultipartRequest('POST',
@@ -189,7 +188,6 @@ class UserStore extends StateKeeper {
       'facebook': facebook,
       'twitter': twitter,
       'linkedin': linkedin,
-      'headquarter': headquarter,
     });
 
     var response = await request.send();
@@ -229,8 +227,8 @@ class UserStore extends StateKeeper {
   Future editCompany({
     required int id,
     required String name,
-    required String logo,
-    required String headquarters,
+    required File? logo,
+    required File? headquarters,
     required String establishedYear,
     required String size,
     required int revenue,
@@ -241,21 +239,18 @@ class UserStore extends StateKeeper {
     required String facebook,
     required String twitter,
     required String linkedin,
-    required String headquarter,
   }) async {
     final prefs = await SharedPreferences.getInstance();
     var request = http.MultipartRequest('PUT',
         Uri.parse('https://innovative-minds.mustansirg.in/api/companies/${id}'));
     request.headers
         .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
-    // request.files.add(
-    //     await http.MultipartFile.fromPath('headquarters', headquarters!.path));
-    // request.files.add(await http.MultipartFile.fromPath('logo', logo!.path));
+    request.files.add(
+        await http.MultipartFile.fromPath('headquarters', headquarters!.path));
+    request.files.add(await http.MultipartFile.fromPath('logo', logo!.path));
     request.fields.addAll({
       'name': name,
       'established_year': establishedYear,
-      'logo': logo,
-      'headquarters': headquarters,
       'size': size,
       'revenue': revenue.toString(),
       'mission_statement': missionStatement,
@@ -265,7 +260,6 @@ class UserStore extends StateKeeper {
       'facebook': facebook,
       'twitter': twitter,
       'linkedin': linkedin,
-      'headquarter': headquarter,
     });
 
     var response = await request.send();
