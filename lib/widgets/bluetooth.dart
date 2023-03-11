@@ -1,3 +1,4 @@
+import 'package:beacon_broadcast/beacon_broadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
@@ -11,34 +12,71 @@ class Bluetooth extends StatefulWidget {
 
 class _BluetoothState extends State<Bluetooth> {
   FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
+  BeaconBroadcast beaconBroadcast = BeaconBroadcast();
 
   void scanForDevices() {
     // Start scanning
     flutterBlue.startScan(timeout: Duration(milliseconds: 200));
 
+    flutterBlue.name.then((value) {
+      print(value);
+    });
+
 // Listen to scan results
     var subscription = flutterBlue.scanResults.listen((results) {
       // do something with scan results
       for (ScanResult r in results) {
-        if (r.device.name != '')
-        print('${r.device.name} found! rssi: ${r.rssi}');
-        // print('|${r.device.name}|');
+        if (r.device.name != '') {
+          print('|${r.device.name}|${r.advertisementData.serviceData}|');
+          // print(r);
+        }
       }
+
     });
 
 // Stop scanning
     flutterBlue.stopScan();
   }
 
+
+  Future<void> beacon() async {
+    BeaconStatus transmissionSupportStatus = await beaconBroadcast.checkTransmissionSupported();
+    switch (transmissionSupportStatus) {
+      case BeaconStatus.supported:
+        print('supported');
+        break;
+      case BeaconStatus.notSupportedMinSdk:
+        print('notSupportedMinSdk');
+        break;
+      case BeaconStatus.notSupportedBle:
+        print('notSupportedBle');
+        break;
+      case BeaconStatus.notSupportedCannotGetAdvertiser:
+        print('notSupportedCannotGetAdvertiser');
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            scanForDevices();
-          },
-          child: Text('Scan'),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                scanForDevices();
+              },
+              child: Text('Scan'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                beacon();
+              },
+              child: Text('Beacon Broadcast'),
+            ),
+          ],
         ),
       ),
     );
