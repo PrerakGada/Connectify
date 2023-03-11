@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 class Bluetooth extends StatefulWidget {
+  static const String id = '/bluetooth';
   Bluetooth({Key? key}) : super(key: key);
 
   @override
@@ -32,7 +33,9 @@ class _BluetoothState extends State<Bluetooth> {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            scanForDevices();
+          },
           child: Text('Scan'),
         ),
       ),

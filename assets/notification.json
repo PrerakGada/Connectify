@@ -1,0 +1,164 @@
+{
+    "notifications": [
+        {
+            "name": "Prerak Gada", 
+            "profilePic": "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "content": " accepted your follow request. ", 
+            "postImage": "", 
+            "timeAgo": "20s", 
+            "hasStory" : false
+        },
+        {
+            "name":  "Look", 
+            "profilePic":  "https://randomuser.me/api/portraits/men/46.jpg", 
+            "content":  " There's a tour to Lonavala this weekend. ", 
+            "postImage":  "",
+            "timeAgo":  "1m", 
+            "hasStory" :  false
+        },
+        {
+            "name":  "Join ", 
+            "profilePic":  "https://randomuser.me/api/portraits/men/86.jpg", 
+            "content":  " Prerak for a Imagica trip? ", 
+            "postImage":  "https://media.insider.in/image/upload/c_crop,g_custom/v1496129119/sdtmiag4w2k6g7psj7ad.jpg",
+            "timeAgo":  "1m", 
+            "hasStory" :   true
+        },
+        {
+            "name":  "leah.stevens", 
+            "profilePic":  "https://randomuser.me/api/portraits/women/47.jpg", 
+            "content":  " liked your post. ", 
+            "postImage":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b",
+            "timeAgo":  "1m", 
+            "hasStory" :   true
+        },
+        {
+            "name":  "thiago_barr1", 
+            "profilePic":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "content":  " liked your video. ", 
+            "postImage":  "https://meanderwander.com/wp-content/uploads/2022/08/Snow-covered-roads-in-Manali.jpg", 
+            "timeAgo":  "2m", 
+            "hasStory" :  false
+        },
+        {
+            "name":  "devon", 
+            "profilePic":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "content":  " liked your post. ", 
+            "postImage":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b",
+            "timeAgo":  "3m", 
+            "hasStory" :   true
+        },
+        {
+            "name":  "jesse", 
+            "profilePic":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "content":  " started following you. ", 
+            "postImage":  "",
+            "timeAgo":  "3m", 
+            "hasStory" :  false
+        },
+        {
+            "name":  "rodrigo.hawkins", 
+            "profilePic":  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=74daec1914d1d105202bca8a310a6a71", 
+            "content":  " started following you. ", 
+            "postImage":  "",
+            "timeAgo":  "3m", 
+            "hasStory" :  false
+        },
+        {
+            "name":  "lucy.walker", 
+            "profilePic":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "content":  " started following you. ", 
+            "postImage":  "",
+            "timeAgo":  "4m", 
+            "hasStory" :   true
+        },
+        {
+            "name":  "arnob.mukherjee", 
+            "profilePic":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "content":  " started following you. ", 
+            "postImage":  "",
+            "timeAgo":  "4m", 
+            "hasStory" :  false
+        },
+        {
+            "name":  "lourdes", 
+            "profilePic":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "content":  " started following you. ", 
+            "postImage":  "",
+            "timeAgo":  "4m", 
+            "hasStory" :  false
+        },
+        {
+            "name":  "nesuixd", 
+            "profilePic":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "content":  " liked your video. ", 
+            "postImage":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "timeAgo":  "20s", 
+            "hasStory" :  false
+        },
+        {
+            "name":  "m.t.arrofi", 
+            "profilePic":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "content":  " started following you. ", 
+            "postImage":  "",
+            "timeAgo":  "1m", 
+            "hasStory" :  false
+        },
+        {
+            "name":  "digitalenvision", 
+            "profilePic":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "content":  " liked your post. ", 
+            "postImage":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b",
+            "timeAgo":  "1m", 
+            "hasStory" :   true
+        },
+        {
+            "name":  "leah.stevens", 
+            "profilePic":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "content":  " liked your post. ", 
+            "postImage":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b",
+            "timeAgo":  "1m", 
+            "hasStory" :   true
+        },
+        {
+            "name":  "thiago_barr1", 
+            "profilePic":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "content":  " liked your video. ", 
+            "postImage":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "timeAgo":  "2m", 
+            "hasStory" :  false
+        },
+        {
+            "name":  "devon", 
+            "profilePic":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "content":  " liked your post. ", 
+            "postImage":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b",
+            "timeAgo":  "3m", 
+            "hasStory" :   true
+        },
+        {
+            "name":  "jesse", 
+            "profilePic":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "content":  " started following you. ", 
+            "postImage":  "",
+            "timeAgo":  "3m", 
+            "hasStory" :  false
+        },
+        {
+            "name":  "rodrigo.hawkins", 
+            "profilePic":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "content":  " started following you. ", 
+            "postImage":  "",
+            "timeAgo":  "3m", 
+            "hasStory" :  false
+        },
+        {
+            "name":  "lucy.walker", 
+            "profilePic":  "https://instagram.fbom16-1.fna.fbcdn.net/v/t51.2885-19/297723103_131991389535733_3394524039300739566_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fbom16-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=M2xqI7Jd6nIAX-F1WKV&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfATh1Ytp1wGyChO1BMGbtASPXapXj1NWaljQZlv9-N_1Q&oe=64094AB9&_nc_sid=8fd12b", 
+            "content":  " started following you. ", 
+            "postImage":  "",
+            "timeAgo":  "4m", 
+            "hasStory" :   true
+        }
+    ]    
+}

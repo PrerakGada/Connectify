@@ -1,3 +1,4 @@
+import 'package:connectify/widgets/bluetooth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,7 @@ class MyApp extends StatelessWidget {
         darkTheme: dark_theme(),
         themeMode: ThemeMode.dark,
         debugShowCheckedModeBanner: false,
-        initialRoute: SplashScreen.id,
+        initialRoute: Bluetooth.id,
         routes: {
           HomeScreen.id: (context) => const HomeScreen(),
           SplashScreen.id: (context) => const SplashScreen(),
@@ -78,6 +79,7 @@ class MyApp extends StatelessWidget {
           Settings.id: (context) => const Settings(),
           // LocationScreen.id: (context) => const LocationScreen(),
           ChatScreen.id: (context) => const ChatScreen(),
+          Bluetooth.id: (context) => Bluetooth(),
         },
       ),
     );
