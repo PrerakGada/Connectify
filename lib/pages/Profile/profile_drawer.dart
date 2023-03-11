@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../logic/state_management/user_store.dart';
 import '../../theme/app_colors.dart';
 import '../Settings/settings.dart';
-import 'edit_profile.dart';
+// import 'edit_profile.dart';
 
 class ProfileDrawer extends StatelessWidget {
   const ProfileDrawer({Key? key}) : super(key: key);
@@ -28,7 +28,6 @@ class ProfileDrawer extends StatelessWidget {
                     IconButton(
                       onPressed: () {
                         Navigator.of(context).pop();
-
                       },
                       icon: const Icon(Icons.chevron_left),
                     ),
@@ -46,7 +45,7 @@ class ProfileDrawer extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                         CircleAvatar(
+                        CircleAvatar(
                           radius: 50,
                           backgroundImage: NetworkImage(
                               "https://tourmate.mustansirg.in/static/${UserStore().tokenData['profile_photo']}"),
