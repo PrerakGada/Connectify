@@ -25,7 +25,7 @@ class _BluetoothState extends State<Bluetooth> {
 
   Future<void> initPlatformState() async {
     // For iOS
-    await nearbyMessagesApi.setAPIKey('AIzaSyCpOWW1ernJL2FgyUYWIOnJFaFYufyaXOE');
+    // await nearbyMessagesApi.setAPIKey('AIzaSyCpOWW1ernJL2FgyUYWIOnJFaFYufyaXOE');
 
     nearbyMessagesApi.onFound = (message) {
       print('~~~onFound : $message');

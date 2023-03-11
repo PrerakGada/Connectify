@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:convert';
 // import 'dart:ffi';
 import 'dart:io';
@@ -116,6 +117,8 @@ class UserStore extends StateKeeper {
   }) async {
     final prefs = await SharedPreferences.getInstance();
     // Register
+    const ch = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
+    Random r = Random();
 
     var request = http.MultipartRequest(
         'POST',
@@ -135,7 +138,7 @@ class UserStore extends StateKeeper {
       'password2': password2,
       'username': username,
       'location': "${[lat, lon]}",
-      'mac_id': macId.toString(),
+      'uid': String.fromCharCodes(Iterable.generate(20, (_) => ch.codeUnitAt(r.nextInt(ch.length)))),
     });
 
     if (domainPreference != null) {
