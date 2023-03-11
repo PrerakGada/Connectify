@@ -4,29 +4,12 @@ import 'package:connectify/pages/CompanyDetails/companyDetails.dart';
 import 'package:flutter/material.dart';
 import '../../theme/typography.dart';
 import 'package:delayed_display/delayed_display.dart';
-// import 'package:animations/animations.dart';
 
 class CompanyCard extends StatefulWidget {
   CompCard details;
-  // String title;
-  // String company;
-  // String experience;
-  // String location;
-  // String description;
-  // List<String> tags;
-  // String pay;
-  // String companyPhoto;
   CompanyCard({
     super.key,
     required this.details,
-    // required this.description,
-    // required this.company,
-    // required this.experience,
-    // required this.location,
-    // required this.tags,
-    // required this.title,
-    // required this.pay,
-    // required this.companyPhoto,
   });
 
   @override
