@@ -90,6 +90,9 @@ dependencies:
   animations: ^2.0.7
   hmssdk_flutter: ^1.3.2
   permission_handler: ^10.2.0
+  flutter_nearby_messages_api: ^0.0.8
+
+
 
 dev_dependencies:
   flutter_test:

@@ -462,6 +462,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.0"
+  flutter_nearby_messages_api:
+    dependency: "direct main"
+    description:
+      name: flutter_nearby_messages_api
+      sha256: "0f2eba7723120eb0ad187b79deef0976ce46911d157e39a6477b797b0549ef3c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.8"
   flutter_phone_direct_caller:
     dependency: "direct main"
     description:

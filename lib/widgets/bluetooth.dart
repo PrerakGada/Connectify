@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'package:flutter_nearby_messages_api/flutter_nearby_messages_api.dart';
 import 'package:beacon_broadcast/beacon_broadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
@@ -12,7 +14,50 @@ class Bluetooth extends StatefulWidget {
 
 class _BluetoothState extends State<Bluetooth> {
   FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
-  BeaconBroadcast beaconBroadcast = BeaconBroadcast();
+  FlutterNearbyMessagesApi nearbyMessagesApi = FlutterNearbyMessagesApi();
+  
+  @override
+  void initState() {
+    super.initState();
+    initPlatformState();
+  }
+
+
+  Future<void> initPlatformState() async {
+    // For iOS
+    await nearbyMessagesApi.setAPIKey('AIzaSyCpOWW1ernJL2FgyUYWIOnJFaFYufyaXOE');
+
+    nearbyMessagesApi.onFound = (message) {
+      print('~~~onFound : $message');
+    };
+
+    nearbyMessagesApi.onLost = (message) {
+      print('~~~onLost : $message');
+    };
+
+    nearbyMessagesApi.statusHandler = (status) {
+      print('~~~statusHandler : $status');
+    };
+
+    nearbyMessagesApi.setPermissionAlert(
+        'Your title', 'Your message', 'Deny', 'Grant');
+
+    nearbyMessagesApi.permissionHandler = (status) {
+      print(status);
+    };
+
+    nearbyMessagesApi.bluetoothPowerErrorHandler = (args) {
+      print('~~~ bluetoothPowerErrorHandler');
+    };
+
+    nearbyMessagesApi.bluetoothPermissionErrorHandler = (args) {
+      print('~~~ bluetoothPermissionErrorHandler');
+    };
+
+    nearbyMessagesApi.microphonePermissionErrorHandler = (args) {
+      print('~~~ microphonePermissionErrorHandler');
+    };
+  }
 
   void scanForDevices() {
     // Start scanning
@@ -35,62 +80,48 @@ class _BluetoothState extends State<Bluetooth> {
     });
 
 // Stop scanning
-    flutterBlue.stopScan();
+  flutterBlue.stopScan();
   }
 
-
-  Future<void> beacon() async {
-    BeaconStatus transmissionSupportStatus = await beaconBroadcast.checkTransmissionSupported();
-    switch (transmissionSupportStatus) {
-      case BeaconStatus.supported:
-        print('supported');
-        break;
-      case BeaconStatus.notSupportedMinSdk:
-        print('notSupportedMinSdk');
-        break;
-      case BeaconStatus.notSupportedBle:
-        print('notSupportedBle');
-        break;
-      case BeaconStatus.notSupportedCannotGetAdvertiser:
-        print('notSupportedCannotGetAdvertiser');
-        break;
-    }
+  void emitBeacon() {
   }
 
-  void beaconBroad() {
-    beaconBroadcast
-        .setUUID('39ED98FF-2900-441A-802F-9C398FC199D2')
-        .setMajorId(1)
-        .setMinorId(100).setAdvertiseMode(AdvertiseMode.lowPower).setExtraData([7,7,77,7])
-        .start();
-    beaconBroadcast.setAdvertiseMode(AdvertiseMode.lowPower);
-    print('Broadcasting');
-    print(beaconBroadcast.setAdvertiseMode(AdvertiseMode.lowPower));
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                scanForDevices();
-              },
-              child: Text('Scan'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                beacon();
-                beaconBroadcast;
-              },
-              child: Text('Beacon Broadcast'),
-            ),
-          ],
+        appBar: new AppBar(
+          title: const Text('Flutter Nearby Messages Example'),
         ),
-      ),
-    );
+        body: new Container(
+          color: Colors.white70,
+          child: new Column(children: [
+            new TextButton(
+                onPressed: () async {
+                  await nearbyMessagesApi.publish('Hello world!');
+                },
+                child: new Text("publish")),
+            new TextButton(
+                onPressed: () async {
+                  await nearbyMessagesApi.unPublish();
+                },
+                child: new Text("unPublish")),
+            new TextButton(
+                onPressed: () async {
+                  await nearbyMessagesApi.backgroundSubscribe();
+                },
+                child: new Text("backgroundSubscribe")),
+            new TextButton(
+                onPressed: () async {
+                  await nearbyMessagesApi.backgroundUnsubscribe();
+                },
+                child: new Text("unSubscribe"))
+          ]),
+        ),
+      );
   }
 }
+
+
+
+
