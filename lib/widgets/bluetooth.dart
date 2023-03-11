@@ -14,13 +14,15 @@ class _BluetoothState extends State<Bluetooth> {
 
   void scanForDevices() {
     // Start scanning
-    flutterBlue.startScan(timeout: Duration(seconds: 4));
+    flutterBlue.startScan(timeout: Duration(milliseconds: 200));
 
 // Listen to scan results
     var subscription = flutterBlue.scanResults.listen((results) {
       // do something with scan results
       for (ScanResult r in results) {
+        if (r.device.name != '')
         print('${r.device.name} found! rssi: ${r.rssi}');
+        // print('|${r.device.name}|');
       }
     });
 

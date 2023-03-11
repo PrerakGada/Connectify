@@ -9,6 +9,7 @@ import '../Profile/edit_profile.dart';
 
 class Settings extends StatefulWidget {
   static const String id = '/settings';
+
   const Settings({Key? key}) : super(key: key);
 
   @override
