@@ -138,7 +138,8 @@ class UserStore extends StateKeeper {
       'password2': password2,
       'username': username,
       'location': "${[lat, lon]}",
-      'uid': String.fromCharCodes(Iterable.generate(20, (_) => ch.codeUnitAt(r.nextInt(ch.length)))),
+      'uid': String.fromCharCodes(
+          Iterable.generate(20, (_) => ch.codeUnitAt(r.nextInt(ch.length)))),
     });
 
     if (domainPreference != null) {
@@ -264,10 +265,11 @@ class UserStore extends StateKeeper {
   }) async {
     final prefs = await SharedPreferences.getInstance();
     var response = await http.get(
-        Uri.parse('https://innovative-minds.mustansirg.in/api/companies/${id}/'),
-        headers: {
-          'Authorization': 'Bearer ${prefs.getString('access')}',
-        },);
+      Uri.parse('https://innovative-minds.mustansirg.in/api/companies/${id}/'),
+      headers: {
+        'Authorization': 'Bearer ${prefs.getString('access')}',
+      },
+    );
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       print(data);
@@ -338,7 +340,7 @@ class UserStore extends StateKeeper {
     });
   }
 
-  Future createJob({
+  Future<bool> createJob({
     required int companyId,
     required String title,
     required String description,
@@ -358,10 +360,9 @@ class UserStore extends StateKeeper {
     print("Create job called");
     final prefs = await SharedPreferences.getInstance();
     var request = http.MultipartRequest(
-        'POST',
-        Uri.parse(
-            'https://innovative-minds.mustansirg.in/api/jobs/'));
-    request.headers.addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+        'POST', Uri.parse('https://innovative-minds.mustansirg.in/api/jobs/'));
+    request.headers
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
     request.fields.addAll({
       'company': companyId.toString(),
       'title': title,
@@ -376,7 +377,7 @@ class UserStore extends StateKeeper {
       'sponsored': sponsored,
       'emotional_requirements': emotional_requirements,
       'skills': skills,
-      'domain': domain,
+      'domains': domain,
       'address': address,
     });
 
@@ -384,24 +385,24 @@ class UserStore extends StateKeeper {
     await http.Response.fromStream(response).then((value) async {
       var body = jsonDecode(value.body);
       if (response.statusCode == 201) {
-        print(body);
+        // print(body);
         return true;
       } else {
-        print("Failed to Create Job");
-        print(body);
+        // print("Failed to Create Job");
+        // print(body);
         return false;
       }
     });
+    return false;
   }
 
   Future getAllJobs() async {
     print("Get all jobs called");
     final prefs = await SharedPreferences.getInstance();
     var request = http.MultipartRequest(
-        'GET',
-        Uri.parse(
-            'https://innovative-minds.mustansirg.in/api/jobs/'));
-    request.headers.addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+        'GET', Uri.parse('https://innovative-minds.mustansirg.in/api/jobs/'));
+    request.headers
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
     var response = await request.send();
     await http.Response.fromStream(response).then((value) async {
       var body = jsonDecode(value.body);
@@ -416,16 +417,13 @@ class UserStore extends StateKeeper {
     });
   }
 
-  Future getJobById({
-    required String id
-  }) async {
+  Future getJobById({required String id}) async {
     print("Get job called");
     final prefs = await SharedPreferences.getInstance();
-    var request = http.MultipartRequest(
-        'GET',
-        Uri.parse(
-            'https://innovative-minds.mustansirg.in/api/jobs/${id}/'));
-    request.headers.addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+    var request = http.MultipartRequest('GET',
+        Uri.parse('https://innovative-minds.mustansirg.in/api/jobs/${id}/'));
+    request.headers
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
     var response = await request.send();
     await http.Response.fromStream(response).then((value) async {
       var body = jsonDecode(value.body);
@@ -458,11 +456,10 @@ class UserStore extends StateKeeper {
     required String address,
   }) async {
     final prefs = await SharedPreferences.getInstance();
-    var request = http.MultipartRequest(
-        'PUT',
-        Uri.parse(
-            'https://innovative-minds.mustansirg.in/api/jobs/${id}/'));
-    request.headers.addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+    var request = http.MultipartRequest('PUT',
+        Uri.parse('https://innovative-minds.mustansirg.in/api/jobs/${id}/'));
+    request.headers
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
     request.fields.addAll({
       'title': title,
       'description': description,
@@ -498,11 +495,10 @@ class UserStore extends StateKeeper {
     required int id,
   }) async {
     final prefs = await SharedPreferences.getInstance();
-    var request = http.MultipartRequest(
-        'DELETE',
-        Uri.parse(
-            'https://innovative-minds.mustansirg.in/api/jobs/${id}/'));
-    request.headers.addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+    var request = http.MultipartRequest('DELETE',
+        Uri.parse('https://innovative-minds.mustansirg.in/api/jobs/${id}/'));
+    request.headers
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
     var response = await request.send();
     await http.Response.fromStream(response).then((value) async {
       var body = jsonDecode(value.body);

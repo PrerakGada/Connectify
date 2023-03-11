@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
+import '../../logic/state_management/user_store.dart';
+
 class CreateJob extends StatefulWidget {
   static const id = '/createJob';
   const CreateJob({super.key});
@@ -60,18 +62,6 @@ class _CreateJobState extends State<CreateJob> {
                       color: Colors.white,
                       fontSize: 22,
                       fontWeight: FontWeight.bold),
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Row(
-                    children: [
-                      Icon(Icons.photo_sharp),
-                      Text(
-                        "Add Header Image",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
                 ),
                 SizedBox(
                   height: 15,
@@ -154,31 +144,31 @@ class _CreateJobState extends State<CreateJob> {
                       });
                     }
                   },
-                  placeholderText: "Enter Recruitement Period",
+                  placeholderText: selectedDate.toString().split(' ')[0],
                   date: true,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
-                Text(
+                const Text(
                   "Expected Salary",
                   style: TextStyle(color: Colors.white),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 InputField(
                   controller: _jobTitle,
                   placeholderText: "Enter amount",
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
-                Text(
+                const Text(
                   "Experience in Years",
                   style: TextStyle(color: Colors.white),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 InputField(
@@ -313,6 +303,72 @@ class _CreateJobState extends State<CreateJob> {
                       ),
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: 300,
+                    height: 50,
+                    child: ElevatedButton(
+                        onPressed: () async {
+                          final status = await UserStore().createJob(
+                              companyId: 1,
+                              address: "hi",
+                              description: "bye",
+                              domain: "Video Editing",
+                              duration: "2 years",
+                              emotional_requirements: "work-life balance",
+                              experience: "2 years",
+                              lat: 20.55,
+                              lon: 56.33,
+                              payscale: "34",
+                              title: "ui ux",
+                              sponsored: "true",
+                              skills: "Final cut pro",
+                              timings: "9-5",
+                              worklife_culture: "gender-neutral");
+                          if (status) {
+                            print("done");
+                            // Navigator.popAndPushNamed(context, SplashScreen.id);
+                          }
+                          // print("pressed");
+                          // if (demo != null) {
+                          //   var request = http.MultipartRequest(
+                          //       'POST',
+                          //       Uri.parse(
+                          //           'https://innovative-minds.mustansirg.in/api/companies/'));
+
+                          //   request.files.add(
+                          //       await http.MultipartFile.fromPath(
+                          //           'headquarters', demo!.path));
+                          //   request.files.add(
+                          //       await http.MultipartFile.fromPath(
+                          //           'logo', demo!.path));
+                          //   request.fields.addAll(
+                          //       {'name': 'Amazon', 'admins': '1'});
+                          //   var response = await request.send();
+                          //   await http.Response.fromStream(response)
+                          //       .then((value) {
+                          //     var body = jsonDecode(value.body);
+                          //   });
+                          // }
+                        },
+                        style: ButtonStyle(
+                          elevation: MaterialStateProperty.all(0),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              const Color.fromARGB(255, 111, 0, 190)),
+                        ),
+                        child: const Text(
+                          "Create Job",
+                          style: TextStyle(color: Colors.white),
+                        )),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
                 ),
               ],
             ),
