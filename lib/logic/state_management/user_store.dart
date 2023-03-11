@@ -33,7 +33,8 @@ class UserStore extends StateKeeper {
     if (prefs.getString('access') != null) {
       print(prefs.getString('refresh'));
       var response = await http.post(
-        Uri.parse("https://innovative-minds.mustansirg.in/api/auth/token/refresh/"),
+        Uri.parse(
+            "https://innovative-minds.mustansirg.in/api/auth/token/refresh/"),
         headers: {
           "Content-Type": "application/json",
         },
@@ -107,21 +108,18 @@ class UserStore extends StateKeeper {
     // Register
 
     var request = http.MultipartRequest(
-    'POST',
-    Uri.parse(
-        'https://innovative-minds.mustansirg.in/api/auth/registration/'));
+        'POST',
+        Uri.parse(
+            'https://innovative-minds.mustansirg.in/api/auth/registration/'));
     if (profilePhoto != null) {
-      request.files.add(
-          await http.MultipartFile.fromPath(
-              'profile_photo', profilePhoto.path));
+      request.files.add(await http.MultipartFile.fromPath(
+          'profile_photo', profilePhoto.path));
     }
     if (resume != null) {
-      request.files.add(
-          await http.MultipartFile.fromPath(
-              'resume', resume.path));
+      request.files
+          .add(await http.MultipartFile.fromPath('resume', resume.path));
     }
-    request.fields.addAll(
-    {
+    request.fields.addAll({
       'email': email,
       'password1': password1,
       'password2': password2,
@@ -129,7 +127,7 @@ class UserStore extends StateKeeper {
     });
 
     var response = await request.send();
-    
+
     await http.Response.fromStream(response).then((value) async {
       var body = jsonDecode(value.body);
       if (response.statusCode == 201) {
@@ -147,7 +145,6 @@ class UserStore extends StateKeeper {
         return false;
       }
     });
-
   }
 
   Future logout() async {
