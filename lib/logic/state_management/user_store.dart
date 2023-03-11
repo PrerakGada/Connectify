@@ -57,7 +57,7 @@ class UserStore extends StateKeeper {
     }
   }
 
-  Future login({
+  Future logIn({
     required String email,
     required String password,
   }) async {
@@ -104,6 +104,7 @@ class UserStore extends StateKeeper {
     required String password2,
     required double lat,
     required double lon,
+    required double macId,
     String? domainPreference,
     String? experience,
     String? keySkills,
@@ -134,7 +135,7 @@ class UserStore extends StateKeeper {
       'username': username,
       'lat': lat.toString(),
       'lon': lon.toString(),
-
+      'mac_id': macId.toString(),
     });
 
     if (domainPreference!= null) {
