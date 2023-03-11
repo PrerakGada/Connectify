@@ -18,7 +18,7 @@ class _CreateJobState extends State<CreateJob> {
   final List<String> _skills = [];
   final TextEditingController _textEditingController = TextEditingController();
   final TextEditingController _hiringController = TextEditingController();
-
+  DateTime selectedDate = DateTime.now();
   void _addChip(String text) {
     setState(() {
       _chips.add(text);
@@ -61,14 +61,17 @@ class _CreateJobState extends State<CreateJob> {
                       fontSize: 22,
                       fontWeight: FontWeight.bold),
                 ),
-                Row(
-                  children: [
-                    Icon(Icons.photo_sharp),
-                    Text(
-                      "Add Header Image",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
+                InkWell(
+                  onTap: () {},
+                  child: Row(
+                    children: [
+                      Icon(Icons.photo_sharp),
+                      Text(
+                        "Add Header Image",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 15,
@@ -138,6 +141,19 @@ class _CreateJobState extends State<CreateJob> {
                 ),
                 InputField(
                   controller: _jobTitle,
+                  onTap: () async {
+                    print("wait");
+                    final DateTime? picked = await showDatePicker(
+                        context: context,
+                        initialDate: selectedDate,
+                        firstDate: DateTime(2015, 8),
+                        lastDate: DateTime(2101));
+                    if (picked != null && picked != selectedDate) {
+                      setState(() {
+                        selectedDate = picked;
+                      });
+                    }
+                  },
                   placeholderText: "Enter Recruitement Period",
                   date: true,
                 ),
@@ -196,6 +212,7 @@ class _CreateJobState extends State<CreateJob> {
                 TextFormField(
                   controller: _hiringController,
                   decoration: InputDecoration(
+                    labelText: "Enter hiring manager",
                     suffixIcon: IconButton(
                       icon: Icon(Icons.add),
                       onPressed: () {

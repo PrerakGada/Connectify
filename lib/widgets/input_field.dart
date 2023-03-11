@@ -35,7 +35,11 @@ class InputField extends StatelessWidget {
           border: Border.all(color: const Color(0xFF5D5D67)),
           borderRadius: BorderRadius.circular(15)),
       child: TextFormField(
-        readOnly: condition ? true : false,
+        readOnly: condition
+            ? true
+            : date
+                ? true
+                : false,
         minLines: minLines,
         maxLines: maxLines,
         controller: controller,
