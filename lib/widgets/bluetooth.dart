@@ -15,13 +15,12 @@ class Bluetooth extends StatefulWidget {
 class _BluetoothState extends State<Bluetooth> {
   FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
   FlutterNearbyMessagesApi nearbyMessagesApi = FlutterNearbyMessagesApi();
-  
+
   @override
   void initState() {
     super.initState();
     initPlatformState();
   }
-
 
   Future<void> initPlatformState() async {
     // For iOS
@@ -76,52 +75,45 @@ class _BluetoothState extends State<Bluetooth> {
           // print(r);
         }
       }
-
     });
 
 // Stop scanning
-  flutterBlue.stopScan();
+    flutterBlue.stopScan();
   }
 
-  void emitBeacon() {
-  }
-
+  void emitBeacon() {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: new AppBar(
-          title: const Text('Flutter Nearby Messages Example'),
-        ),
-        body: new Container(
-          color: Colors.white70,
-          child: new Column(children: [
-            new TextButton(
-                onPressed: () async {
-                  await nearbyMessagesApi.publish('Hello world!');
-                },
-                child: new Text("publish")),
-            new TextButton(
-                onPressed: () async {
-                  await nearbyMessagesApi.unPublish();
-                },
-                child: new Text("unPublish")),
-            new TextButton(
-                onPressed: () async {
-                  await nearbyMessagesApi.backgroundSubscribe();
-                },
-                child: new Text("backgroundSubscribe")),
-            new TextButton(
-                onPressed: () async {
-                  await nearbyMessagesApi.backgroundUnsubscribe();
-                },
-                child: new Text("unSubscribe"))
-          ]),
-        ),
-      );
+      appBar: new AppBar(
+        title: const Text('Flutter Nearby Messages Example'),
+      ),
+      body: new Container(
+        color: Colors.white70,
+        child: new Column(children: [
+          new TextButton(
+              onPressed: () async {
+                await nearbyMessagesApi.publish('Hello world!');
+              },
+              child: new Text("publish")),
+          new TextButton(
+              onPressed: () async {
+                await nearbyMessagesApi.unPublish();
+              },
+              child: new Text("unPublish")),
+          new TextButton(
+              onPressed: () async {
+                await nearbyMessagesApi.backgroundSubscribe();
+              },
+              child: new Text("backgroundSubscribe")),
+          new TextButton(
+              onPressed: () async {
+                await nearbyMessagesApi.backgroundUnsubscribe();
+              },
+              child: new Text("unSubscribe"))
+        ]),
+      ),
+    );
   }
 }
-
-
-
-

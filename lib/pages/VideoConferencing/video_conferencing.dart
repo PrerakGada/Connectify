@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:connectify/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hmssdk_flutter/hmssdk_flutter.dart';
@@ -44,9 +45,10 @@ class VideoConferencing extends StatelessWidget {
             // Function to push to meeting page
             onPressed: () async {
               await getPermissions();
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const MeetingPage();
-              }));
+              Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (_) => const MeetingPage()),
+              );
             },
             child: const Padding(
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -226,8 +228,11 @@ class _MeetingPageState extends State<MeetingPage>
       key: key,
       child: (videoTrack != null && !(videoTrack.isMute))
           // Actual widget to render video
-          ? HMSVideoView(
-              track: videoTrack,
+          ? SizedBox(
+              height: 300,
+              child: HMSVideoView(
+                track: videoTrack,
+              ),
             )
           : Center(
               child: Container(
@@ -255,8 +260,13 @@ class _MeetingPageState extends State<MeetingPage>
   }
 
   // Widget to render grid of peer tiles and a end button
+  bool audioMute = false;
+  bool videoMute = false;
   @override
   Widget build(BuildContext context) {
+    // bool? videoMute = localPeer?.videoTrack?.isMute;
+    // bool? audioMute = localPeer?.audioTrack?.isMute;
+
     return WillPopScope(
       // Used to call "leave room" upon clicking back button [in android]
       onWillPop: () async {
@@ -275,8 +285,8 @@ class _MeetingPageState extends State<MeetingPage>
                 child: GridView(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       mainAxisExtent: (remotePeerVideoTrack == null)
-                          ? MediaQuery.of(context).size.height
-                          : MediaQuery.of(context).size.height / 2,
+                          ? MediaQuery.of(context).size.height * 0.85
+                          : MediaQuery.of(context).size.height * 0.85 / 2,
                       crossAxisCount: 1),
                   children: [
                     if (remotePeerVideoTrack != null && remotePeer != null)
@@ -294,19 +304,63 @@ class _MeetingPageState extends State<MeetingPage>
               // End button to leave the room
               Align(
                 alignment: Alignment.bottomCenter,
-                child: RawMaterialButton(
-                  onPressed: () {
-                    hmsSDK.leave();
-                    Navigator.pop(context);
-                  },
-                  elevation: 2.0,
-                  fillColor: Colors.red,
-                  padding: const EdgeInsets.all(15.0),
-                  shape: const CircleBorder(),
-                  child: const Icon(
-                    Icons.call_end,
-                    size: 25.0,
-                    color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      RawMaterialButton(
+                        onPressed: () {
+                          // hmsSDK.leave();
+                          // Navigator.pop(context);
+                          setState(() {
+                            videoMute = !videoMute;
+                          });
+                          hmsSDK.toggleCameraMuteState();
+                        },
+                        elevation: 2.0,
+                        fillColor: AppColors.grey,
+                        padding: const EdgeInsets.all(15.0),
+                        shape: const CircleBorder(),
+                        child: Icon(
+                          videoMute ? Icons.videocam_off : Icons.videocam,
+                          size: 25.0,
+                          color: Colors.white,
+                        ),
+                      ),
+                      RawMaterialButton(
+                        onPressed: () {
+                          hmsSDK.toggleMicMuteState();
+                          setState(() {
+                            audioMute = !audioMute;
+                          });
+                        },
+                        elevation: 2.0,
+                        fillColor: AppColors.grey,
+                        padding: const EdgeInsets.all(15.0),
+                        shape: const CircleBorder(),
+                        child: Icon(
+                          audioMute ? Icons.volume_off : Icons.volume_up,
+                          size: 25.0,
+                          color: Colors.white,
+                        ),
+                      ),
+                      RawMaterialButton(
+                        onPressed: () {
+                          hmsSDK.leave();
+                          Navigator.pop(context);
+                        },
+                        elevation: 2.0,
+                        fillColor: Colors.red,
+                        padding: const EdgeInsets.all(15.0),
+                        shape: const CircleBorder(),
+                        child: const Icon(
+                          Icons.call_end,
+                          size: 25.0,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
