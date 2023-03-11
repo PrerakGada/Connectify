@@ -33,8 +33,8 @@ class SplashScreenState extends State<SplashScreen>
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await UserStore().refreshTheToken();
-      await UserStore().fetchNearbyUsers();
-      await UserStore().fetchNearbyJourneys();
+      // await UserStore().fetchNearbyUsers();
+      // await UserStore().fetchNearbyJourneys();
       // await UserStore().getLocationsByRadius();
       await _getLocation();
       await handleNavigation();
@@ -77,7 +77,7 @@ class SplashScreenState extends State<SplashScreen>
     final String newLocation = '${pos.latitude},${pos.longitude}';
     UserStore().lat = pos.latitude!;
     UserStore().long = pos.longitude!;
-    await UserStore().sendSOS(lat: pos.latitude!, long: pos.longitude!);
+    // await UserStore().sendSOS(lat: pos.latitude!, long: pos.longitude!);
     print(
         "=============================================Current position: $newLocation=============================================");
   }

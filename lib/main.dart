@@ -1,3 +1,5 @@
+import 'package:connectify/pages/Profile/pofile_screen.dart';
+import 'package:connectify/pages/Profile/profile_view.dart';
 import 'package:connectify/widgets/bluetooth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -9,7 +11,6 @@ import 'pages/Onboarding/onboarding_screen.dart';
 import 'pages/Onboarding/register_screen.dart';
 import 'pages/Onboarding/splash_screen.dart';
 import 'pages/Profile/edit_profile.dart';
-import 'pages/Profile/profile_page.dart';
 import 'pages/Settings/settings.dart';
 import 'pages/home_screen.dart';
 import 'theme/dark_theme.dart';
@@ -67,14 +68,14 @@ class MyApp extends StatelessWidget {
         darkTheme: dark_theme(),
         themeMode: ThemeMode.dark,
         debugShowCheckedModeBanner: false,
-        initialRoute: Bluetooth.id,
+        initialRoute: Profile.id,
         routes: {
           HomeScreen.id: (context) => const HomeScreen(),
           SplashScreen.id: (context) => const SplashScreen(),
           LoginScreen.id: (context) => const LoginScreen(),
           OnboardingScreen.id: (context) => const OnboardingScreen(),
           RegisterScreen.id: (context) => const RegisterScreen(),
-          ProfileScreen.id: (context) => const ProfileScreen(),
+          Profile.id: (context) => const Profile(),
           // EditProfile.id: (context) => const EditProfile(),
           Settings.id: (context) => const Settings(),
           // LocationScreen.id: (context) => const LocationScreen(),
