@@ -56,7 +56,7 @@ class InputField extends StatelessWidget {
             border: InputBorder.none,
             hintText: placeholderText,
             hintStyle: const TextStyle(fontSize: 15, color: Color(0xFF8F8F9E))),
-        onTap: condition ? onTap : null,
+        onTap: date ? onTap : null,
       ),
     );
   }

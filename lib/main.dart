@@ -4,7 +4,6 @@ import 'package:connectify/pages/ats/ats.dart';
 import 'package:connectify/pages/createCompany/create_company.dart';
 import 'package:connectify/pages/createJob/create_job.dart';
 import 'package:connectify/pages/employeeDashBoard/employee_dashboard.dart';
-import 'package:connectify/widgets/bluetooth.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -24,6 +23,7 @@ import 'theme/light_theme.dart';
 import 'firebase_options.dart';
 import 'logic/state_management/user_store.dart';
 import 'theme/dark_theme.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'theme/light_theme.dart';
 
 Future<void> main() async {
@@ -59,6 +59,13 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+  Future<void> requestCameraPermission() async {
+    await Permission.bluetoothAdvertise.isGranted;
+    await Permission.bluetooth.isGranted;
+    await Permission.bluetoothConnect.isGranted;
+    await Permission.bluetoothScan.isGranted;
+  }
 
   @override
   Widget build(BuildContext context) {

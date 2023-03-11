@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../logic/state_management/user_store.dart';
 import '../theme/app_colors.dart';
 import './Search/search.dart';
+import 'AudioVideo/audio_recording_page.dart';
+import 'AudioVideo/video_recording_page.dart';
 import 'Profile/profile_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -265,6 +267,8 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       children: <Widget>[
         SearchScreen(),
+        AudioRecordingPage(),
+        VideoRecordingPage(),
         // const ChatScreen(),
         // Container(),
         // const ViewActivity(),
