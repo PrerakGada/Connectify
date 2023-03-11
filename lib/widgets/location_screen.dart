@@ -56,7 +56,7 @@ class LocationScreenState extends State<LocationScreen> {
           final geometry = detail.result.geometry!;
           final lat = geometry.location.lat;
           final lang = geometry.location.lng;
-          UserStore().findJourney(lat: lat, long: lang);
+          // UserStore().findJourney(lat: lat, long: lang);
 
           setState(() {
             location = '$lat,$lang';
