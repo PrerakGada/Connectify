@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -101,6 +102,13 @@ class UserStore extends StateKeeper {
     required String email,
     required String password1,
     required String password2,
+    required double lat,
+    required double lon,
+    String? domainPreference,
+    String? experience,
+    String? keySkills,
+    String? address,
+    String? preferredDepartment,
     File? profilePhoto,
     File? resume,
   }) async {
@@ -124,7 +132,26 @@ class UserStore extends StateKeeper {
       'password1': password1,
       'password2': password2,
       'username': username,
+      'lat': lat.toString(),
+      'lon': lon.toString(),
+
     });
+
+    if (domainPreference!= null) {
+      request.fields.addAll({'domainpreference': domainPreference});
+    }
+    if (experience!= null) {
+      request.fields.addAll({'experience': experience});
+    }
+    if (address!= null) {
+      request.fields.addAll({'address': address});
+    }
+    if (keySkills != null) {
+      request.fields.addAll({'keyskills': keySkills});
+    }
+    if (preferredDepartment != null) {
+      request.fields.addAll({'preferredDepartment': preferredDepartment});
+    }
 
     var response = await request.send();
 
@@ -161,11 +188,13 @@ class UserStore extends StateKeeper {
     required String size,
     required int revenue,
     required String missionStatement,
+    required String domain,
     required String whatWeDo,
     required String website,
     required String instagram,
     required String facebook,
     required String twitter,
+    required String address,
     required String linkedin,
   }) async {
     final prefs = await SharedPreferences.getInstance();
@@ -185,7 +214,9 @@ class UserStore extends StateKeeper {
       'what_we_do': whatWeDo,
       'website': website,
       'instagram': instagram,
+      'address': address,
       'facebook': facebook,
+      'domain': domain,
       'twitter': twitter,
       'linkedin': linkedin,
     });
@@ -230,9 +261,11 @@ class UserStore extends StateKeeper {
     required File? logo,
     required File? headquarters,
     required String establishedYear,
+    required String address,
     required String size,
     required int revenue,
     required String missionStatement,
+    required String domain,
     required String whatWeDo,
     required String website,
     required String instagram,
@@ -257,8 +290,10 @@ class UserStore extends StateKeeper {
       'what_we_do': whatWeDo,
       'website': website,
       'instagram': instagram,
+      'domain': domain,
       'facebook': facebook,
       'twitter': twitter,
+      'address': address,
       'linkedin': linkedin,
     });
 
@@ -320,5 +355,22 @@ class UserStore extends StateKeeper {
       print(response.body);
       return false;
     }
+  }
+
+  Future createJob({
+    required int companyId,
+    required String title,
+    required String description,
+    required double lat,
+    required double lon,
+    required String payscale,
+    required String duration,
+    required String timings,
+    required String experience,
+    required String workCulture,
+    required String sponsored,
+    required String emotionality,
+  }) async {
+    
   }
 }
