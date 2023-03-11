@@ -8,14 +8,14 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:file_picker/file_picker.dart';
 
-class AudioVideoPage extends StatefulWidget {
-  const AudioVideoPage({Key? key}) : super(key: key);
+class AudioRecordingPage extends StatefulWidget {
+  const AudioRecordingPage({Key? key}) : super(key: key);
 
   @override
-  State<AudioVideoPage> createState() => _AudioVideoPageState();
+  State<AudioRecordingPage> createState() => _AudioRecordingPageState();
 }
 
-class _AudioVideoPageState extends State<AudioVideoPage> {
+class _AudioRecordingPageState extends State<AudioRecordingPage> {
   late final RecorderController recorderController;
 
   String? path;
@@ -204,7 +204,7 @@ class _AudioVideoPageState extends State<AudioVideoPage> {
 
         if (path != null) {
           isRecordingCompleted = true;
-          debugPrint(path);
+          debugPrint("recorded file path :$path");
           debugPrint("Recorded file size: ${File(path).lengthSync()}");
         }
       } else {
