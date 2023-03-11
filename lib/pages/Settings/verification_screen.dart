@@ -2,10 +2,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../Theme/app_colors.dart';
+import '../../theme/app_colors.dart';
 
 class VerifyJournalist extends StatelessWidget {
-
   VerifyJournalist({Key? key}) : super(key: key);
 
   void _pickFile() async {

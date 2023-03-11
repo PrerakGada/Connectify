@@ -11,7 +11,8 @@ import 'pages/Onboarding/login_screen.dart';
 import 'pages/Onboarding/onboarding_screen.dart';
 import 'pages/Onboarding/register_screen.dart';
 import 'pages/Onboarding/splash_screen.dart';
-import 'pages/Profile/edit_profile.dart';
+// import 'pages/Profile/edit_profile.dart';
+import 'pages/Profile/profile_page.dart';
 import 'pages/Settings/settings.dart';
 import 'pages/home_screen.dart';
 import 'theme/dark_theme.dart';
@@ -69,7 +70,7 @@ class MyApp extends StatelessWidget {
         darkTheme: dark_theme(),
         themeMode: ThemeMode.dark,
         debugShowCheckedModeBanner: false,
-        initialRoute: CreateBusinessScreen.id,
+        initialRoute: HomeScreen.id,
         routes: {
           HomeScreen.id: (context) => const HomeScreen(),
           SplashScreen.id: (context) => const SplashScreen(),

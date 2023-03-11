@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../logic/state_management/user_store.dart';
 import '../theme/app_colors.dart';
+import './Search/search.dart';
 import 'Profile/profile_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -263,7 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
         pageChanged(index);
       },
       children: <Widget>[
-        // const ViewPostScreen(),
+        SearchScreen(),
         // const ChatScreen(),
         // Container(),
         // const ViewActivity(),
@@ -357,20 +358,20 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Text("Welcome ${UserStore().tokenData["username"]}!",
-            style: const TextStyle(fontSize: 24)),
+        // title: Text("Welcome ${UserStore().tokenData["username"]}!",
+        //     style: const TextStyle(fontSize: 24)),
         actions: [
-          Builder(
-            builder: (context) => MaterialButton(
-              child: CircleAvatar(
-                radius: 30,
-                backgroundImage: NetworkImage(
-                    "https://tourmate.mustansirg.in/static/${UserStore().tokenData['profile_photo']}"),
-              ),
-              onPressed: () => Scaffold.of(context).openEndDrawer(),
-              // tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            ),
-          ),
+          // Builder( builder: (context) => MaterialButton(
+          //     child: CircleAvatar(
+          //       radius: 30,
+          //       backgroundImage: NetworkImage(
+          //         "https://tourmate.mustansirg.in/static/${UserStore().tokenData['profile_photo']}",
+          //       ),
+          //     ),
+          //     onPressed: () => Scaffold.of(context).openEndDrawer(),
+          //     // tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+          //   ),
+          // ),
         ],
       ),
       body: buildPageView(),
