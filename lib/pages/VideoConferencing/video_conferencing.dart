@@ -9,20 +9,20 @@ class VideoConferencing extends StatelessWidget {
   const VideoConferencing({super.key});
 
   Future<bool> getPermissions() async {
-    if (Platform.isIOS) return true;
-    await Permission.camera.request();
-    await Permission.microphone.request();
-    await Permission.bluetoothConnect.request();
-
-    while ((await Permission.camera.isDenied)) {
-      await Permission.camera.request();
-    }
-    while ((await Permission.microphone.isDenied)) {
-      await Permission.microphone.request();
-    }
-    while ((await Permission.bluetoothConnect.isDenied)) {
-      await Permission.bluetoothConnect.request();
-    }
+    // if (Platform.isIOS) return true;
+    // await Permission.camera.request();
+    // await Permission.microphone.request();
+    // await Permission.bluetoothConnect.request();
+    //
+    // while ((await Permission.camera.isDenied)) {
+    //   await Permission.camera.request();
+    // }
+    // while ((await Permission.microphone.isDenied)) {
+    //   await Permission.microphone.request();
+    // }
+    // while ((await Permission.bluetoothConnect.isDenied)) {
+    //   await Permission.bluetoothConnect.request();
+    // }
     return true;
   }
 
@@ -44,10 +44,9 @@ class VideoConferencing extends StatelessWidget {
             // Function to push to meeting page
             onPressed: () async {
               await getPermissions();
-              Navigator.push(
-                context,
-                CupertinoPageRoute(builder: (_) => const MeetingPage()),
-              );
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const MeetingPage();
+              }));
             },
             child: const Padding(
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
