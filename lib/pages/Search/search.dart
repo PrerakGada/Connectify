@@ -27,7 +27,7 @@ List allCards = [
     "Mumbai",
     "Work on cutting edge tech with the best technologists out there",
     "https://cdn-icons-png.flaticon.com/512/281/281764.png",
-    ["Android dev", "Flutter"],
+    ["Android dev", "Flutter", "React native"],
   ),
   CompCard(
     "Flutter dev",
@@ -79,8 +79,9 @@ class _SearchScreenState extends State<SearchScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              SizedBox(
-                height: 60,
+              Container(
+                height: 92,
+                padding: EdgeInsets.all(16),
                 // width: MediaQuery.of(context).size.width * 0.9,
                 child: TextField(
                   autofocus: true,
@@ -92,6 +93,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     fontWeight: FontWeight.w400,
                   ),
                   decoration: InputDecoration(
+                    labelText: "Search",
+                    labelStyle: TextStyle(),
                     contentPadding: const EdgeInsets.all(25),
                     hintText: 'Search here',
                     filled: true,

@@ -14,6 +14,7 @@ class CompanyDetails extends StatefulWidget {
 }
 
 class _CompanyDetailsState extends State<CompanyDetails> {
+  String bullet = "\u2022 ";
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -241,6 +242,34 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                   ],
                 ),
                 SizedBox(
+                  height: 10,
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Wrap(
+                    spacing: 10.0,
+                    runSpacing: 2.0,
+                    children: List<Widget>.generate(widget.details.tags.length,
+                        (int index) {
+                      return Chip(
+                        side: BorderSide(
+                          width: 1,
+                          color: AppColors.secondary,
+                        ),
+                        label: Text(widget.details.tags[index],
+                            style: textTheme.bodyMedium),
+                      );
+                    }),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  "  Posted 2 days ago",
+                  style: TextStyle(color: AppColors.grey, height: 2),
+                ),
+                SizedBox(
                   height: 40,
                 ),
                 Text("Description", style: textTheme.headlineMedium),
@@ -254,6 +283,31 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                     height: 1.5,
                   ),
                 ),
+                SizedBox(
+                  height: 40,
+                ),
+                Text("Skills required", style: textTheme.headlineMedium),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "${bullet} B.Tech. or any other degree\n$bullet Desinglakdjsfklasj fi2o3iwkjloweafksjd\n$bullet a woeo28iqwaeksd89233fausodiweajkdsf",
+                  style: TextStyle(color: AppColors.secondary, height: 2),
+                ),
+
+                // ListView.builder(
+                //   itemCount: widget.details.tags.length,
+                //   shrinkWrap: true,
+                //   itemBuilder: (ctx, index) {
+                //     return Padding(
+                //       padding: const EdgeInsets.all(8.0),
+                //       child: Text(
+                //         bullet + " " + widget.details.tags[index],
+                //         style: TextStyle(color: AppColors.secondary),
+                //       ),
+                //     );
+                //   },
+                // )
               ],
             ),
           ),
