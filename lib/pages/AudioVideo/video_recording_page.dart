@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class VideoRecordingPage extends StatefulWidget {
   static const String id = "/video_recording_page";
-  const VideoRecordingPage({super.key});
+  final videoRecorded;
+  const VideoRecordingPage({super.key, required this.videoRecorded});
 
   @override
   State<VideoRecordingPage> createState() => _VideoRecordingPageState();
@@ -14,6 +15,7 @@ class _VideoRecordingPageState extends State<VideoRecordingPage> {
   late CameraController _cameraController;
   bool _isRecording = false;
   bool openCamera = false;
+
   _initCamera() async {
     final cameras = await availableCameras();
     final front = cameras.firstWhere(
@@ -26,17 +28,14 @@ class _VideoRecordingPageState extends State<VideoRecordingPage> {
   _recordVideo() async {
     if (_isRecording) {
       final file = await _cameraController.stopVideoRecording();
-      // file.saveTo("/storage/emulated/0/Download");
       debugPrint("file is ${file.path}");
+
       setState(() {
         _isRecording = false;
         openCamera = false;
       });
-      // final route = MaterialPageRoute(
-      //   fullscreenDialog: true,
-      //   builder: (_) => VideoPage(filePath: file.path),
-      // );
-      // Navigator.push(context, route);
+      widget.videoRecorded(file.path);
+      Navigator.of(context).pop();
     } else {
       await _cameraController.prepareForVideoRecording();
       await _cameraController.startVideoRecording();
@@ -58,43 +57,37 @@ class _VideoRecordingPageState extends State<VideoRecordingPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (_isLoading) {
-      return Container(
-        color: Colors.white,
-        child: const Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    } else {
-      return openCamera
-          ? Center(
-              child: Stack(
-                alignment: Alignment.bottomCenter,
-                children: [
-                  CameraPreview(_cameraController),
-                  Padding(
-                    padding: const EdgeInsets.all(25),
-                    child: FloatingActionButton(
-                      backgroundColor: Colors.red,
-                      child: Icon(_isRecording ? Icons.stop : Icons.circle),
-                      onPressed: () => _recordVideo(),
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            _isLoading
+                ? Container(
+                    // color: Colors.white,
+                    child: const Center(
+                      child: CircularProgressIndicator(),
                     ),
-                  ),
-                ],
-              ),
-            )
-          : Column(
-              children: [
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      openCamera = true;
-                    });
-                  },
-                  child: Text("Open Camera"),
-                ),
-              ],
-            );
-    }
+                  )
+                : Center(
+                    child: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        CameraPreview(_cameraController),
+                        Padding(
+                          padding: const EdgeInsets.all(25),
+                          child: FloatingActionButton(
+                            backgroundColor: Colors.red,
+                            child:
+                                Icon(_isRecording ? Icons.stop : Icons.circle),
+                            onPressed: () => _recordVideo(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+          ],
+        ),
+      ),
+    );
   }
 }

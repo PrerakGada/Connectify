@@ -81,6 +81,7 @@ class _FiltersDialogState extends State<FiltersDialog> {
                       ),
                       child: RangeSlider(
                         values: salaryRangeValues,
+                        activeColor: AppColors.primary,
                         max: 100,
                         divisions: 5,
                         labels: RangeLabels(
@@ -110,6 +111,7 @@ class _FiltersDialogState extends State<FiltersDialog> {
                         values: workRangeValues,
                         max: 25,
                         divisions: 10,
+                        activeColor: AppColors.primary,
                         labels: RangeLabels(
                           workRangeValues.start.round().toString(),
                           workRangeValues.end.round().toString(),
@@ -190,7 +192,7 @@ class _FiltersDialogState extends State<FiltersDialog> {
                       height: 10,
                     ),
                     Text(
-                      "Applications within older than",
+                      "Applications within",
                       style: textTheme.headlineMedium!
                           .copyWith(color: AppColors.greyLight),
                     ),

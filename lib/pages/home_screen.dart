@@ -5,6 +5,7 @@ import './Search/search.dart';
 import 'AudioVideo/audio_recording_page.dart';
 import 'AudioVideo/video_recording_page.dart';
 import 'Profile/profile_drawer.dart';
+import 'Profile/edit_profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -268,9 +269,10 @@ class _HomeScreenState extends State<HomeScreen> {
       children: <Widget>[
         SearchScreen(),
         AudioRecordingPage(),
-        VideoRecordingPage(),
+        Container(),
+        Container(),
+        EditProfile(),
         // const ChatScreen(),
-        // Container(),
         // const ViewActivity(),
         // const MapsScreen(),
       ],
@@ -280,12 +282,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget buildNavBarItem(IconData icon, int index) {
     return GestureDetector(
       onTap: () {
-        // print(index);
-        // print(bottomSelectedIndex);
-        // if (index == 2) {
-        //   openModalSheet();
-        //   bottomSelectedIndex = index;
-        // } else {
         setState(() {
           bottomSelectedIndex = index;
           pageController.animateToPage(bottomSelectedIndex,
@@ -394,7 +390,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   buildNavBarItem(Icons.chat_outlined, 1),
                   buildNavBarItem(Icons.add_box_outlined, 2),
                   buildNavBarItem(Icons.notifications_none_rounded, 3),
-                  buildNavBarItem(Icons.location_on_outlined, 4),
+                  buildNavBarItem(Icons.person, 4),
                 ],
               ),
             ),
