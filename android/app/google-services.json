@@ -29,6 +29,13 @@
             {
               "client_id": "250009185281-3k0pbk5apqn6gak1ncvl91lq42vqk9c9.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "250009185281-udv9lmn2l2oqqqbsv6drnngpcrtlchjl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.connectify"
+              }
             }
           ]
         }

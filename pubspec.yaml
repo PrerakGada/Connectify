@@ -30,6 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter  
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -37,6 +39,27 @@ dependencies:
 
   provider: ^6.0.5
   cached_network_image: ^3.2.3
+  desktop_window: ^0.4.0
+  syncfusion_flutter_calendar: ^20.4.53
+  syncfusion_localizations: ^20.4.38
+  
+  syncfusion_flutter_datagrid_export: ^20.4.38-beta
+  
+  syncfusion_flutter_datepicker: ^20.4.38
+  syncfusion_flutter_charts: ^20.4.38
+  syncfusion_flutter_gauges: ^20.4.38
+  syncfusion_flutter_sliders: ^20.4.38
+  syncfusion_flutter_pdf: ^20.4.38
+  
+  syncfusion_flutter_barcodes: ^20.4.38
+  syncfusion_officechart: ^20.4.38-beta
+  syncfusion_flutter_maps: ^20.4.38
+  flutter_form_builder:
+  pdf: ^3.9.0
+  
+  syncfusion_flutter_signaturepad: ^20.4.38
+  syncfusion_flutter_pdfviewer: ^20.4.38-beta
+  syncfusion_flutter_treemap: ^20.4.38-beta
   video_player: ^2.6.0
   shared_preferences: ^2.0.17
   curved_navigation_bar: ^1.0.3
@@ -84,7 +107,7 @@ dependencies:
   dots_indicator: ^2.1.0
   file_picker: ^5.2.0+1
   fl_chart: ^0.55.2
-  syncfusion_flutter_charts: ^20.3.48
+ 
   font_awesome_flutter: ^10.4.0
   fluttertoast: ^8.2.1
   flutter_chat_ui: any

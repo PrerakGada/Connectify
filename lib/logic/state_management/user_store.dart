@@ -179,6 +179,40 @@ class UserStore extends StateKeeper {
     return false;
   }
 
+  Future<bool> applyJob({
+    required String userId,
+    required String jobId,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    // Register
+    const ch = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
+    Random r = Random();
+
+    var request = http.MultipartRequest('POST',
+        Uri.parse('https://innovative-minds.mustansirg.in/api/applications/'));
+    request.headers
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+
+    request.fields.addAll({'user': userId, 'job': jobId});
+
+    var response = await request.send();
+
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 201) {
+        print(body);
+
+        refreshTheToken();
+        return true;
+      } else {
+        print("Failed to Register");
+        print(body);
+        return false;
+      }
+    });
+    return false;
+  }
+
   Future logout() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.clear();

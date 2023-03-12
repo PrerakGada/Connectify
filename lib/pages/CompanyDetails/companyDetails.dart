@@ -1,3 +1,4 @@
+import 'package:connectify/logic/state_management/user_store.dart';
 import 'package:connectify/pages/Search/search.dart';
 import 'package:connectify/theme/typography.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:connectify/pages/VideoConferencing/video_conferencing.dart';
 import 'package:connectify/theme/typography.dart';
 
 class CompanyDetails extends StatefulWidget {
+  static const id = '/companydet';
   CompCard details;
 
   CompanyDetails({super.key, required this.details});
@@ -313,7 +315,16 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                         ),
                         child: Center(
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () async {
+                              var applying = await UserStore()
+                                  .applyJob(userId: "1", jobId: "26");
+                              if (applying) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text('Succesfull'),
+                                ));
+                              }
+                            },
                             child: Text(
                               'Apply',
                               style: TextStyle(
