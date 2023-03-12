@@ -539,4 +539,45 @@ class UserStore extends StateKeeper {
       }
     });
   }
+
+  var allApplcations = [];
+
+  Future getApplications() async {
+    final prefs = await SharedPreferences.getInstance();
+    var request = http.MultipartRequest('GET',
+        Uri.parse('https://innovative-minds.mustansirg.in/api/applications/'));
+    request.headers
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+    var response = await request.send();
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 200) {
+        allApplcations = body;
+        return true;
+      } else {
+        print("Failed to get all applications");
+        print(body);
+        return false;
+      }
+    });
+  }
+
+  Future getApplicationsById({required String id}) async {
+    final prefs = await SharedPreferences.getInstance();
+    var request = http.MultipartRequest('GET',
+        Uri.parse('https://innovative-minds.mustansirg.in/api/applications/$id'));
+    request.headers
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+    var response = await request.send();
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 200) {
+        return body;
+      } else {
+        print("Failed to get all application by id");
+        print(body);
+        return false;
+      }
+    });
+  }
 }
