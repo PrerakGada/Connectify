@@ -1,7 +1,7 @@
 import 'package:connectify/pages/Onboarding/register_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../../Theme/app_colors.dart';
+import '../../theme/app_colors.dart';
 import '../../logic/state_management/user_store.dart';
 import '../../widgets/LabeledTextFormField.dart';
 import 'splash_screen.dart';

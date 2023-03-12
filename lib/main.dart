@@ -1,7 +1,7 @@
 import 'package:connectify/pages/AudioVideo/audio_recording_page.dart';
 import 'package:connectify/pages/AudioVideo/video_recording_page.dart';
 import 'package:connectify/pages/Onboarding/signup_page.dart';
-import 'package:connectify/pages/Profile/pofile_screen.dart';
+import 'package:connectify/pages/Profile/profile_screen.dart';
 import 'package:connectify/pages/Profile/profile_view.dart';
 import 'package:connectify/pages/Search/search.dart';
 import 'package:connectify/pages/ats/ats.dart';
@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
         darkTheme: dark_theme(),
         themeMode: ThemeMode.dark,
         debugShowCheckedModeBanner: false,
-        initialRoute: RegisterScreen.id,
+        initialRoute: Profile.id,
         routes: {
           HomeScreen.id: (context) => const HomeScreen(),
           SplashScreen.id: (context) => const SplashScreen(),
@@ -103,7 +103,7 @@ class MyApp extends StatelessWidget {
           EmployeeDashBoard.id: (context) => EmployeeDashBoard(),
           AtsView.id: (context) => AtsView(),
           CreateJob.id: (context) => CreateJob(),
-          VideoRecordingPage.id: (context) => VideoRecordingPage(),
+          // VideoRecordingPage.id: (context) => VideoRecordingPage(),
           AudioRecordingPage.id: (context) => AudioRecordingPage(),
           SearchScreen.id: (context) => SearchScreen(),
         },

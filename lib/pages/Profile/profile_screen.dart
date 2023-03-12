@@ -37,9 +37,7 @@ class _ProfileState extends State<Profile> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(
-                        height: 50
-                      ),
+                      const SizedBox(height: 50),
                       Container(
                         height: 275,
                         child: Stack(
@@ -48,18 +46,19 @@ class _ProfileState extends State<Profile> {
                               alignment: Alignment.bottomCenter,
                               child: Container(
                                 // padding: EdgeInsets.only(top: 100),
-                                height: 250,
+                                // height: 250,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: AppColors.greyDarker,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: Stack(
+                                child: Column(
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           const SizedBox(
                                             height: 50,
@@ -69,13 +68,23 @@ class _ProfileState extends State<Profile> {
                                             child: Text(
                                               "Siddesh Shetty",
                                               style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20,
+                                              ),
                                             ),
                                           ),
                                           SizedBox(
                                             height: 20,
+                                          ),
+                                          Text(
+                                            "Cross Platform Flutter Developer",
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text("LOC 4.0 hackathon winner"),
+                                          SizedBox(
+                                            height: 8,
                                           ),
                                           Row(
                                             children: const [
@@ -85,7 +94,9 @@ class _ProfileState extends State<Profile> {
                                               ),
                                               Text(
                                                 "Mumbai",
-                                                style: TextStyle(color: Colors.black),
+                                                style: TextStyle(
+                                                    //  ,
+                                                    ),
                                               )
                                             ],
                                           ),
@@ -97,7 +108,9 @@ class _ProfileState extends State<Profile> {
                                               ),
                                               Text(
                                                 "0 Years 6 Months",
-                                                style: TextStyle(color: Colors.black),
+                                                style: TextStyle(
+                                                    //  ,
+                                                    ),
                                               )
                                             ],
                                           ),
@@ -109,7 +122,9 @@ class _ProfileState extends State<Profile> {
                                               ),
                                               Text(
                                                 "+91 9004137508",
-                                                style: TextStyle(color: Colors.black),
+                                                style: TextStyle(
+                                                    //  ,
+                                                    ),
                                               ),
                                               SizedBox(
                                                 width: 3,
@@ -128,7 +143,7 @@ class _ProfileState extends State<Profile> {
                                               ),
                                               Text(
                                                 "siddushetty30@gmail.com",
-                                                style: TextStyle(color: Colors.black),
+                                                style: TextStyle(),
                                               ),
                                               SizedBox(
                                                 width: 3,
@@ -137,6 +152,45 @@ class _ProfileState extends State<Profile> {
                                                 Icons.verified,
                                                 color: AppColors.primary,
                                               )
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            children: [
+                                              MaterialButton(
+                                                onPressed: () {},
+                                                child: Image.asset(
+                                                  "assets/whatsapp.png",
+                                                  height: 30,
+                                                  width: 30,
+                                                ),
+                                              ),
+                                              MaterialButton(
+                                                onPressed: () {},
+                                                child: Image.asset(
+                                                  "assets/whatsapp.png",
+                                                  height: 30,
+                                                  width: 30,
+                                                ),
+                                              ),
+                                              MaterialButton(
+                                                onPressed: () {},
+                                                child: Image.asset(
+                                                  "assets/whatsapp.png",
+                                                  height: 30,
+                                                  width: 30,
+                                                ),
+                                              ),
+                                              MaterialButton(
+                                                onPressed: () {},
+                                                child: Image.asset(
+                                                  "assets/whatsapp.png",
+                                                  height: 30,
+                                                  width: 30,
+                                                ),
+                                              ),
                                             ],
                                           )
                                         ],
@@ -159,6 +213,9 @@ class _ProfileState extends State<Profile> {
                       const SizedBox(
                         height: 20,
                       ),
+                      Divider(
+                        thickness: 1,
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
@@ -170,7 +227,8 @@ class _ProfileState extends State<Profile> {
                                 Text(
                                   "Your Profile Score (73% complete)",
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 17),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17),
                                 ),
                                 Spacer(),
                                 Icon(Icons.arrow_forward_ios)
@@ -184,8 +242,8 @@ class _ProfileState extends State<Profile> {
                               style: TextStyle(fontSize: 14),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 5, right: 10, top: 15),
+                              padding: const EdgeInsets.only(
+                                  left: 5, right: 10, top: 15),
                               child: ProgressBar(
                                 progress: 0.5,
                               ),
@@ -196,11 +254,14 @@ class _ProfileState extends State<Profile> {
                       SizedBox(
                         height: 30,
                       ),
+                      Divider(
+                        thickness: 1,
+                      ),
                       Container(
                         height: 80,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: AppColors.black,
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -210,21 +271,29 @@ class _ProfileState extends State<Profile> {
                               const Text(
                                 "Resume",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17,
-                                    color: AppColors.black),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                  color: AppColors.white,
+                                ),
                               ),
+                              Image.asset(
+                                "assets/resume1.png",
+                                height: 20,
+                                color: AppColors.white,
+                              ),
+                              Image.asset(
+                                "assets/resume2.png",
+                                height: 20,
+                                color: AppColors.white,
+                              )
                             ],
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
                       Container(
                         width: double.infinity,
                         decoration: const BoxDecoration(
-                          color: Colors.white,
+                          color: AppColors.black,
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -236,23 +305,26 @@ class _ProfileState extends State<Profile> {
                                   Text(
                                     "Skills",
                                     style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17,
-                                        color: AppColors.black),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 7,
                                   ),
                                   Container(
                                     decoration: BoxDecoration(
-                                        color: Color.fromARGB(255, 240, 246, 236),
-                                        borderRadius: BorderRadius.circular(10)),
+                                        color:
+                                            Color.fromARGB(255, 240, 246, 236),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
                                     child: Padding(
                                       padding: const EdgeInsets.all(5.0),
                                       child: Row(children: [
                                         Text(
                                           "8%",
-                                          style: TextStyle(color: AppColors.black),
+                                          style:
+                                              TextStyle(color: AppColors.black),
                                         ),
                                         Image.asset(
                                           "assets/growth.png",
@@ -271,7 +343,7 @@ class _ProfileState extends State<Profile> {
                               ),
                               Text(
                                 "Recruiters search via skills.Add your skills to appear in maximum recruiter searches",
-                                style: TextStyle(color: AppColors.black),
+                                style: TextStyle(color: AppColors.white),
                               )
                             ],
                           ),
@@ -284,7 +356,7 @@ class _ProfileState extends State<Profile> {
                         height: 80,
                         width: double.infinity,
                         decoration: const BoxDecoration(
-                          color: Colors.white,
+                          color: AppColors.black,
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -298,7 +370,7 @@ class _ProfileState extends State<Profile> {
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 17,
-                                        color: AppColors.black),
+                                        color: AppColors.white),
                                   ),
                                   SizedBox(
                                     width: 7,
@@ -312,7 +384,7 @@ class _ProfileState extends State<Profile> {
                               ),
                               Text(
                                 "Recruiters search via skills.Add your skills to appear in maximum recruiter searches",
-                                style: TextStyle(color: AppColors.black),
+                                style: TextStyle(color: AppColors.white),
                               )
                             ],
                           ),
@@ -325,7 +397,7 @@ class _ProfileState extends State<Profile> {
                         height: 80,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: AppColors.black,
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -337,7 +409,7 @@ class _ProfileState extends State<Profile> {
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 17,
-                                    color: AppColors.black),
+                                    color: AppColors.white),
                               ),
                             ],
                           ),
