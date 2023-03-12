@@ -1,6 +1,7 @@
 import 'package:connectify/logic/state_management/user_store.dart';
 import 'package:connectify/pages/Search/search.dart';
 import 'package:connectify/theme/typography.dart';
+import 'package:connectify/widgets/audio_input_screen.dart';
 import 'package:flutter/material.dart';
 
 // import 'package:connectify/widgets/curved_shape.dart';
@@ -328,14 +329,32 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                         child: Center(
                           child: InkWell(
                             onTap: () async {
-                              var applying = await UserStore()
-                                  .applyJob(userId: "1", jobId: "26");
-                              if (applying) {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
-                                  content: Text('Succesfull'),
-                                ));
-                              }
+                              // var applying = await UserStore()
+                              //     .applyJob(userId: "1", jobId: "26");
+                              // if (applying) {
+                              //   ScaffoldMessenger.of(context)
+                              //       .showSnackBar(const SnackBar(
+                              //     content: Text('Succesfull'),
+                              //   ));
+                              // }
+                              return showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10)),
+                                  ),
+                                  builder: (context) =>
+                                      StatefulBuilder(builder: (BuildContext
+                                              context,
+                                          StateSetter
+                                              setModalState /*You can rename this!*/) {
+                                        return FractionallySizedBox(
+                                          heightFactor: 0.8,
+                                          child: AudioInputScreen(),
+                                        );
+                                      }));
                             },
                             child: Text(
                               'Apply',

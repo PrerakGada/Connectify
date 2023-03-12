@@ -19,7 +19,6 @@ class AudioRecordingPage extends StatefulWidget {
 
 class _AudioRecordingPageState extends State<AudioRecordingPage> {
   late final RecorderController recorderController;
-
   String? path;
   String? musicFile;
   bool isRecording = false;
