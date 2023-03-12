@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.dark,
         debugShowCheckedModeBanner: false,
         // home: ShiftScheduler(),
-        initialRoute: AtsView.id,
+        initialRoute: SplashScreen.id,
         routes: {
           HomeScreen.id: (context) => const HomeScreen(),
           SplashScreen.id: (context) => const SplashScreen(),

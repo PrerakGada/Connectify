@@ -269,7 +269,7 @@ class _AtsViewState extends State<AtsView> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Siddesh Shetty",
+                                          "${allResults[index]["user_username"]}",
                                           style: TextStyle(
                                               color: AppColors.black,
                                               fontSize: 16,

@@ -109,7 +109,7 @@ class SplashScreenState extends State<SplashScreen>
     var generalNotificationDetails =
         NotificationDetails(android: androidDetails, iOS: iosDetails);
     // _firebaseMessaging.requestPermission();
-    _firebaseMessaging.subscribeToTopic("sos");
+    _firebaseMessaging.subscribeToTopic("Flutter");
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
