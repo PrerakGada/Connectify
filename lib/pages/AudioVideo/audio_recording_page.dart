@@ -9,6 +9,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:file_picker/file_picker.dart';
 
 class AudioRecordingPage extends StatefulWidget {
+  static const String id = "/audio_recording_page";
+
   const AudioRecordingPage({Key? key}) : super(key: key);
 
   @override

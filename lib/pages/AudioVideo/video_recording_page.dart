@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 class VideoRecordingPage extends StatefulWidget {
+  static const String id = "/video_recording_page";
   const VideoRecordingPage({super.key});
 
   @override

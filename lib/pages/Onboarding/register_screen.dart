@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:connectify/widgets/location_screen.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,6 +24,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   File? demo;
+
   // Text Editing Controllers
   final TextEditingController _nameController = TextEditingController(text: "");
   final TextEditingController _userNameController =
@@ -34,10 +36,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _confirmPasswordController =
       TextEditingController(text: "");
   final TextEditingController _mobileNumber = TextEditingController(text: "");
+
   // final TextEditingController _confirmPasswordController =
   // TextEditingController();
 
   File? file;
+
   void onPickImageButtonClicked() async {
     final tempImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -75,7 +79,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.withOpacity(0.4),
+      // backgroundColor: Colors.grey.withOpacity(0.4),
       appBar: AppBar(
         backgroundColor: AppColors.black,
         elevation: 1,
@@ -91,13 +95,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 8,
+                height: 0,
               ),
               Container(
                 width: double.infinity,
-                decoration: const BoxDecoration(color: Colors.black),
+                decoration: const BoxDecoration(color: AppColors.black),
                 child: Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -128,116 +132,116 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(
                         height: 15,
                       ),
-                      RichText(
-                        text: const TextSpan(
-                            text: 'Enter Username',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                            children: [
-                              TextSpan(
-                                  text: ' *',
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12))
-                            ]),
-                        textScaleFactor: 1,
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      InputField(
-                        controller: _userNameController,
-                        placeholderText: "Enter User Name",
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      RichText(
-                        text: const TextSpan(
-                            text: 'Email ID',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                            children: [
-                              TextSpan(
-                                  text: ' *',
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12))
-                            ]),
-                        textScaleFactor: 1,
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      InputField(
-                        controller: _emailController,
-                        placeholderText: "Enter Email ID",
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      RichText(
-                        text: const TextSpan(
-                            text: 'Password',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                            children: [
-                              TextSpan(
-                                  text: ' *',
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12))
-                            ]),
-                        textScaleFactor: 1,
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      InputField(
-                        controller: _passwordController,
-                        placeholderText: "Enter Password",
-                        textinput: TextInputType.number,
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      RichText(
-                        text: const TextSpan(
-                            text: ' Confirm Password',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                            children: [
-                              TextSpan(
-                                  text: ' *',
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12))
-                            ]),
-                        textScaleFactor: 1,
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      InputField(
-                        controller: _confirmPasswordController,
-                        textinput: TextInputType.number,
-                        placeholderText: "Enter Confirm Password",
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
+                      // RichText(
+                      //   text: const TextSpan(
+                      //       text: 'Enter Username',
+                      //       style: TextStyle(
+                      //           color: Colors.white,
+                      //           fontWeight: FontWeight.bold,
+                      //           fontSize: 16),
+                      //       children: [
+                      //         TextSpan(
+                      //             text: ' *',
+                      //             style: TextStyle(
+                      //                 color: Colors.red,
+                      //                 fontWeight: FontWeight.bold,
+                      //                 fontSize: 12))
+                      //       ]),
+                      //   textScaleFactor: 1,
+                      // ),
+                      // const SizedBox(
+                      //   height: 5,
+                      // ),
+                      // InputField(
+                      //   controller: _userNameController,
+                      //   placeholderText: "Enter User Name",
+                      // ),
+                      // const SizedBox(
+                      //   height: 15,
+                      // ),
+                      // RichText(
+                      //   text: const TextSpan(
+                      //       text: 'Email ID',
+                      //       style: TextStyle(
+                      //           color: Colors.white,
+                      //           fontWeight: FontWeight.bold,
+                      //           fontSize: 16),
+                      //       children: [
+                      //         TextSpan(
+                      //             text: ' *',
+                      //             style: TextStyle(
+                      //                 color: Colors.red,
+                      //                 fontWeight: FontWeight.bold,
+                      //                 fontSize: 12))
+                      //       ]),
+                      //   textScaleFactor: 1,
+                      // ),
+                      // const SizedBox(
+                      //   height: 5,
+                      // ),
+                      // InputField(
+                      //   controller: _emailController,
+                      //   placeholderText: "Enter Email ID",
+                      // ),
+                      // const SizedBox(
+                      //   height: 15,
+                      // ),
+                      // RichText(
+                      //   text: const TextSpan(
+                      //       text: 'Password',
+                      //       style: TextStyle(
+                      //           color: Colors.white,
+                      //           fontWeight: FontWeight.bold,
+                      //           fontSize: 16),
+                      //       children: [
+                      //         TextSpan(
+                      //             text: ' *',
+                      //             style: TextStyle(
+                      //                 color: Colors.red,
+                      //                 fontWeight: FontWeight.bold,
+                      //                 fontSize: 12))
+                      //       ]),
+                      //   textScaleFactor: 1,
+                      // ),
+                      // const SizedBox(
+                      //   height: 5,
+                      // ),
+                      // InputField(
+                      //   controller: _passwordController,
+                      //   placeholderText: "Enter Password",
+                      //   textinput: TextInputType.number,
+                      // ),
+                      // const SizedBox(
+                      //   height: 15,
+                      // ),
+                      // RichText(
+                      //   text: const TextSpan(
+                      //       text: ' Confirm Password',
+                      //       style: TextStyle(
+                      //           color: Colors.white,
+                      //           fontWeight: FontWeight.bold,
+                      //           fontSize: 16),
+                      //       children: [
+                      //         TextSpan(
+                      //             text: ' *',
+                      //             style: TextStyle(
+                      //                 color: Colors.red,
+                      //                 fontWeight: FontWeight.bold,
+                      //                 fontSize: 12))
+                      //       ]),
+                      //   textScaleFactor: 1,
+                      // ),
+                      // const SizedBox(
+                      //   height: 5,
+                      // ),
+                      // InputField(
+                      //   controller: _confirmPasswordController,
+                      //   textinput: TextInputType.number,
+                      //   placeholderText: "Enter Confirm Password",
+                      // ),
+                      // const SizedBox(
+                      //   height: 15,
+                      // ),
                       RichText(
                         text: const TextSpan(
                             text: 'Mobile Number',
@@ -269,7 +273,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       const Text(
                         "Recruiters will contact you on this number",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: AppColors.greyDark),
                       ),
                       const SizedBox(
                         height: 20,
@@ -294,10 +298,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(
                         height: 5,
                       ),
-                      InputField(
-                        placeholderText: "Add the city you are living in",
-                        condition: true,
-                        onTap: () {},
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.greyDark),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: LocationScreen(),
                       ),
                       const SizedBox(
                         height: 15,
@@ -421,11 +427,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 0,
               ),
               Container(
                 width: double.infinity,
-                decoration: const BoxDecoration(color: Colors.black),
+                decoration: const BoxDecoration(color: AppColors.black),
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
@@ -494,11 +500,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 0,
               ),
               Container(
                 width: double.infinity,
-                decoration: const BoxDecoration(color: Colors.black),
+                decoration: const BoxDecoration(color: AppColors.black),
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
@@ -532,11 +538,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 0,
               ),
               Container(
                 width: double.infinity,
-                decoration: const BoxDecoration(color: Colors.black),
+                decoration: const BoxDecoration(color: AppColors.black),
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
@@ -549,11 +555,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 0,
               ),
               Container(
                 width: double.infinity,
-                decoration: const BoxDecoration(color: Colors.black),
+                decoration: const BoxDecoration(color: AppColors.black),
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
@@ -565,60 +571,63 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           width: 300,
                           height: 50,
                           child: ElevatedButton(
-                              onPressed: () async {
-                                final status = await UserStore().register(
-                                    email: _emailController.text,
-                                    lat: 46.22,
-                                    lon: 34.22,
-                                    macId: "2344554",
-                                    password1: _passwordController.text,
-                                    password2: _confirmPasswordController.text,
-                                    resume: file,
-                                    preferredDepartment: "It/Software",
-                                    domainPreference: "Software Developement",
-                                    username: "Sid@31");
-                                if (status) {
-                                  print("done");
-                                  // Navigator.popAndPushNamed(context, SplashScreen.id);
-                                }
-                                // print("pressed");
-                                // if (demo != null) {
-                                //   var request = http.MultipartRequest(
-                                //       'POST',
-                                //       Uri.parse(
-                                //           'https://innovative-minds.mustansirg.in/api/companies/'));
+                            onPressed: () async {
+                              final status = await UserStore().register(
+                                  email: _emailController.text,
+                                  lat: 46.22,
+                                  lon: 34.22,
+                                  macId: "2344554",
+                                  password1: _passwordController.text,
+                                  password2: _confirmPasswordController.text,
+                                  resume: file,
+                                  preferredDepartment: "It/Software",
+                                  domainPreference: "Software Developement",
+                                  username: "Sid@31");
+                              if (status) {
+                                print("done");
+                                // Navigator.popAndPushNamed(context, SplashScreen.id);
+                              }
+                              // print("pressed");
+                              // if (demo != null) {
+                              //   var request = http.MultipartRequest(
+                              //       'POST',
+                              //       Uri.parse(
+                              //           'https://innovative-minds.mustansirg.in/api/companies/'));
 
-                                //   request.files.add(
-                                //       await http.MultipartFile.fromPath(
-                                //           'headquarters', demo!.path));
-                                //   request.files.add(
-                                //       await http.MultipartFile.fromPath(
-                                //           'logo', demo!.path));
-                                //   request.fields.addAll(
-                                //       {'name': 'Amazon', 'admins': '1'});
-                                //   var response = await request.send();
-                                //   await http.Response.fromStream(response)
-                                //       .then((value) {
-                                //     var body = jsonDecode(value.body);
-                                //   });
-                                // }
-                              },
-                              style: ButtonStyle(
-                                elevation: MaterialStateProperty.all(0),
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        const Color.fromARGB(255, 111, 0, 190)),
-                              ),
-                              child: const Text(
-                                "Next: Verification >",
-                                style: TextStyle(color: Colors.white),
-                              )),
+                              //   request.files.add(
+                              //       await http.MultipartFile.fromPath(
+                              //           'headquarters', demo!.path));
+                              //   request.files.add(
+                              //       await http.MultipartFile.fromPath(
+                              //           'logo', demo!.path));
+                              //   request.fields.addAll(
+                              //       {'name': 'Amazon', 'admins': '1'});
+                              //   var response = await request.send();
+                              //   await http.Response.fromStream(response)
+                              //       .then((value) {
+                              //     var body = jsonDecode(value.body);
+                              //   });
+                              // }
+                            },
+                            style: ButtonStyle(
+                              elevation: MaterialStateProperty.all(0),
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  const Color.fromARGB(255, 111, 0, 190)),
+                            ),
+                            child: const Text(
+                              "Next: Verification >",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
-              )
+              ),
+              SizedBox(
+                height: 400,
+              ),
             ],
           ),
         ),
