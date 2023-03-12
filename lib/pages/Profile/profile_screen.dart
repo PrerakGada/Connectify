@@ -258,7 +258,7 @@ class _ProfileState extends State<Profile> {
                         thickness: 1,
                       ),
                       Container(
-                        height: 80,
+                        // height: 80,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: AppColors.black,
@@ -276,79 +276,93 @@ class _ProfileState extends State<Profile> {
                                   color: AppColors.white,
                                 ),
                               ),
-                              Image.asset(
-                                "assets/resume1.png",
-                                height: 20,
-                                color: AppColors.white,
-                              ),
-                              Image.asset(
-                                "assets/resume2.png",
-                                height: 20,
-                                color: AppColors.white,
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        decoration: const BoxDecoration(
-                          color: AppColors.black,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                              // Image.asset(
+                              //   "assets/resume1.png",
+                              //   height: 200,
+                              //   color: AppColors.white,
+                              // ),
+                              // Image.asset(
+                              //   "assets/resume2.png",
+                              //   height: 20,
+                              //   color: AppColors.white,
+                              // )
                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Text(
-                                    "Skills",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17,
-                                    ),
+                                  ElevatedButton(
+                                    child: Text("View Resume"),
+                                    onPressed: () {},
                                   ),
-                                  SizedBox(
-                                    width: 7,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color:
-                                            Color.fromARGB(255, 240, 246, 236),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Row(children: [
-                                        Text(
-                                          "8%",
-                                          style:
-                                              TextStyle(color: AppColors.black),
-                                        ),
-                                        Image.asset(
-                                          "assets/growth.png",
-                                          height: 15,
-                                          color: Colors.green,
-                                        )
-                                      ]),
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Icon(
-                                    Icons.add_circle_outline,
-                                    color: AppColors.primary,
+                                  ElevatedButton(
+                                    child: Text("Video Resume"),
+                                    onPressed: () {},
                                   )
                                 ],
-                              ),
-                              Text(
-                                "Recruiters search via skills.Add your skills to appear in maximum recruiter searches",
-                                style: TextStyle(color: AppColors.white),
                               )
                             ],
                           ),
                         ),
                       ),
+                      // Container(
+                      //   width: double.infinity,
+                      //   decoration: const BoxDecoration(
+                      //     color: AppColors.black,
+                      //   ),
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(10.0),
+                      //     child: Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: [
+                      //         Row(
+                      //           children: [
+                      //             Text(
+                      //               "Skills",
+                      //               style: TextStyle(
+                      //                 fontWeight: FontWeight.bold,
+                      //                 fontSize: 17,
+                      //               ),
+                      //             ),
+                      //             SizedBox(
+                      //               width: 7,
+                      //             ),
+                      //             Container(
+                      //               decoration: BoxDecoration(
+                      //                   color:
+                      //                       Color.fromARGB(255, 240, 246, 236),
+                      //                   borderRadius:
+                      //                       BorderRadius.circular(10)),
+                      //               child: Padding(
+                      //                 padding: const EdgeInsets.all(5.0),
+                      //                 child: Row(children: [
+                      //                   Text(
+                      //                     "8%",
+                      //                     style:
+                      //                         TextStyle(color: AppColors.black),
+                      //                   ),
+                      //                   Image.asset(
+                      //                     "assets/growth.png",
+                      //                     height: 15,
+                      //                     color: Colors.green,
+                      //                   )
+                      //                 ]),
+                      //               ),
+                      //             ),
+                      //             Spacer(),
+                      //             Icon(
+                      //               Icons.add_circle_outline,
+                      //               color: AppColors.primary,
+                      //             )
+                      //           ],
+                      //         ),
+                      //         Text(
+                      //           "Recruiters search via skills.Add your skills to appear in maximum recruiter searches",
+                      //           style: TextStyle(color: AppColors.white),
+                      //         )
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                       SizedBox(
                         height: 10,
                       ),
@@ -372,20 +386,105 @@ class _ProfileState extends State<Profile> {
                                         fontSize: 17,
                                         color: AppColors.white),
                                   ),
-                                  SizedBox(
-                                    width: 7,
-                                  ),
-                                  Spacer(),
-                                  Icon(
-                                    Icons.add_circle_outline,
-                                    color: AppColors.primary,
-                                  )
                                 ],
                               ),
-                              Text(
-                                "Recruiters search via skills.Add your skills to appear in maximum recruiter searches",
-                                style: TextStyle(color: AppColors.white),
-                              )
+                              Wrap(
+                                spacing: 7,
+                                children: [
+                                  Chip(
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15))),
+                                    label: SizedBox(
+                                      width: 80,
+                                      child: Center(
+                                        child: Text(
+                                          "Swing",
+                                          style: const TextStyle(
+                                              color: AppColors.black),
+                                        ),
+                                      ),
+                                    ),
+                                    backgroundColor: AppColors.secondary,
+                                    // side: BorderSide(
+                                    //   width: 1,
+                                    //   color: Color.fromARGB(255, 73, 255, 82),
+                                    // ),
+                                    elevation: 6.0,
+                                    shadowColor: Colors.grey[60],
+                                    padding: const EdgeInsets.all(5),
+                                  ),
+                                  Chip(
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15))),
+                                    label: SizedBox(
+                                      width: 80,
+                                      child: Center(
+                                        child: Text(
+                                          "Photoshop",
+                                          style: const TextStyle(
+                                              color: AppColors.black),
+                                        ),
+                                      ),
+                                    ),
+                                    backgroundColor: AppColors.secondary,
+                                    // side: BorderSide(
+                                    //   width: 1,
+                                    //   color: Color.fromARGB(255, 73, 255, 82),
+                                    // ),
+                                    elevation: 6.0,
+                                    shadowColor: Colors.grey[60],
+                                    padding: const EdgeInsets.all(5),
+                                  ),
+                                  Chip(
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15))),
+                                    label: SizedBox(
+                                      width: 80,
+                                      child: Center(
+                                        child: Text(
+                                          "Flutter",
+                                          style: const TextStyle(
+                                              color: AppColors.black),
+                                        ),
+                                      ),
+                                    ),
+                                    backgroundColor: AppColors.secondary,
+                                    // side: BorderSide(
+                                    //   width: 1,
+                                    //   color: Color.fromARGB(255, 73, 255, 82),
+                                    // ),
+                                    elevation: 6.0,
+                                    shadowColor: Colors.grey[60],
+                                    padding: const EdgeInsets.all(5),
+                                  ),
+                                  Chip(
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15))),
+                                    label: SizedBox(
+                                      width: 80,
+                                      child: Center(
+                                        child: Text(
+                                          "Java",
+                                          style: const TextStyle(
+                                              color: AppColors.black),
+                                        ),
+                                      ),
+                                    ),
+                                    backgroundColor: AppColors.secondary,
+                                    // side: BorderSide(
+                                    //   width: 1,
+                                    //   color: Color.fromARGB(255, 73, 255, 82),
+                                    // ),
+                                    elevation: 6.0,
+                                    shadowColor: Colors.grey[60],
+                                    padding: const EdgeInsets.all(5),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -393,28 +492,28 @@ class _ProfileState extends State<Profile> {
                       SizedBox(
                         height: 10,
                       ),
-                      Container(
-                        height: 80,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: AppColors.black,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                "Resume",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17,
-                                    color: AppColors.white),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
+                      // Container(
+                      //   height: 80,
+                      //   width: double.infinity,
+                      //   decoration: BoxDecoration(
+                      //     color: AppColors.black,
+                      //   ),
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(10.0),
+                      //     child: Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: [
+                      //         const Text(
+                      //           "Resume",
+                      //           style: TextStyle(
+                      //               fontWeight: FontWeight.bold,
+                      //               fontSize: 17,
+                      //               color: AppColors.white),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // )
                     ],
                   ),
                 ),
