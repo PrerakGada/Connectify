@@ -5,6 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class ProfileView extends StatefulWidget {
   const ProfileView({Key? key}) : super(key: key);
 
+  static const String id = '/profileView';
+
   @override
   State<ProfileView> createState() => _ProfileViewState();
 }

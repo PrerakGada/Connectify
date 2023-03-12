@@ -54,7 +54,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 autofocus: true,
                 textAlignVertical: TextAlignVertical.bottom,
                 style: const TextStyle(
-                  color: Colors.black,
+                  // color: Colors.black,
                   fontSize: 17,
                   // fontFamily: 'EuclidCircular',
                   fontWeight: FontWeight.w400,
@@ -95,7 +95,26 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: Scrollbar(
                   child: Consumer<UserStore>(builder: (_, userStore, __) {
                       final allResults = userStore.searchResults;
-                    return ListView.builder(
+
+                      return  (allResults.isEmpty) ? Center(child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "No results found",
+                            style: TextStyle(
+                              fontSize: 40,
+                            ),
+                          ),
+                          Text(
+                            "Try searching for something else",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
+                      ),) :
+
+                     ListView.builder(
                       itemCount: allResults.length,
                       // children: <Widget>[
                       // for (Card card in allResults)

@@ -23,6 +23,7 @@ import 'pages/Onboarding/splash_screen.dart';
 // import 'pages/Profile/edit_profile.dart';
 import 'pages/Profile/profile_page.dart';
 import 'pages/Settings/settings.dart';
+import 'pages/bluetooth.dart';
 import 'pages/home_screen.dart';
 import 'theme/dark_theme.dart';
 import 'theme/light_theme.dart';
@@ -75,7 +76,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Key key;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UserStore>(
@@ -108,8 +108,15 @@ class MyApp extends StatelessWidget {
           AtsView.id: (context) => const AtsView(),
           CreateJob.id: (context) => const CreateJob(),
           // VideoRecordingPage.id: (context) => VideoRecordingPage(),
+          Bluetooth.id: (context) => Bluetooth(),
+          CreateBusinessScreen.id: (context) => CreateBusinessScreen(),
+          EmployeeDashBoard.id: (context) => EmployeeDashBoard(),
+          AtsView.id: (context) => AtsView(),
+          CreateJob.id: (context) => CreateJob(),
+          // VideoRecordingPage.id: (context) => VideoRecordingPage(),
           AudioRecordingPage.id: (context) => AudioRecordingPage(),
           SearchScreen.id: (context) => SearchScreen(),
+          ProfileView.id: (context) => ProfileView(),
           ShiftScheduler.id: (context) => ShiftScheduler(),
           // CompanyDetails.id:(context) => CompanyDetails(details: ,)
         },

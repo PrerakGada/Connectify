@@ -14,12 +14,22 @@ class CreateJob extends StatefulWidget {
 }
 
 class _CreateJobState extends State<CreateJob> {
-  final TextEditingController _jobTitle = TextEditingController();
+  final TextEditingController jobTitleController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final List<String> _chips = [];
   final List<String> _skills = [];
   final TextEditingController _textEditingController = TextEditingController();
-  final TextEditingController _hiringController = TextEditingController();
+  final TextEditingController hiringController = TextEditingController();
+  final TextEditingController Controller = TextEditingController();
+  final TextEditingController departmentController = TextEditingController();
+  final TextEditingController jobTypeController = TextEditingController();
+  final TextEditingController recuitQuotsController = TextEditingController();
+  final TextEditingController salaryController = TextEditingController();
+  final TextEditingController experienceController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
+  final TextEditingController hiringManagerController = TextEditingController();
+  final TextEditingController skilsController = TextEditingController();
+  final TextEditingController periodController = TextEditingController();
   DateTime selectedDate = DateTime.now();
   void _addChip(String text) {
     setState(() {
@@ -74,7 +84,7 @@ class _CreateJobState extends State<CreateJob> {
                   height: 8,
                 ),
                 InputField(
-                  controller: _jobTitle,
+                  controller: jobTitleController,
                   placeholderText: "Enter Job Title",
                 ),
                 SizedBox(
@@ -88,7 +98,7 @@ class _CreateJobState extends State<CreateJob> {
                   height: 8,
                 ),
                 InputField(
-                  controller: _jobTitle,
+                  controller: departmentController,
                   placeholderText: "Enter Department",
                 ),
                 SizedBox(
@@ -102,7 +112,7 @@ class _CreateJobState extends State<CreateJob> {
                   height: 8,
                 ),
                 InputField(
-                  controller: _jobTitle,
+                  controller: jobTypeController,
                   placeholderText: "Job Type",
                 ),
                 SizedBox(
@@ -116,8 +126,8 @@ class _CreateJobState extends State<CreateJob> {
                   height: 8,
                 ),
                 InputField(
-                  controller: _jobTitle,
-                  placeholderText: "Enter Recruitement Quota",
+                  controller: recuitQuotsController,
+                  placeholderText: "Enter Recruitment Quota",
                 ),
                 SizedBox(
                   height: 15,
@@ -130,7 +140,7 @@ class _CreateJobState extends State<CreateJob> {
                   height: 8,
                 ),
                 InputField(
-                  controller: _jobTitle,
+                  controller: periodController,
                   onTap: () async {
                     print("wait");
                     final DateTime? picked = await showDatePicker(
@@ -158,7 +168,7 @@ class _CreateJobState extends State<CreateJob> {
                   height: 8,
                 ),
                 InputField(
-                  controller: _jobTitle,
+                  controller: salaryController,
                   placeholderText: "Enter amount",
                 ),
                 const SizedBox(
@@ -172,7 +182,7 @@ class _CreateJobState extends State<CreateJob> {
                   height: 8,
                 ),
                 InputField(
-                  controller: _jobTitle,
+                  controller: experienceController,
                   placeholderText: "Enter experience",
                 ),
                 SizedBox(
@@ -186,7 +196,7 @@ class _CreateJobState extends State<CreateJob> {
                   height: 8,
                 ),
                 InputField(
-                  controller: _jobTitle,
+                  controller: locationController,
                   placeholderText: "Enter location",
                 ),
                 SizedBox(
@@ -200,16 +210,16 @@ class _CreateJobState extends State<CreateJob> {
                   height: 8,
                 ),
                 TextFormField(
-                  controller: _hiringController,
+                  controller: hiringController,
                   decoration: InputDecoration(
                     labelText: "Enter hiring manager",
                     suffixIcon: IconButton(
                       icon: Icon(Icons.add),
                       onPressed: () {
-                        String text = _hiringController.text.trim();
+                        String text = hiringController.text.trim();
                         if (text.isNotEmpty) {
                           _addChip(text);
-                          _hiringController.clear();
+                          hiringController.clear();
                         }
                       },
                     ),
@@ -316,7 +326,7 @@ class _CreateJobState extends State<CreateJob> {
                         onPressed: () async {
                           final status = await UserStore().createJob(
                               companyId: 1,
-                              address: "hi",
+                              address: locationController.text,
                               description: "bye",
                               domain: "Video Editing",
                               duration: "2 years",
@@ -325,7 +335,7 @@ class _CreateJobState extends State<CreateJob> {
                               lat: 20.55,
                               lon: 56.33,
                               payscale: "34",
-                              title: "ui ux",
+                              title: jobTitleController.text,
                               sponsored: "true",
                               skills: "Final cut pro",
                               timings: "9-5",

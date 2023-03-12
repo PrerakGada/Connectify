@@ -6,21 +6,19 @@ import '../../theme/typography.dart';
 import 'package:delayed_display/delayed_display.dart';
 
 class CompanyCard extends StatefulWidget {
-  
   CompanyCard({
     super.key,
     required this.details,
   });
 
- final details;
-
+  final details;
 
   @override
   State<CompanyCard> createState() => _CompanyCardState();
 }
 
 class _CompanyCardState extends State<CompanyCard> {
-
+  final List tags = ['Flutter', 'React', 'Node', 'Angular', 'Django'];
 
   @override
   Widget build(BuildContext context) {
@@ -66,19 +64,21 @@ class _CompanyCardState extends State<CompanyCard> {
                       children: [
                         Text(
                           widget.details["title"],
-                          style: textTheme.headlineMedium!
-                              .copyWith(color: AppColors.secondary),
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Image.network(
-                              'https://innovative-minds.mustansirg.in/' + widget.details['company_logo'].toString(),
-                              height: 20,
-                              width: 20,
-                              // width: constraints.maxWidth,
-                              fit: BoxFit.fitWidth,
-                              
+                            CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  'https://innovative-minds.mustansirg.in/' +
+                                      widget.details['company_logo']
+                                          .toString()),
+                              radius: 14,
                             ),
                             SizedBox(width: 6),
                             Text(
@@ -90,69 +90,66 @@ class _CompanyCardState extends State<CompanyCard> {
                       ],
                     ),
                     SizedBox(height: 8),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.location_on,
-                                color: Color.fromARGB(255, 160, 255, 164),
-                              ),
-                              Text(widget.details['address']),
-                            ],
-                          ),
-                          // SizedBox(
-                          //   width: 10,
-                          // ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.work,
-                                color: Color.fromARGB(255, 255, 156, 156),
-                              ),
-                              Text(widget.details['experience']),
-                            ],
-                          ),
-                          // SizedBox(
-                          //   width: 7,
-                          // ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.currency_rupee,
-                                color: Color.fromARGB(255, 255, 243, 156),
-                              ),
-                              Text(widget.details['payscale']),
-                            ],
-                          ),
-                          // SizedBox(
-                          //   width: 7,
-                          // ),
-                        ],
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.location_on,
+                              color: Color.fromARGB(255, 160, 255, 164),
+                            ),
+                            Text(widget.details['address']),
+                          ],
+                        ),
+                        // SizedBox(
+                        //   width: 10,
+                        // ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.work,
+                              color: Color.fromARGB(255, 255, 156, 156),
+                            ),
+                            Text(widget.details['experience']),
+                          ],
+                        ),
+                        // SizedBox(
+                        //   width: 7,
+                        // ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.currency_rupee,
+                              color: Color.fromARGB(255, 255, 243, 156),
+                            ),
+                            Text(widget.details['payscale']),
+                          ],
+                        ),
+                        // SizedBox(
+                        //   width: 7,
+                        // ),
+                      ],
                     ),
                     SizedBox(height: 8),
-                    // SingleChildScrollView(
-                    //   scrollDirection: Axis.horizontal,
-                    //   child: Wrap(
-                    //     spacing: 10.0,
-                    //     runSpacing: 2.0,
-                    //     children: List<Widget>.generate(
-                    //         widget.details.tags.length, (int index) {
-                    //       return Chip(
-                    //         side: BorderSide(
-                    //           width: 1,
-                    //           color: AppColors.secondary,
-                    //         ),
-                    //         label: Text(widget.details.tags[index],
-                    //             style: textTheme.bodyMedium),
-                    //       );
-                    //     }),
-                    //   ),
-                    // )
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Wrap(
+                        spacing: 10.0,
+                        runSpacing: 2.0,
+                        children:
+                            List<Widget>.generate(tags.length, (int index) {
+                          return Chip(
+                            side: BorderSide(
+                              width: 1,
+                              color: AppColors.secondary,
+                            ),
+                            label:
+                                Text(tags[index], style: textTheme.bodyMedium),
+                          );
+                        }),
+                      ),
+                    )
                   ],
                 ),
               ),
