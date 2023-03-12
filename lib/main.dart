@@ -1,5 +1,6 @@
 import 'package:connectify/pages/Profile/pofile_screen.dart';
 import 'package:connectify/pages/Profile/profile_view.dart';
+import 'package:connectify/pages/Search/search.dart';
 import 'package:connectify/pages/ats/ats.dart';
 import 'package:connectify/pages/createCompany/create_company.dart';
 import 'package:connectify/pages/createJob/create_job.dart';
@@ -98,6 +99,7 @@ class MyApp extends StatelessWidget {
           EmployeeDashBoard.id: (context) => EmployeeDashBoard(),
           AtsView.id: (context) => AtsView(),
           CreateJob.id: (context) => CreateJob(),
+          SearchScreen.id: (context) => SearchScreen(),
         },
       ),
     );

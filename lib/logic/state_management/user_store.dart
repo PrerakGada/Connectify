@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -433,6 +434,32 @@ class UserStore extends StateKeeper {
       } else {
         print("Failed to get job by id");
         print(body);
+        return false;
+      }
+    });
+  }
+
+  var searchResults = [];
+
+  Future searchJob({required String query}) async {
+    print("Get job called");
+    final prefs = await SharedPreferences.getInstance();
+    var request = http.MultipartRequest('GET',
+        Uri.parse('https://innovative-minds.mustansirg.in/api/jobs/search/$query'));
+    request.headers
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'}); 
+    var response = await request.send();
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 200) {
+        searchResults = body;
+        print(body);
+        notifyListeners();
+        return true;
+      } else {
+        print("Failed to get job by id");
+        print(body);
+        notifyListeners();
         return false;
       }
     });

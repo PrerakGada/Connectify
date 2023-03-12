@@ -8,7 +8,7 @@ import 'package:connectify/pages/VideoConferencing/video_conferencing.dart';
 import 'package:connectify/theme/typography.dart';
 
 class CompanyDetails extends StatefulWidget {
-  CompCard details;
+  final details;
 
   CompanyDetails({super.key, required this.details});
 
