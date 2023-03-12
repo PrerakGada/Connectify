@@ -1,3 +1,4 @@
+import 'package:connectify/pages/Onboarding/signup_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -127,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () => Navigator.popAndPushNamed(
-                                    context, RegisterScreen.id),
+                                    context, SignupPage.id),
                             ),
                           ],
                         ),

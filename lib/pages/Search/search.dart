@@ -1,7 +1,10 @@
+import 'package:connectify/logic/state_management/user_store.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/typography.dart';
 import '../../widgets/company_card.dart';
+import '../../widgets/filters_dialog.dart';
 import 'package:delayed_display/delayed_display.dart';
 
 class CompCard {
@@ -18,50 +21,8 @@ class CompCard {
       this.description, this.companyPhoto, this.tags);
 }
 
-List allCards = [
-  CompCard(
-    "Flutter dev",
-    "Alphabet",
-    "7-8 year",
-    "10 lpa",
-    "Mumbai",
-    "Work on cutting edge tech with the best technologists out there",
-    "https://cdn-icons-png.flaticon.com/512/281/281764.png",
-    ["Android dev", "Flutter", "React native"],
-  ),
-  CompCard(
-    "Flutter dev",
-    "Alphabet",
-    "7-8 year",
-    "10 lpa",
-    "Mumbai",
-    "Work on cutting edge tech with the best technologists out there",
-    "https://cdn-icons-png.flaticon.com/512/281/281764.png",
-    ["Android dev", "Flutter"],
-  ),
-  CompCard(
-    "Flutter dev",
-    "Alphabet",
-    "7-8 year",
-    "10 lpa",
-    "Mumbai",
-    "Work on cutting edge tech with the best technologists out there",
-    "https://cdn-icons-png.flaticon.com/512/281/281764.png",
-    ["Android dev", "Flutter"],
-  ),
-  CompCard(
-    "Flutter dev",
-    "Alphabet",
-    "7-8 year",
-    "10 lpa",
-    "Mumbai",
-    "Work on cutting edge tech with the best technologists out there",
-    "https://cdn-icons-png.flaticon.com/512/281/281764.png",
-    ["Android dev", "Flutter"],
-  ),
-];
-
 class SearchScreen extends StatefulWidget {
+  static const id = '/searchJob';
   const SearchScreen({super.key});
 
   @override
@@ -72,11 +33,12 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        toolbarHeight:72,
+        toolbarHeight: 86,
         flexibleSpace: Column(
           children: [
             SizedBox(height: 36),
@@ -85,6 +47,10 @@ class _SearchScreenState extends State<SearchScreen> {
               padding: EdgeInsets.all(16),
               // width: MediaQuery.of(context).size.width * 0.9,
               child: TextField(
+                onChanged: (value) async {
+                  print("searching for $value");
+                  await UserStore().searchJob(query: value);
+                },
                 autofocus: true,
                 textAlignVertical: TextAlignVertical.bottom,
                 style: const TextStyle(
@@ -112,12 +78,6 @@ class _SearchScreenState extends State<SearchScreen> {
                       width: 2.5,
                     ),
                   ),
-                  // prefixIcon: IconButton(
-                  //   onPressed: () {
-                  //     // Routemaster.of(context).pop();
-                  //   },
-                  //   icon: const Icon(Icons.arrow_back),
-                  // ),
                 ),
               ),
             ),
@@ -133,83 +93,59 @@ class _SearchScreenState extends State<SearchScreen> {
               child: Container(
                 height: screenHeight * 0.75,
                 child: Scrollbar(
-                  child: ListView.builder(
-                    itemCount: allCards.length,
-                    // children: <Widget>[
-                    // for (Card card in allCards)
-                    itemBuilder: (ctx, index) {
-                      return CompanyCard(
-                        details: allCards[index],
-                        // company: allCards[index].company,
-                        // companyPhoto: allCards[index].companyPhoto,
-                        // experience: allCards[index].experience,
-                        // location: allCards[index].location,
-                        // title: allCards[index].title,
-                        // description: allCards[index].description,
-                        // tags: allCards[index].tags,
-                        // pay: allCards[index].pay,
-                      );
-                    },
-                    // ],
-                  ),
+                  child: Consumer<UserStore>(builder: (_, userStore, __) {
+                      final allResults = userStore.searchResults;
+                    return ListView.builder(
+                      itemCount: allResults.length,
+                      // children: <Widget>[
+                      // for (Card card in allResults)
+                      itemBuilder: (ctx, index) {
+                        final result = allResults[index];
+                        return CompanyCard(
+                          details: result,
+                          // company: allResults[index].company,
+                          // companyPhoto: allResults[index].companyPhoto,
+                          // experience: allResults[index].experience,
+                          // location: allResults[index].location,
+                          // title: allResults[index].title,
+                          // description: allResults[index].description,
+                          // tags: allResults[index].tags,
+                          // pay: allResults[index].pay,
+                        );
+                      },
+                      // ],
+                    );
+                  }),
                 ),
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: SingleChildScrollView(
-            //     child: Column(
-            //       children: [
-            //         CompanyCard(
-            //           company: "Alphabet",
-            //           experience: "7-8 year",
-            //           location: "Mumbai",
-            //           title: "Flutter dev",
-            //           description:
-            //               "Work on cutting edge tech with the best technologists out there",
-            //           tags: ["Android dev", "Flutter"],
-            //         ),
-            //         CompanyCard(
-            //           company: "Alphabet",
-            //           experience: "7-8 year",
-            //           location: "Mumbai",
-            //           description:
-            //               "Work on cutting edge tech with the best technologists out there",
-            //           title: "Flutter dev",
-            //           tags: ["Android dev", "Flutter"],
-            //         ),
-            //         CompanyCard(
-            //           company: "Facebook",
-            //           experience: "7-8 year",
-            //           location: "Mumbai",
-            //           title: "Flutter dev",
-            //           description:
-            //               "Work on cutting edge tech with the best technologists out there",
-            //           tags: ["Android dev", "Flutter"],
-            //         ),
-            //         CompanyCard(
-            //           company: "Alphabet",
-            //           experience: "7-8 year",
-            //           location: "Mumbai",
-            //           title: "Flutter dev",
-            //           description:
-            //               "Work on cutting edge tech with the best technologists out there",
-            //           tags: ["Android dev", "Flutter"],
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
-        onPressed: () {},
+        onPressed: () {
+          showGeneralDialog(
+            //! select filter dialog box
+            context: context,
+            barrierDismissible: true,
+            barrierLabel: "Choose filters",
+            pageBuilder: (BuildContext context, Animation<double> animation,
+                Animation<double> secondaryAnimation) {
+              return Container();
+            },
+            transitionBuilder: (ctx, a1, a2, child) {
+              var curve = Curves.easeInOut.transform(a1.value);
+              return FiltersDialog(
+                curve: curve,
+              );
+            },
+            transitionDuration: const Duration(milliseconds: 300),
+          );
+        },
         tooltip: 'Increment',
         child: const Icon(
           Icons.filter_alt_outlined,
-          // color: AppColors.secondary,
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

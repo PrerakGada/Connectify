@@ -9,6 +9,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:file_picker/file_picker.dart';
 
 class AudioRecordingPage extends StatefulWidget {
+  static const String id = "/audio_recording_page";
+
   const AudioRecordingPage({Key? key}) : super(key: key);
 
   @override
@@ -350,3 +352,54 @@ class _WaveBubbleState extends State<WaveBubble> {
         : const SizedBox.shrink();
   }
 }
+
+// class AudioRecordingPage extends StatefulWidget {
+//   const AudioRecordingPage({super.key});
+
+//   @override
+//   State<AudioRecordingPage> createState() => _AudioRecordingPageState();
+// }
+
+// class _AudioRecordingPageState extends State<AudioRecordingPage> {
+//   @override
+//   Widget build(BuildContext context) {
+    // if (_isLoading) {
+    //   return Container(
+    //     color: Colors.white,
+    //     child: const Center(
+    //       child: CircularProgressIndicator(),
+    //     ),
+    //   );
+    // } else {
+    //   return openCamera
+    //       ? Center(
+    //           child: Stack(
+    //             alignment: Alignment.bottomCenter,
+    //             children: [
+    //               CameraPreview(_cameraController),
+    //               Padding(
+    //                 padding: const EdgeInsets.all(25),
+    //                 child: FloatingActionButton(
+    //                   backgroundColor: Colors.red,
+    //                   child: Icon(_isRecording ? Icons.stop : Icons.circle),
+    //                   onPressed: () => _recordVideo(),
+    //                 ),
+    //               ),
+    //             ],
+    //           ),
+    //         )
+    //       : Column(
+    //           children: [
+    //             TextButton(
+    //               onPressed: () {
+    //                 setState(() {
+    //                   openCamera = true;
+    //                 });
+    //               },
+    //               child: Text("Open Camera"),
+    //             ),
+    //           ],
+    //         );
+    // }
+//   }
+// }

@@ -1,6 +1,9 @@
-import 'package:connectify/pages/CompanyDetails/companyDetails.dart';
-import 'package:connectify/pages/Profile/pofile_screen.dart';
+import 'package:connectify/pages/AudioVideo/audio_recording_page.dart';
+import 'package:connectify/pages/AudioVideo/video_recording_page.dart';
+import 'package:connectify/pages/Onboarding/signup_page.dart';
+import 'package:connectify/pages/Profile/profile_screen.dart';
 import 'package:connectify/pages/Profile/profile_view.dart';
+import 'package:connectify/pages/Search/search.dart';
 import 'package:connectify/pages/ats/ats.dart';
 import 'package:connectify/pages/calendar/calendar_view.dart';
 import 'package:connectify/pages/createCompany/create_company.dart';
@@ -93,6 +96,7 @@ class MyApp extends StatelessWidget {
           LoginScreen.id: (context) => const LoginScreen(),
           OnboardingScreen.id: (context) => const OnboardingScreen(),
           RegisterScreen.id: (context) => const RegisterScreen(),
+          SignupPage.id: (context) => const SignupPage(),
           Profile.id: (context) => const Profile(),
           // EditProfile.id: (context) => const EditProfile(),
           Settings.id: (context) => const Settings(),
@@ -103,6 +107,9 @@ class MyApp extends StatelessWidget {
           EmployeeDashBoard.id: (context) => const EmployeeDashBoard(),
           AtsView.id: (context) => const AtsView(),
           CreateJob.id: (context) => const CreateJob(),
+          // VideoRecordingPage.id: (context) => VideoRecordingPage(),
+          AudioRecordingPage.id: (context) => AudioRecordingPage(),
+          SearchScreen.id: (context) => SearchScreen(),
           ShiftScheduler.id: (context) => ShiftScheduler(),
           // CompanyDetails.id:(context) => CompanyDetails(details: ,)
         },

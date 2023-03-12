@@ -33,7 +33,7 @@ class LocationScreenState extends State<LocationScreen> {
             logo: Text(''),
             context: context,
             apiKey: googleApikey,
-            mode: Mode.overlay,
+            mode: Mode.fullscreen,
             types: [],
             strictbounds: false,
             components: [Component(Component.country, 'in')],
@@ -59,31 +59,29 @@ class LocationScreenState extends State<LocationScreen> {
           // UserStore().findJourney(lat: lat, long: lang);
 
           setState(() {
-            location = '$lat,$lang';
+            location = detail.result.formattedAddress ?? "Select Location";
             // Provider.of<UserStore>(context, listen: false)
             //     .localPost['location'] = '$lat,$lang';
           });
         }
       },
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(Icons.location_on_outlined),
+          // Icon(Icons.location_on_outlined),
           Padding(
-            padding: const EdgeInsets.only(left: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
               location,
               style: TextStyle(
-                  fontSize: 18,
+                fontWeight: FontWeight.normal,
+                  fontSize: 16,
                   overflow: TextOverflow.ellipsis,
-                  color: AppColors.greyLight),
+                  color: AppColors.grey),
             ),
           ),
 
-          // const ImageIcon(
-          //   AssetImage('assets/images/arrow_forward.png'),
-          //   size: 20,
-          // ),
+          Icon(Icons.chevron_right, size: 40, color: AppColors.greyLight),
         ],
       ),
     );

@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -472,6 +473,32 @@ class UserStore extends StateKeeper {
     });
   }
 
+  var searchResults = [];
+
+  Future searchJob({required String query}) async {
+    print("Get job called");
+    final prefs = await SharedPreferences.getInstance();
+    var request = http.MultipartRequest('GET',
+        Uri.parse('https://innovative-minds.mustansirg.in/api/jobs/search/$query'));
+    request.headers
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'}); 
+    var response = await request.send();
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 200) {
+        searchResults = body;
+        print(body);
+        notifyListeners();
+        return true;
+      } else {
+        print("Failed to get job by id");
+        print(body);
+        notifyListeners();
+        return false;
+      }
+    });
+  }
+
   Future editJob({
     required int id,
     required String title,
@@ -546,4 +573,74 @@ class UserStore extends StateKeeper {
       }
     });
   }
+
+  var allApplcations = [];
+
+  Future getApplications() async {
+    final prefs = await SharedPreferences.getInstance();
+    var request = http.MultipartRequest('GET',
+        Uri.parse('https://innovative-minds.mustansirg.in/api/applications/'));
+    request.headers
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+    var response = await request.send();
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 200) {
+        allApplcations = body;
+        return true;
+      } else {
+        print("Failed to get all applications");
+        print(body);
+        return false;
+      }
+    });
+  }
+
+  var allApplcationsById = [];
+
+  Future getApplicationsById({required String id}) async {
+    final prefs = await SharedPreferences.getInstance();
+    var request = http.MultipartRequest('GET',
+        Uri.parse('https://innovative-minds.mustansirg.in/api/applications/$id'));
+    request.headers
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+    var response = await request.send();
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 200) {
+        allApplcationsById = body;
+        return true;
+      } else {
+        print("Failed to get all application by id");
+        print(body);
+        return false;
+      }
+    });
+  }
+
+  var nearbyUsers = [];
+
+  Future getNearbyUsers({
+    required List macs
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    var request = http.MultipartRequest('GET',
+        Uri.parse('https://innovative-minds.mustansirg.in/api/users/nearby/?mac=["macs":${macs}]'));
+    request.headers
+      .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+    var response = await request.send();
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 200) {
+        nearbyUsers = body;
+        return true;
+      } else {
+        print("Failed to get nearby users");
+        print(body);
+        return false;
+      }
+    });      
+
+  }
+
 }
