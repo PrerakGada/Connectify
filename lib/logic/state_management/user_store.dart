@@ -478,10 +478,12 @@ class UserStore extends StateKeeper {
   Future searchJob({required String query}) async {
     print("Get job called");
     final prefs = await SharedPreferences.getInstance();
-    var request = http.MultipartRequest('GET',
-        Uri.parse('https://innovative-minds.mustansirg.in/api/jobs/search/$query'));
+    var request = http.MultipartRequest(
+        'GET',
+        Uri.parse(
+            'https://innovative-minds.mustansirg.in/api/jobs/search/$query'));
     request.headers
-        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'}); 
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
     var response = await request.send();
     await http.Response.fromStream(response).then((value) async {
       var body = jsonDecode(value.body);
@@ -577,6 +579,7 @@ class UserStore extends StateKeeper {
   var allApplcations = [];
 
   Future getApplications() async {
+    print("entering");
     final prefs = await SharedPreferences.getInstance();
     var request = http.MultipartRequest('GET',
         Uri.parse('https://innovative-minds.mustansirg.in/api/applications/'));
@@ -587,10 +590,12 @@ class UserStore extends StateKeeper {
       var body = jsonDecode(value.body);
       if (response.statusCode == 200) {
         allApplcations = body;
+        notifyListeners();
         return true;
       } else {
         print("Failed to get all applications");
         print(body);
+        notifyListeners();
         return false;
       }
     });
@@ -600,8 +605,10 @@ class UserStore extends StateKeeper {
 
   Future getApplicationsById({required String id}) async {
     final prefs = await SharedPreferences.getInstance();
-    var request = http.MultipartRequest('GET',
-        Uri.parse('https://innovative-minds.mustansirg.in/api/applications/$id'));
+    var request = http.MultipartRequest(
+        'GET',
+        Uri.parse(
+            'https://innovative-minds.mustansirg.in/api/applications/$id'));
     request.headers
         .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
     var response = await request.send();
@@ -620,14 +627,14 @@ class UserStore extends StateKeeper {
 
   var nearbyUsers = [];
 
-  Future getNearbyUsers({
-    required List macs
-  }) async {
+  Future getNearbyUsers({required List macs}) async {
     final prefs = await SharedPreferences.getInstance();
-    var request = http.MultipartRequest('GET',
-        Uri.parse('https://innovative-minds.mustansirg.in/api/users/nearby/?mac=["macs":${macs}]'));
+    var request = http.MultipartRequest(
+        'GET',
+        Uri.parse(
+            'https://innovative-minds.mustansirg.in/api/users/nearby/?mac=["macs":${macs}]'));
     request.headers
-      .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+        .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
     var response = await request.send();
     await http.Response.fromStream(response).then((value) async {
       var body = jsonDecode(value.body);
@@ -639,8 +646,6 @@ class UserStore extends StateKeeper {
         print(body);
         return false;
       }
-    });      
-
+    });
   }
-
 }
