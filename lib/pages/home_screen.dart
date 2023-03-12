@@ -282,17 +282,16 @@ class _HomeScreenState extends State<HomeScreen> {
       onTap: () {
         // print(index);
         // print(bottomSelectedIndex);
-        if (index == 2) {
-          openModalSheet();
+        // if (index == 2) {
+        //   openModalSheet();
+        //   bottomSelectedIndex = index;
+        // } else {
+        setState(() {
           bottomSelectedIndex = index;
-        } else {
-          setState(() {
-            bottomSelectedIndex = index;
-            pageController.animateToPage(bottomSelectedIndex,
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.ease);
-          });
-        }
+          pageController.animateToPage(bottomSelectedIndex,
+              duration: const Duration(milliseconds: 500), curve: Curves.ease);
+        });
+        // }
       },
       child: SizedBox(
         height: 48,

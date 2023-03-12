@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
         darkTheme: dark_theme(),
         themeMode: ThemeMode.dark,
         debugShowCheckedModeBanner: false,
-        initialRoute: CreateJob.id,
+        initialRoute: HomeScreen.id,
         routes: {
           HomeScreen.id: (context) => const HomeScreen(),
           SplashScreen.id: (context) => const SplashScreen(),

@@ -52,8 +52,9 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                           child: SafeArea(
                             child: Column(
                               children: [
-                                const Text(
-                                  'Microsoft',
+                                const SizedBox(height: 20),
+                                Text(
+                                  widget.details.company,
                                   style: TextStyle(fontSize: 36),
                                 ),
                                 // const SizedBox(height: 20),
