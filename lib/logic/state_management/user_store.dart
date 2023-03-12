@@ -562,6 +562,8 @@ class UserStore extends StateKeeper {
     });
   }
 
+  var allApplcationsById = [];
+
   Future getApplicationsById({required String id}) async {
     final prefs = await SharedPreferences.getInstance();
     var request = http.MultipartRequest('GET',
@@ -572,7 +574,8 @@ class UserStore extends StateKeeper {
     await http.Response.fromStream(response).then((value) async {
       var body = jsonDecode(value.body);
       if (response.statusCode == 200) {
-        return body;
+        allApplcationsById = body;
+        return true;
       } else {
         print("Failed to get all application by id");
         print(body);
@@ -580,4 +583,30 @@ class UserStore extends StateKeeper {
       }
     });
   }
+
+  var nearbyUsers = [];
+
+  Future getNearbyUsers({
+    required List macs
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    var request = http.MultipartRequest('GET',
+        Uri.parse('https://innovative-minds.mustansirg.in/api/users/nearby/?mac=["macs":${macs}]'));
+    request.headers
+      .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
+    var response = await request.send();
+    await http.Response.fromStream(response).then((value) async {
+      var body = jsonDecode(value.body);
+      if (response.statusCode == 200) {
+        nearbyUsers = body;
+        return true;
+      } else {
+        print("Failed to get nearby users");
+        print(body);
+        return false;
+      }
+    });      
+
+  }
+
 }
