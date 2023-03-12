@@ -351,7 +351,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                                           StateSetter
                                               setModalState /*You can rename this!*/) {
                                         return FractionallySizedBox(
-                                          heightFactor: 0.8,
+                                          heightFactor: 0.6,
                                           child: AudioInputScreen(),
                                         );
                                       }));

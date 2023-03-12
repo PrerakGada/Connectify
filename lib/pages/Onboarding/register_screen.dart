@@ -24,23 +24,71 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   File? demo;
+  final List<String> _chips = [];
+  final List<String> _skills = [];
+  final List<String> _department = [];
+  var exp = "";
 
   // Text Editing Controllers
-  final TextEditingController _nameController = TextEditingController(text: "");
+  final TextEditingController _nameController = TextEditingController(text: "Dummy");
   final TextEditingController _userNameController =
       TextEditingController(text: "");
   final TextEditingController _emailController =
       TextEditingController(text: "");
+  final TextEditingController _expController = TextEditingController(text: "");
+  final TextEditingController _hiringController =
+      TextEditingController(text: "");
+  final TextEditingController _skillsController =
+      TextEditingController(text: "");
+  final TextEditingController _deptController = TextEditingController(text: "");
   final TextEditingController _passwordController =
       TextEditingController(text: "");
   final TextEditingController _confirmPasswordController =
       TextEditingController(text: "");
-  final TextEditingController _mobileNumber = TextEditingController(text: "");
+
+  final TextEditingController _mobileNumber = TextEditingController(text: "9821349823");
+  late bool toggle = true;
 
   // final TextEditingController _confirmPasswordController =
   // TextEditingController();
 
   File? file;
+
+  void _addChip(String text) {
+    setState(() {
+      _chips.add(text);
+    });
+  }
+
+  void _removeChip(String text) {
+    setState(() {
+      _chips.remove(text);
+    });
+  }
+
+  void _addChipSkills(String text) {
+    setState(() {
+      _skills.add(text);
+    });
+  }
+
+  void _removeChipSkills(String text) {
+    setState(() {
+      _skills.remove(text);
+    });
+  }
+
+  void _addChipDepartment(String text) {
+    setState(() {
+      _department.add(text);
+    });
+  }
+
+  void _removeChipDepartment(String text) {
+    setState(() {
+      _department.remove(text);
+    });
+  }
 
   void onPickImageButtonClicked() async {
     final tempImage =
@@ -74,6 +122,76 @@ class _RegisterScreenState extends State<RegisterScreen> {
     setState(() {
       file = File(tempImage.files.single.path!);
     });
+  }
+
+  showAlertDialog(BuildContext context) {
+    // Create button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Select Experience"),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            // width: 200,
+            // height: 50,
+            decoration: BoxDecoration(
+                color: Colors.black, borderRadius: BorderRadius.circular(15)),
+            child: InkWell(
+              onTap: () {
+                setState(() {
+                  _expController.text = "Fresher";
+                  Navigator.of(context).pop();
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text("Fresher"),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          InkWell(
+            onTap: () {
+              setState(() {
+                _expController.text = "Experienced";
+                Navigator.of(context).pop();
+              });
+            },
+            child: Container(
+              // width: 200,
+              // height: 50,
+              decoration: BoxDecoration(
+                  color: Colors.black, borderRadius: BorderRadius.circular(15)),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text("Experienced"),
+              ),
+            ),
+          )
+        ],
+      ),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   @override
@@ -126,122 +244,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 5,
                       ),
                       InputField(
+
                         controller: _nameController,
                         placeholderText: "Enter Full Name",
                       ),
                       const SizedBox(
                         height: 15,
                       ),
-                      // RichText(
-                      //   text: const TextSpan(
-                      //       text: 'Enter Username',
-                      //       style: TextStyle(
-                      //           color: Colors.white,
-                      //           fontWeight: FontWeight.bold,
-                      //           fontSize: 16),
-                      //       children: [
-                      //         TextSpan(
-                      //             text: ' *',
-                      //             style: TextStyle(
-                      //                 color: Colors.red,
-                      //                 fontWeight: FontWeight.bold,
-                      //                 fontSize: 12))
-                      //       ]),
-                      //   textScaleFactor: 1,
-                      // ),
-                      // const SizedBox(
-                      //   height: 5,
-                      // ),
-                      // InputField(
-                      //   controller: _userNameController,
-                      //   placeholderText: "Enter User Name",
-                      // ),
-                      // const SizedBox(
-                      //   height: 15,
-                      // ),
-                      // RichText(
-                      //   text: const TextSpan(
-                      //       text: 'Email ID',
-                      //       style: TextStyle(
-                      //           color: Colors.white,
-                      //           fontWeight: FontWeight.bold,
-                      //           fontSize: 16),
-                      //       children: [
-                      //         TextSpan(
-                      //             text: ' *',
-                      //             style: TextStyle(
-                      //                 color: Colors.red,
-                      //                 fontWeight: FontWeight.bold,
-                      //                 fontSize: 12))
-                      //       ]),
-                      //   textScaleFactor: 1,
-                      // ),
-                      // const SizedBox(
-                      //   height: 5,
-                      // ),
-                      // InputField(
-                      //   controller: _emailController,
-                      //   placeholderText: "Enter Email ID",
-                      // ),
-                      // const SizedBox(
-                      //   height: 15,
-                      // ),
-                      // RichText(
-                      //   text: const TextSpan(
-                      //       text: 'Password',
-                      //       style: TextStyle(
-                      //           color: Colors.white,
-                      //           fontWeight: FontWeight.bold,
-                      //           fontSize: 16),
-                      //       children: [
-                      //         TextSpan(
-                      //             text: ' *',
-                      //             style: TextStyle(
-                      //                 color: Colors.red,
-                      //                 fontWeight: FontWeight.bold,
-                      //                 fontSize: 12))
-                      //       ]),
-                      //   textScaleFactor: 1,
-                      // ),
-                      // const SizedBox(
-                      //   height: 5,
-                      // ),
-                      // InputField(
-                      //   controller: _passwordController,
-                      //   placeholderText: "Enter Password",
-                      //   textinput: TextInputType.number,
-                      // ),
-                      // const SizedBox(
-                      //   height: 15,
-                      // ),
-                      // RichText(
-                      //   text: const TextSpan(
-                      //       text: ' Confirm Password',
-                      //       style: TextStyle(
-                      //           color: Colors.white,
-                      //           fontWeight: FontWeight.bold,
-                      //           fontSize: 16),
-                      //       children: [
-                      //         TextSpan(
-                      //             text: ' *',
-                      //             style: TextStyle(
-                      //                 color: Colors.red,
-                      //                 fontWeight: FontWeight.bold,
-                      //                 fontSize: 12))
-                      //       ]),
-                      //   textScaleFactor: 1,
-                      // ),
-                      // const SizedBox(
-                      //   height: 5,
-                      // ),
-                      // InputField(
-                      //   controller: _confirmPasswordController,
-                      //   textinput: TextInputType.number,
-                      //   placeholderText: "Enter Confirm Password",
-                      // ),
-                      // const SizedBox(
-                      //   height: 15,
-                      // ),
                       RichText(
                         text: const TextSpan(
                             text: 'Mobile Number',
@@ -329,10 +338,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 5,
                       ),
                       InputField(
-                        controller: _emailController,
-                        condition: true,
+                        controller: _expController,
+                        // exp: false,
                         placeholderText: "Specify your total experience",
-                        onTap: () {},
+                        onTap: () {
+                          showAlertDialog(context);
+                        },
                       ),
                       const SizedBox(
                         height: 15,
@@ -357,11 +368,58 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(
                         height: 5,
                       ),
-                      InputField(
-                        controller: _emailController,
-                        condition: true,
-                        placeholderText: "Enter or select your key skills",
-                        onTap: () {},
+                      TextFormField(
+                        controller: _skillsController,
+                        decoration: InputDecoration(
+                          hintText:
+                              _skills.isNotEmpty ? "" : 'Enter your skills',
+                          // labelText: "Enter hiring manager",
+                          suffixIcon: IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: () {
+                              String text = _skillsController.text.trim();
+                              if (text.isNotEmpty) {
+                                _addChipSkills(text);
+                                _skillsController.clear();
+                              }
+                            },
+                          ),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 8.0),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey[400]!,
+                              width: 1.0,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide: BorderSide(
+                              color: Colors.blue,
+                              width: 1.0,
+                            ),
+                          ),
+                          prefixIcon: _skills.isNotEmpty
+                              ? Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: Wrap(
+                                    spacing: 8.0,
+                                    runSpacing: 4.0,
+                                    children: _skills.map((chipText) {
+                                      return Chip(
+                                        label: Text(chipText),
+                                        onDeleted: () =>
+                                            _removeChipSkills(chipText),
+                                      );
+                                    }).toList(),
+                                  ),
+                                )
+                              : null,
+                        ),
                       ),
                       const SizedBox(
                         height: 15,
@@ -386,10 +444,57 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(
                         height: 5,
                       ),
-                      InputField(
-                        controller: _emailController,
-                        condition: true,
-                        placeholderText: "Maximum 2 industries can be selected",
+                      TextFormField(
+                        controller: _hiringController,
+                        decoration: InputDecoration(
+                          hintText:
+                              _chips.isNotEmpty ? "" : 'Enter hiring manager',
+                          // labelText: "Enter hiring manager",
+                          suffixIcon: IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: () {
+                              String text = _hiringController.text.trim();
+                              if (text.isNotEmpty) {
+                                _addChip(text);
+                                _hiringController.clear();
+                              }
+                            },
+                          ),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 16.0),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey[400]!,
+                              width: 1.0,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide: BorderSide(
+                              color: Colors.blue,
+                              width: 1.0,
+                            ),
+                          ),
+                          prefixIcon: _chips.isNotEmpty
+                              ? Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: Wrap(
+                                    spacing: 8.0,
+                                    runSpacing: 4.0,
+                                    children: _chips.map((chipText) {
+                                      return Chip(
+                                        label: Text(chipText),
+                                        onDeleted: () => _removeChip(chipText),
+                                      );
+                                    }).toList(),
+                                  ),
+                                )
+                              : null,
+                        ),
                       ),
                       const SizedBox(
                         height: 15,
@@ -414,10 +519,59 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(
                         height: 5,
                       ),
-                      InputField(
-                        controller: _confirmPasswordController,
-                        condition: true,
-                        placeholderText: "Maximum 2 functions can be selected",
+                      TextFormField(
+                        controller: _deptController,
+                        decoration: InputDecoration(
+                          hintText: _department.isNotEmpty
+                              ? ""
+                              : 'Maximum two functions can be selected',
+                          // labelText: "Enter hiring manager",
+                          suffixIcon: IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: () {
+                              String text = _deptController.text.trim();
+                              if (text.isNotEmpty) {
+                                _addChipDepartment(text);
+                                _deptController.clear();
+                              }
+                            },
+                          ),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 8.0),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey[400]!,
+                              width: 1.0,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide: BorderSide(
+                              color: Colors.blue,
+                              width: 1.0,
+                            ),
+                          ),
+                          prefixIcon: _department.isNotEmpty
+                              ? Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: Wrap(
+                                    spacing: 8.0,
+                                    runSpacing: 4.0,
+                                    children: _department.map((chipText) {
+                                      return Chip(
+                                        label: Text(chipText),
+                                        onDeleted: () =>
+                                            _removeChipDepartment(chipText),
+                                      );
+                                    }).toList(),
+                                  ),
+                                )
+                              : null,
+                        ),
                       ),
                       const SizedBox(
                         height: 15,
@@ -516,12 +670,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Colors.purpleAccent.withOpacity(0.6),
                           inactiveTrackColor: Colors.grey,
                           inactiveThumbColor: Colors.grey,
-                          value: true,
+                          value: toggle,
                           onChanged: (value) {
-                            // setState(() {
-                            //   forSale = value;
-                            //   _pagingController.refresh();
-                            // });
+                            setState(() {
+                              toggle = value;
+                            });
                           }),
                       const Text("I want to receive updates on "),
                       Image.asset(
@@ -585,8 +738,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   username: "Sid@31");
                               if (status) {
                                 print("done");
-                                // Navigator.popAndPushNamed(context, SplashScreen.id);
+                                Navigator.popAndPushNamed(
+                                    context, SplashScreen.id);
                               }
+                              Navigator.popAndPushNamed(
+                                  context, SplashScreen.id);
                               // print("pressed");
                               // if (demo != null) {
                               //   var request = http.MultipartRequest(
@@ -626,7 +782,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               SizedBox(
-                height: 400,
+                height: 100,
               ),
             ],
           ),

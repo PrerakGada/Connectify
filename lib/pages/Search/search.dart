@@ -1,6 +1,8 @@
 import 'package:connectify/logic/state_management/user_store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
+import 'package:shake/shake.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/typography.dart';
 import '../../widgets/company_card.dart';
@@ -29,7 +31,40 @@ class SearchScreen extends StatefulWidget {
   State<SearchScreen> createState() => _SearchScreenState();
 }
 
+FlutterTts ftts = FlutterTts();
+
 class _SearchScreenState extends State<SearchScreen> {
+  ShakeDetector? detector;
+  bool _shaking = false;
+  TextEditingController editingController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    detector = ShakeDetector.autoStart(
+      onPhoneShake: _onShake,
+    );
+    super.initState();
+  }
+
+  Future<void> _onShake() async {
+    // Don't send the API request multiple times while the device is shaking
+    // if (_shaking) {
+    //   return;
+    // }
+
+    // setState(() {
+    //   _shaking = true;
+    // });
+    await ftts.setLanguage('en-US');
+    await ftts.setPitch(1.0);
+    await ftts.setVolume(1.0);
+    await ftts.speak(
+        "I found 10 job related to ${editingController.text} near your area");
+
+    // await UserStore().sendSOS(lat: 73.6277, long: 17.9639);
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -48,6 +83,7 @@ class _SearchScreenState extends State<SearchScreen> {
               // width: MediaQuery.of(context).size.width * 0.9,
               child: TextField(
                 onChanged: (value) async {
+                  editingController.text = value;
                   print("searching for $value");
                   await UserStore().searchJob(query: value);
                 },
@@ -94,46 +130,48 @@ class _SearchScreenState extends State<SearchScreen> {
                 height: screenHeight * 0.75,
                 child: Scrollbar(
                   child: Consumer<UserStore>(builder: (_, userStore, __) {
-                      final allResults = userStore.searchResults;
+                    final allResults = userStore.searchResults;
 
-                      return  (allResults.isEmpty) ? Center(child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "No results found",
-                            style: TextStyle(
-                              fontSize: 40,
+                    return (allResults.isEmpty)
+                        ? Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "No results found",
+                                  style: TextStyle(
+                                    fontSize: 40,
+                                  ),
+                                ),
+                                Text(
+                                  "Try searching for something else",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                          Text(
-                            "Try searching for something else",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),) :
-
-                     ListView.builder(
-                      itemCount: allResults.length,
-                      // children: <Widget>[
-                      // for (Card card in allResults)
-                      itemBuilder: (ctx, index) {
-                        final result = allResults[index];
-                        return CompanyCard(
-                          details: result,
-                          // company: allResults[index].company,
-                          // companyPhoto: allResults[index].companyPhoto,
-                          // experience: allResults[index].experience,
-                          // location: allResults[index].location,
-                          // title: allResults[index].title,
-                          // description: allResults[index].description,
-                          // tags: allResults[index].tags,
-                          // pay: allResults[index].pay,
-                        );
-                      },
-                      // ],
-                    );
+                          )
+                        : ListView.builder(
+                            itemCount: allResults.length,
+                            // children: <Widget>[
+                            // for (Card card in allResults)
+                            itemBuilder: (ctx, index) {
+                              final result = allResults[index];
+                              return CompanyCard(
+                                details: result,
+                                // company: allResults[index].company,
+                                // companyPhoto: allResults[index].companyPhoto,
+                                // experience: allResults[index].experience,
+                                // location: allResults[index].location,
+                                // title: allResults[index].title,
+                                // description: allResults[index].description,
+                                // tags: allResults[index].tags,
+                                // pay: allResults[index].pay,
+                              );
+                            },
+                            // ],
+                          );
                   }),
                 ),
               ),

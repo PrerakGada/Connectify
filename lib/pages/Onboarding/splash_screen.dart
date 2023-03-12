@@ -33,6 +33,7 @@ class SplashScreenState extends State<SplashScreen>
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await UserStore().refreshTheToken();
+      await UserStore().searchJob(query: 'f');
       // await UserStore().fetchNearbyUsers();
       // await UserStore().fetchNearbyJourneys();
       // await UserStore().getLocationsByRadius();
@@ -130,7 +131,7 @@ class SplashScreenState extends State<SplashScreen>
           scale: _animation,
           child: Image(
             image: const AssetImage(
-              'assets/logo.png',
+              'assets/proxy.jpeg',
             ),
             // height: 480,
             width: MediaQuery.of(context).size.width * 0.8,

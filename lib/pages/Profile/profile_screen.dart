@@ -1,21 +1,56 @@
+import 'dart:io';
+
+import 'package:connectify/pages/calendar/calendar_view.dart';
 import 'package:connectify/theme/app_colors.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-
+import '../../logic/state_management/user_store.dart';
 import '../../widgets/progress_bar.dart';
+import '../Onboarding/splash_screen.dart';
+import 'edit_profile_screen.dart';
 
 class Profile extends StatefulWidget {
   static const id = '/profileid';
-  const Profile({super.key});
+
+  const Profile({super.key, this.user});
+
+  final user;
 
   @override
   State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
+  late bool x = false;
+
+  var progress = 0.62;
+  File? file;
+  var uploaded = false;
+  void onPickFileButtonClicked() async {
+    FilePickerResult? tempImage = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+    if (tempImage == null) {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('An error occurred. Failed to pick image!'),
+      ));
+      return;
+    }
+    setState(() {
+      file = File(tempImage.files.single.path!);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (widget.user == null) {
+      x = false;
+    } else {
+      x = true;
+    }
     return Scaffold(
       body: Stack(
         children: [
@@ -39,179 +74,189 @@ class _ProfileState extends State<Profile> {
                     children: [
                       const SizedBox(height: 50),
                       Container(
-                        height: 275,
+                        // height: 275,
                         child: Stack(
                           children: [
                             Align(
                               alignment: Alignment.bottomCenter,
                               child: Container(
-                                // padding: EdgeInsets.only(top: 100),
+                                padding: EdgeInsets.only(top: 100),
                                 // height: 250,
                                 width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: AppColors.greyDarker,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const SizedBox(
-                                            height: 50,
-                                          ),
-                                          const Align(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              "Siddesh Shetty",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20,
+
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.black,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(
+                                              height: 50,
+                                            ),
+                                            Align(
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                x
+                                                    ? widget.user["username"]
+                                                    : "Siddesh Shetty",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Text(
-                                            "Cross Platform Flutter Developer",
-                                          ),
-                                          SizedBox(
-                                            height: 8,
-                                          ),
-                                          Text("LOC 4.0 hackathon winner"),
-                                          SizedBox(
-                                            height: 8,
-                                          ),
-                                          Row(
-                                            children: const [
-                                              Icon(Icons.location_on),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                "Mumbai",
-                                                style: TextStyle(
-                                                    //  ,
-                                                    ),
-                                              )
-                                            ],
-                                          ),
-                                          Row(
-                                            children: const [
-                                              Icon(Icons.work),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                "0 Years 6 Months",
-                                                style: TextStyle(
-                                                    //  ,
-                                                    ),
-                                              )
-                                            ],
-                                          ),
-                                          Row(
-                                            children: const [
-                                              Icon(Icons.phone),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                "+91 9004137508",
-                                                style: TextStyle(
-                                                    //  ,
-                                                    ),
-                                              ),
-                                              SizedBox(
-                                                width: 3,
-                                              ),
-                                              Icon(
-                                                Icons.verified,
-                                                color: AppColors.primary,
-                                              )
-                                            ],
-                                          ),
-                                          Row(
-                                            children: const [
-                                              Icon(Icons.email),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                "siddushetty30@gmail.com",
-                                                style: TextStyle(),
-                                              ),
-                                              SizedBox(
-                                                width: 3,
-                                              ),
-                                              Icon(
-                                                Icons.verified,
-                                                color: AppColors.primary,
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Row(
-                                            children: [
-                                              MaterialButton(
-                                                onPressed: () {},
-                                                child: Image.asset(
-                                                  "assets/whatsapp.png",
-                                                  height: 30,
-                                                  width: 30,
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                              x
+                                                  ? widget.user["keyskills"]
+                                                  : "Cross Platform Flutter Developer",
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Text("LOC 4.0 hackathon winner"),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Icon(Icons.location_on),
+                                                SizedBox(
+                                                  width: 5,
                                                 ),
-                                              ),
-                                              MaterialButton(
-                                                onPressed: () {},
-                                                child: Image.asset(
-                                                  "assets/whatsapp.png",
-                                                  height: 30,
-                                                  width: 30,
+                                                Text(
+                                                  "Mumbai",
+                                                  style: TextStyle(
+                                                      //  ,
+                                                      ),
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: const [
+                                                Icon(Icons.work),
+                                                SizedBox(
+                                                  width: 5,
                                                 ),
-                                              ),
-                                              MaterialButton(
-                                                onPressed: () {},
-                                                child: Image.asset(
-                                                  "assets/whatsapp.png",
-                                                  height: 30,
-                                                  width: 30,
+                                                Text(
+                                                  "0 Years 6 Months",
+                                                  style: TextStyle(
+                                                      //  ,
+                                                      ),
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: const [
+                                                Icon(Icons.phone),
+                                                SizedBox(
+                                                  width: 5,
                                                 ),
-                                              ),
-                                              MaterialButton(
-                                                onPressed: () {},
-                                                child: Image.asset(
-                                                  "assets/whatsapp.png",
-                                                  height: 30,
-                                                  width: 30,
+                                                Text(
+                                                  "+91 9004137508",
+                                                  style: TextStyle(
+                                                      //  ,
+                                                      ),
                                                 ),
-                                              ),
-                                            ],
-                                          )
-                                        ],
+                                                SizedBox(
+                                                  width: 3,
+                                                ),
+                                                Icon(
+                                                  Icons.verified,
+                                                  color: AppColors.primary,
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Icon(Icons.email),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  x
+                                                      ? widget.user["email"]
+                                                      : "siddushetty30@gmail.com",
+                                                  style: TextStyle(),
+                                                ),
+                                                SizedBox(
+                                                  width: 3,
+                                                ),
+                                                Icon(
+                                                  Icons.verified,
+                                                  color: AppColors.primary,
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Row(
+                                              children: [
+                                                MaterialButton(
+                                                  onPressed: () {},
+                                                  child: Image.asset(
+                                                    "assets/whatsapp.png",
+                                                    height: 30,
+                                                    width: 30,
+                                                  ),
+                                                ),
+                                                MaterialButton(
+                                                  onPressed: () {},
+                                                  child: Image.network(
+                                                    "https://cdn-icons-png.flaticon.com/512/733/733579.png",
+                                                    height: 30,
+                                                    width: 30,
+                                                  ),
+                                                ),
+                                                MaterialButton(
+                                                  onPressed: () {},
+                                                  child: Image.network(
+                                                    "https://cdn-icons-png.flaticon.com/512/2111/2111463.png",
+                                                    height: 30,
+                                                    width: 30,
+                                                  ),
+                                                ),
+                                                MaterialButton(
+                                                  onPressed: () {},
+                                                  child: Image.network(
+                                                    "https://cdn-icons-png.flaticon.com/512/4945/4945973.png",
+                                                    height: 30,
+                                                    width: 30,
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                             Align(
                               alignment: Alignment.topCenter,
-                              child: Image.asset(
-                                "assets/whatsapp.png",
-                                height: 60,
+                              child: CircleAvatar(
+                                radius: 60,
+                                backgroundImage: AssetImage(
+                                  "assets/img.png",
+                                ),
                               ),
                             ),
                           ],
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
                       ),
                       Divider(
                         thickness: 1,
@@ -292,82 +337,54 @@ class _ProfileState extends State<Profile> {
                                 children: [
                                   ElevatedButton(
                                     child: Text("View Resume"),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                        onPickFileButtonClicked();
+                                        setState(() {
+                                          progress = 0.8;
+                                        });
+                                    },
                                   ),
                                   ElevatedButton(
-                                    child: Text("Video Resume"),
-                                    onPressed: () {},
-                                  )
+                                    child: uploaded
+                                        ? Icon(Icons.done)
+                                        : Text("Video Resume"),
+                                    onPressed: () async {
+                                      return showModalBottomSheet(
+                                          context: context,
+                                          isScrollControlled: true,
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(10),
+                                                topRight: Radius.circular(10)),
+                                          ),
+                                          builder: (context) => StatefulBuilder(
+                                              builder:
+                                                  (BuildContext context,
+                                                  StateSetter
+                                                  setModalState) {
+                                                return FractionallySizedBox(
+                                                  heightFactor: 0.4,
+                                                  child: EditProfile(),
+                                                );
+                                              })).then((value) {
+                                        setState(() {
+                                          progress = 0.90;
+                                          uploaded = true;
+                                        });
+                                      });
+                                    },
+                                  ),
                                 ],
                               )
                             ],
                           ),
                         ),
                       ),
-                      // Container(
-                      //   width: double.infinity,
-                      //   decoration: const BoxDecoration(
-                      //     color: AppColors.black,
-                      //   ),
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.all(10.0),
-                      //     child: Column(
-                      //       crossAxisAlignment: CrossAxisAlignment.start,
-                      //       children: [
-                      //         Row(
-                      //           children: [
-                      //             Text(
-                      //               "Skills",
-                      //               style: TextStyle(
-                      //                 fontWeight: FontWeight.bold,
-                      //                 fontSize: 17,
-                      //               ),
-                      //             ),
-                      //             SizedBox(
-                      //               width: 7,
-                      //             ),
-                      //             Container(
-                      //               decoration: BoxDecoration(
-                      //                   color:
-                      //                       Color.fromARGB(255, 240, 246, 236),
-                      //                   borderRadius:
-                      //                       BorderRadius.circular(10)),
-                      //               child: Padding(
-                      //                 padding: const EdgeInsets.all(5.0),
-                      //                 child: Row(children: [
-                      //                   Text(
-                      //                     "8%",
-                      //                     style:
-                      //                         TextStyle(color: AppColors.black),
-                      //                   ),
-                      //                   Image.asset(
-                      //                     "assets/growth.png",
-                      //                     height: 15,
-                      //                     color: Colors.green,
-                      //                   )
-                      //                 ]),
-                      //               ),
-                      //             ),
-                      //             Spacer(),
-                      //             Icon(
-                      //               Icons.add_circle_outline,
-                      //               color: AppColors.primary,
-                      //             )
-                      //           ],
-                      //         ),
-                      //         Text(
-                      //           "Recruiters search via skills.Add your skills to appear in maximum recruiter searches",
-                      //           style: TextStyle(color: AppColors.white),
-                      //         )
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
                       SizedBox(
                         height: 10,
                       ),
                       Container(
-                        height: 80,
+                        // height: 80,
                         width: double.infinity,
                         decoration: const BoxDecoration(
                           color: AppColors.black,
@@ -517,6 +534,42 @@ class _ProfileState extends State<Profile> {
                     ],
                   ),
                 ),
+              ),
+            ),
+          ),
+          SafeArea(
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, ShiftScheduler.id);
+                    },
+                    child: Container(
+                      height: 30,
+                      width: 30,
+                      child: Text('.'),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () async {
+                      await UserStore().logout();
+                      Navigator.popAndPushNamed(context, SplashScreen.id);
+                    },
+                    icon: Icon(Icons.exit_to_app),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, EditProfile.id);
+                    },
+                    child: Container(
+                      height: 30,
+                      width: 30,
+                      child: Text('.'),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

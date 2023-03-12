@@ -30,32 +30,30 @@ class VideoConferencing extends StatelessWidget {
 // UI to render join screen
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Colors.black,
-        child: Center(
-          child: ElevatedButton(
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
+    return Container(
+      color: Colors.black,
+      child: Center(
+        child: ElevatedButton(
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
               ),
             ),
-            // Function to push to meeting page
-            onPressed: () async {
-              await getPermissions();
-              Navigator.push(
-                context,
-                CupertinoPageRoute(builder: (_) => const MeetingPage()),
-              );
-            },
-            child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-              child: Text(
-                'Join',
-                style: TextStyle(fontSize: 20),
-              ),
+          ),
+          // Function to push to meeting page
+          onPressed: () async {
+            await getPermissions();
+            Navigator.push(
+              context,
+              CupertinoPageRoute(builder: (_) => const MeetingPage()),
+            );
+          },
+          child: const Padding(
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            child: Text(
+              'Join',
+              style: TextStyle(fontSize: 20),
             ),
           ),
         ),

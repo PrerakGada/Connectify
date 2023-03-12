@@ -85,6 +85,8 @@ class _SignupPageState extends State<SignupPage> {
                               Navigator.pushReplacementNamed(
                                   context, RegisterScreen.id);
                             }
+                            Navigator.pushReplacementNamed(
+                                context, RegisterScreen.id);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primary,

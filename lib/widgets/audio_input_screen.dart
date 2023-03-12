@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:audio_waveforms/audio_waveforms.dart';
+import 'package:connectify/logic/state_management/user_store.dart';
+import 'package:connectify/pages/VideoConferencing/video_conferencing.dart';
 import 'package:connectify/theme/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -14,7 +16,7 @@ class AudioInputScreen extends StatefulWidget {
 }
 
 class _AudioInputScreenState extends State<AudioInputScreen> {
-  late final RecorderController recorderController;
+  late final RecorderController aRecorderController;
   String? path;
   String? musicFile;
   bool isRecording = false;
@@ -37,7 +39,7 @@ class _AudioInputScreenState extends State<AudioInputScreen> {
   }
 
   void _initialiseControllers() {
-    recorderController = RecorderController()
+    aRecorderController = RecorderController()
       ..androidEncoder = AndroidEncoder.aac
       ..androidOutputFormat = AndroidOutputFormat.mpeg4
       ..iosEncoder = IosEncoder.kAudioFormatMPEG4AAC
@@ -56,16 +58,16 @@ class _AudioInputScreenState extends State<AudioInputScreen> {
 
   @override
   void dispose() {
-    recorderController.dispose();
+    aRecorderController.dispose();
     super.dispose();
   }
 
   void _startOrStopRecording() async {
     try {
       if (isRecording) {
-        recorderController.reset();
+        aRecorderController.reset();
 
-        final path = await recorderController.stop(false);
+        final path = await aRecorderController.stop(false);
 
         if (path != null) {
           isRecordingCompleted = true;
@@ -73,7 +75,7 @@ class _AudioInputScreenState extends State<AudioInputScreen> {
           debugPrint("Recorded file size: ${File(path).lengthSync()}");
         }
       } else {
-        await recorderController.record(path: path!);
+        await aRecorderController.record(path: path!);
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -88,63 +90,103 @@ class _AudioInputScreenState extends State<AudioInputScreen> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
-      child: Column(
-        children: [
-          Text(
-            "Describe what makes you the best fit for this job",
-            style: textTheme.headlineMedium,
-          ),
-          isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : SafeArea(
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 20),
-
-                      // IconButton(
-                      //   onPressed: _pickFile,
-                      //   icon: Icon(Icons.adaptive.share),
-                      //   color: Colors.white54,
-                      // ),
-
-                      IconButton(
-                        onPressed: _startOrStopRecording,
-                        icon: Icon(isRecording ? Icons.stop : Icons.mic),
-                        color: Colors.white,
-                        iconSize: 28,
-                      ),
-                      isRecording
-                          ? AudioWaveforms(
-                              enableGesture: true,
-                              size: Size(
-                                  MediaQuery.of(context).size.width / 2, 50),
-                              recorderController: recorderController,
-                              waveStyle: const WaveStyle(
-                                waveColor: Colors.white,
-                                extendWaveform: true,
-                                showMiddleLine: false,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12.0),
-                                color: const Color(0xFF1E1B26),
-                              ),
-                              padding: const EdgeInsets.only(left: 18),
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                            )
-                          : Container(),
-                      if (isRecordingCompleted)
-                        WaveBubble(
-                          path: path,
-                          isSender: true,
-                          appDirectory: appDirectory,
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          children: [
+            isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : SafeArea(
+                    child: Column(
+                      children: [
+                        Text(
+                          "What makes you the best fit for this job",
+                          style: textTheme.headlineMedium,
                         ),
-                    ],
+                        const SizedBox(height: 10),
+                        IconButton(
+                          onPressed: _startOrStopRecording,
+                          icon: Icon(isRecording ? Icons.stop : Icons.mic),
+                          color: Colors.white,
+                          iconSize: 28,
+                        ),
+                        isRecording
+                            ? AudioWaveforms(
+                                enableGesture: true,
+                                size: Size(
+                                    MediaQuery.of(context).size.width / 2, 50),
+                                recorderController: aRecorderController,
+                                waveStyle: const WaveStyle(
+                                  waveColor: Colors.white,
+                                  extendWaveform: true,
+                                  showMiddleLine: false,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  color: const Color(0xFF1E1B26),
+                                ),
+                                padding: const EdgeInsets.only(left: 18),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                              )
+                            : Container(),
+                        if (isRecordingCompleted)
+                          WaveBubble(
+                            path: path,
+                            isSender: true,
+                            appDirectory: appDirectory,
+                          ),
+                      ],
+                    ),
                   ),
-                )
-        ],
+            SizedBox(height: 20),
+            Text(
+              "Where are you looking yourself in 5 years?",
+              style: textTheme.headlineMedium,
+            ),
+            const SizedBox(height: 10),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(isRecording ? Icons.stop : Icons.mic),
+              color: Colors.white,
+              iconSize: 28,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              "What are your strengths and weaknesses?",
+              style: textTheme.headlineMedium,
+            ),
+            const SizedBox(height: 10),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(isRecording ? Icons.stop : Icons.mic),
+              color: Colors.white,
+              iconSize: 28,
+            ),
+            // Spacer(),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => const VideoConferencing()),
+                  // );
+                  Navigator.pop(context);
+                  bookedAppointment = true;
+                },
+                child: Text(
+                  "Submit",
+                  style: textTheme.headlineMedium,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -230,7 +272,7 @@ class _WaveBubbleState extends State<WaveBubble> {
               padding: EdgeInsets.only(
                 bottom: 6,
                 right: widget.isSender ? 0 : 10,
-                top: 6,
+                top: 16,
               ),
               margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
               decoration: BoxDecoration(

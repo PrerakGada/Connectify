@@ -8,6 +8,7 @@ class InputField extends StatelessWidget {
   final bool condition;
   final bool prefix;
   final bool date;
+  final bool exp;
   final TextEditingController? controller;
   final VoidCallback? onTap;
   final TextInputType? textinput;
@@ -23,7 +24,8 @@ class InputField extends StatelessWidget {
       this.onTap,
       this.textinput,
       this.prefix = false,
-      this.date = false})
+      this.date = false,
+      this.exp = false})
       : super(key: key);
 
   @override
@@ -39,12 +41,18 @@ class InputField extends StatelessWidget {
             ? true
             : date
                 ? true
-                : false,
+                : exp
+                    ? false
+                    : true,
         minLines: minLines,
         maxLines: maxLines,
         controller: controller,
         keyboardType: textinput,
-        obscureText: condition ? true : false,
+        obscureText: condition
+            ? true
+            : exp
+                ? true
+                : false,
         decoration: InputDecoration(
             prefixText: prefix ? "+91" : null,
             prefixStyle: TextStyle(color: Colors.white),
@@ -56,7 +64,11 @@ class InputField extends StatelessWidget {
             border: InputBorder.none,
             hintText: placeholderText,
             hintStyle: const TextStyle(fontSize: 15, color: Color(0xFF8F8F9E))),
-        onTap: date ? onTap : null,
+        onTap: date
+            ? onTap
+            : exp
+                ? null
+                : onTap,
       ),
     );
   }

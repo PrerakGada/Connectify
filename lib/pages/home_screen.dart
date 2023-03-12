@@ -1,3 +1,8 @@
+import 'package:connectify/pages/Profile/profile_page.dart';
+import 'package:connectify/pages/Profile/profile_screen.dart';
+import 'package:connectify/pages/bluetooth.dart';
+import 'package:connectify/pages/createCompany/create_company.dart';
+import 'package:connectify/pages/createJob/create_job.dart';
 import 'package:flutter/material.dart';
 import '../logic/state_management/user_store.dart';
 import '../theme/app_colors.dart';
@@ -268,10 +273,10 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       children: <Widget>[
         SearchScreen(),
-        AudioRecordingPage(),
-        Container(),
-        Container(),
-        EditProfile(),
+        Bluetooth(),
+        CreateJob(),
+        CreateBusinessScreen(),
+        Profile(),
         // const ChatScreen(),
         // const ViewActivity(),
         // const MapsScreen(),
@@ -386,10 +391,10 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.only(top: 14),
               child: Row(
                 children: <Widget>[
-                  buildNavBarItem(Icons.dashboard_outlined, 0),
-                  buildNavBarItem(Icons.chat_outlined, 1),
+                  buildNavBarItem(Icons.search, 0),
+                  buildNavBarItem(Icons.bluetooth, 1),
                   buildNavBarItem(Icons.add_box_outlined, 2),
-                  buildNavBarItem(Icons.notifications_none_rounded, 3),
+                  buildNavBarItem(Icons.contact_page, 3),
                   buildNavBarItem(Icons.person, 4),
                 ],
               ),

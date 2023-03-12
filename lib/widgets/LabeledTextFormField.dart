@@ -45,7 +45,7 @@ class _LabeledTextFormFieldState extends State<LabeledTextFormField> {
           width: widget.width == null ? null : widget.width,
           padding: EdgeInsets.only(left: 16),
           decoration: BoxDecoration(
-            color: AppColors.black,
+            color: AppColors.greyDarker,
             borderRadius: BorderRadius.circular(8),
           ),
           child: TextFormField(

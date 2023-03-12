@@ -11,6 +11,8 @@ import 'package:http/http.dart' as http;
 
 import 'state_keeper.dart';
 
+bool bookedAppointment = false;
+
 class UserStore extends StateKeeper {
   double lat = 19.0760;
 
@@ -629,21 +631,26 @@ class UserStore extends StateKeeper {
 
   Future getNearbyUsers({required List macs}) async {
     final prefs = await SharedPreferences.getInstance();
+
     var request = http.MultipartRequest(
         'GET',
         Uri.parse(
-            'https://innovative-minds.mustansirg.in/api/users/nearby/?mac=["macs":${macs}]'));
+            'https://innovative-minds.mustansirg.in/api/nearby/?mac=${macs.toString()}]'));
     request.headers
         .addAll({'Authorization': 'Bearer ${prefs.getString('access')}'});
     var response = await request.send();
     await http.Response.fromStream(response).then((value) async {
       var body = jsonDecode(value.body);
       if (response.statusCode == 200) {
+        print("-------------------------------------Success!!!!");
+        print(body);
         nearbyUsers = body;
+        notifyListeners();
         return true;
       } else {
-        print("Failed to get nearby users");
+        print("----------------------------Failed to get nearby users");
         print(body);
+        notifyListeners();
         return false;
       }
     });

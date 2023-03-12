@@ -1,5 +1,7 @@
 ///Package imports
 import 'dart:math';
+import 'package:connectify/logic/state_management/user_store.dart';
+import 'package:connectify/pages/VideoConferencing/video_conferencing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -533,7 +535,16 @@ class _ShiftSchedulerState extends SampleViewState {
       showNavigationArrow: model.isWebFullView,
       dataSource: calendarDataSource,
       onViewChanged: viewChangedCallback,
-      onTap: calendarTapCallback,
+      onTap: !bookedAppointment
+          ? calendarTapCallback
+          : (CalendarTapDetails calDet) {
+              bookedAppointment = false;
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const VideoConferencing()),
+              );
+            },
     );
   }
 }

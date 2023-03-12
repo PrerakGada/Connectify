@@ -1,6 +1,7 @@
 import 'package:connectify/pages/AudioVideo/audio_recording_page.dart';
 import 'package:connectify/pages/AudioVideo/video_recording_page.dart';
 import 'package:connectify/pages/Onboarding/signup_page.dart';
+import 'package:connectify/pages/Profile/edit_profile_screen.dart';
 import 'package:connectify/pages/Profile/profile_screen.dart';
 import 'package:connectify/pages/Profile/profile_view.dart';
 import 'package:connectify/pages/Search/search.dart';
@@ -118,7 +119,8 @@ class MyApp extends StatelessWidget {
           SearchScreen.id: (context) => SearchScreen(),
           ProfileView.id: (context) => ProfileView(),
           ShiftScheduler.id: (context) => ShiftScheduler(),
-          // CompanyDetails.id:(context) => CompanyDetails(details: ,)
+          // CompanyDetails.id:(context) => CompanyDetails(details: ,),
+          EditProfile.id: (context) => EditProfile(),
         },
       ),
     );
