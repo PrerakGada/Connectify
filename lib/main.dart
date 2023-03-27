@@ -1,5 +1,4 @@
 import 'package:connectify/pages/AudioVideo/audio_recording_page.dart';
-import 'package:connectify/pages/AudioVideo/video_recording_page.dart';
 import 'package:connectify/pages/Onboarding/signup_page.dart';
 import 'package:connectify/pages/Profile/edit_profile_screen.dart';
 import 'package:connectify/pages/Profile/profile_screen.dart';
@@ -22,17 +21,13 @@ import 'pages/Onboarding/onboarding_screen.dart';
 import 'pages/Onboarding/register_screen.dart';
 import 'pages/Onboarding/splash_screen.dart';
 // import 'pages/Profile/edit_profile.dart';
-import 'pages/Profile/profile_page.dart';
 import 'pages/Settings/settings.dart';
-import 'pages/bluetooth.dart';
 import 'pages/home_screen.dart';
 import 'theme/dark_theme.dart';
 import 'theme/light_theme.dart';
 import 'firebase_options.dart';
 import 'logic/state_management/user_store.dart';
-import 'theme/dark_theme.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'theme/light_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -103,24 +98,18 @@ class MyApp extends StatelessWidget {
           Settings.id: (context) => const Settings(),
           // LocationScreen.id: (context) => const LocationScreen(),
           ChatScreen.id: (context) => const ChatScreen(),
-          // Bluetooth.id: (context) => Bluetooth(),
           CreateBusinessScreen.id: (context) => const CreateBusinessScreen(),
           EmployeeDashBoard.id: (context) => const EmployeeDashBoard(),
           AtsView.id: (context) => const AtsView(),
           CreateJob.id: (context) => const CreateJob(),
           // VideoRecordingPage.id: (context) => VideoRecordingPage(),
-          Bluetooth.id: (context) => Bluetooth(),
-          CreateBusinessScreen.id: (context) => CreateBusinessScreen(),
-          EmployeeDashBoard.id: (context) => EmployeeDashBoard(),
-          AtsView.id: (context) => AtsView(),
-          CreateJob.id: (context) => CreateJob(),
           // VideoRecordingPage.id: (context) => VideoRecordingPage(),
-          AudioRecordingPage.id: (context) => AudioRecordingPage(),
-          SearchScreen.id: (context) => SearchScreen(),
-          ProfileView.id: (context) => ProfileView(),
+          AudioRecordingPage.id: (context) => const AudioRecordingPage(),
+          SearchScreen.id: (context) => const SearchScreen(),
+          ProfileView.id: (context) => const ProfileView(),
           ShiftScheduler.id: (context) => ShiftScheduler(),
           // CompanyDetails.id:(context) => CompanyDetails(details: ,),
-          EditProfile.id: (context) => EditProfile(),
+          EditProfile.id: (context) => const EditProfile(),
         },
       ),
     );

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../theme/app_colors.dart';
+import '../../theme/palette.dart';
 import 'login_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {

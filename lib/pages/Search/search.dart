@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
 import 'package:shake/shake.dart';
-import '../../theme/app_colors.dart';
+import '../../theme/palette.dart';
 import '../../theme/typography.dart';
 import '../../widgets/company_card.dart';
 import '../../widgets/filters_dialog.dart';

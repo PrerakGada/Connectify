@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'app_colors.dart';
+import 'palette.dart';
 import 'typography.dart';
 
 // ignore: non_constant_identifier_names
@@ -30,7 +30,7 @@ ThemeData dark_theme() => ThemeData(
         bodyColor: AppColors.greyLight,
         displayColor: AppColors.white,
       ),
-      scaffoldBackgroundColor: AppColors.black,
+      scaffoldBackgroundColor: Colors.black,
       primaryTextTheme: textTheme,
       iconTheme: const IconThemeData(color: AppColors.greyLight),
       colorScheme:

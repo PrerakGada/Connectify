@@ -2,7 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../theme/app_colors.dart';
+import '../../theme/palette.dart';
 
 class VerifyJournalist extends StatelessWidget {
   VerifyJournalist({Key? key}) : super(key: key);

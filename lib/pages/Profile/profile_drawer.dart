@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../logic/state_management/user_store.dart';
-import '../../theme/app_colors.dart';
+import '../../theme/palette.dart';
 import '../Settings/settings.dart';
 // import 'edit_profile.dart';
 
@@ -31,8 +30,11 @@ class ProfileDrawer extends StatelessWidget {
                       },
                       icon: const Icon(Icons.chevron_left),
                     ),
-                    Text("Welcome ${UserStore().tokenData["username"]}!",
-                        style: const TextStyle(fontSize: 24)),
+                    Text(
+                      "Welcome Prerak!",
+                      // "Welcome ${UserStore().tokenData["username"]}!",
+                      style: const TextStyle(fontSize: 24),
+                    ),
                     IconButton(
                       onPressed: () {
                         Navigator.of(context).pushNamed(Settings.id);
@@ -48,13 +50,18 @@ class ProfileDrawer extends StatelessWidget {
                         CircleAvatar(
                           radius: 50,
                           backgroundImage: NetworkImage(
-                              "https://innovate-minds.mustansirg.in/static/${UserStore().tokenData['profile_photo']}"),
+                            // "https://innovate-minds.mustansirg.in/static/${UserStore().tokenData['profile_photo']}",
+                            "https://cdn-icons-png.flaticon.com/512/2111/2111463.png",
+                          ),
                         ),
                         const SizedBox(
                           height: 10.0,
                         ),
-                        Text(UserStore().tokenData["username"],
-                            style: const TextStyle(fontSize: 20)),
+                        Text(
+                          // UserStore().tokenData["username"],
+                          "Prerak",
+                          style: const TextStyle(fontSize: 20),
+                        ),
                       ],
                     ),
                     const SizedBox(

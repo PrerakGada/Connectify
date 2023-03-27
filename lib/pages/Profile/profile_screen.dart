@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:connectify/pages/calendar/calendar_view.dart';
-import 'package:connectify/theme/app_colors.dart';
+import 'package:connectify/theme/palette.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';

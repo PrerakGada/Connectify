@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../theme/app_colors.dart';
+import '../../theme/palette.dart';
 import '../../logic/state_management/user_store.dart';
 import '../../widgets/LabeledTextFormField.dart';
 import 'register_screen.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../theme/app_colors.dart';
+import '../theme/palette.dart';
 
 class RoundedSmallButton extends StatelessWidget {
   final VoidCallback onTap;

@@ -1,5 +1,5 @@
 import 'package:connectify/pages/Search/search.dart';
-import 'package:connectify/theme/app_colors.dart';
+import 'package:connectify/theme/palette.dart';
 import 'package:connectify/pages/CompanyDetails/companyDetails.dart';
 import 'package:flutter/material.dart';
 import '../../theme/typography.dart';

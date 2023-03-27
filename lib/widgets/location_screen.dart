@@ -6,7 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:intl/intl.dart';
 
-import '../../theme/app_colors.dart';
+import '../../theme/palette.dart';
 import '../logic/state_management/user_store.dart';
 
 class LocationScreen extends StatefulWidget {

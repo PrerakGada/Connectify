@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../../theme/app_colors.dart';
+import '../../../theme/palette.dart';
 import '../../logic/state_management/user_store.dart';
 import '../../widgets/profile_pic.dart';
 

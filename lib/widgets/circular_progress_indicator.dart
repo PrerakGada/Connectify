@@ -87,7 +87,7 @@ class CircularProgressPainter extends CustomPainter {
     canvas.drawCircle(Offset(centerX, centerY), radius, paint);
 
     Paint progressPaint = Paint()
-      ..shader = valueColor?.value != null
+      ..shader = valueColor.value != null
           ? SweepGradient(
               colors: [Colors.transparent, valueColor.value!],
               stops: [0.0, 1.0],

@@ -1,4 +1,4 @@
-import 'package:connectify/theme/app_colors.dart';
+import 'package:connectify/theme/palette.dart';
 import 'package:flutter/material.dart';
 
 const curveHeight = 160.0;

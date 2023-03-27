@@ -3,7 +3,7 @@ import 'package:connectify/theme/typography.dart';
 import 'package:flutter/material.dart';
 
 // import 'package:connectify/widgets/curved_shape.dart';
-import 'package:connectify/theme/app_colors.dart';
+import 'package:connectify/theme/palette.dart';
 import 'package:connectify/pages/VideoConferencing/video_conferencing.dart';
 import 'package:connectify/theme/typography.dart';
 

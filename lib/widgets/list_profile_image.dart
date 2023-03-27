@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../theme/app_colors.dart';
+import '../theme/palette.dart';
 
 class ListProfilImage extends StatelessWidget {
   const ListProfilImage({

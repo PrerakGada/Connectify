@@ -1,16 +1,10 @@
-import 'package:connectify/pages/Profile/profile_page.dart';
 import 'package:connectify/pages/Profile/profile_screen.dart';
-import 'package:connectify/pages/bluetooth.dart';
 import 'package:connectify/pages/createCompany/create_company.dart';
 import 'package:connectify/pages/createJob/create_job.dart';
 import 'package:flutter/material.dart';
-import '../logic/state_management/user_store.dart';
-import '../theme/app_colors.dart';
+import '../theme/palette.dart';
 import './Search/search.dart';
-import 'AudioVideo/audio_recording_page.dart';
-import 'AudioVideo/video_recording_page.dart';
 import 'Profile/profile_drawer.dart';
-import 'Profile/edit_profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -272,11 +266,11 @@ class _HomeScreenState extends State<HomeScreen> {
         pageChanged(index);
       },
       children: <Widget>[
-        SearchScreen(),
-        Bluetooth(),
-        CreateJob(),
-        CreateBusinessScreen(),
-        Profile(),
+        const SearchScreen(),
+        Container(),
+        const CreateJob(),
+        const CreateBusinessScreen(),
+        const Profile(),
         // const ChatScreen(),
         // const ViewActivity(),
         // const MapsScreen(),
@@ -359,25 +353,24 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   elevation: 0,
-      //   backgroundColor: Colors.transparent,
-      //   // title: Text("Welcome ${UserStore().tokenData["username"]}!",
-      //   //     style: const TextStyle(fontSize: 24)),
-      //   actions: [
-      //     // Builder( builder: (context) => MaterialButton(
-      //     //     child: CircleAvatar(
-      //     //       radius: 30,
-      //     //       backgroundImage: NetworkImage(
-      //     //         "https://tourmate.mustansirg.in/static/${UserStore().tokenData['profile_photo']}",
-      //     //       ),
-      //     //     ),
-      //     //     onPressed: () => Scaffold.of(context).openEndDrawer(),
-      //     //     // tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-      //     //   ),
-      //     // ),
-      //   ],
-      // ),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        actions: [
+          Builder(
+            builder: (context) => MaterialButton(
+              child: const CircleAvatar(
+                radius: 30,
+                backgroundImage: NetworkImage(
+                  "https://cdn-icons-png.flaticon.com/512/2111/2111463.png",
+                ),
+              ),
+              onPressed: () => Scaffold.of(context).openEndDrawer(),
+              // tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            ),
+          ),
+        ],
+      ),
       body: buildPageView(),
       endDrawer: const ProfileDrawer(),
       bottomNavigationBar: SafeArea(
@@ -386,7 +379,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               // color: Colors.black,
               decoration: const BoxDecoration(
-                color: AppColors.black,
+                color: Colors.black,
               ),
               padding: const EdgeInsets.only(top: 14),
               child: Row(
