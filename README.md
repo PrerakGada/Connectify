@@ -1,16 +1,5 @@
-# connectify
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+A job portal to connect laid off people with potential employers.
+Uses Geolocation API to fetch location and recommend appropriate jobs
+Uses Flutter's bluetooth API to directly connect with nearby people in a conference
+Enables users to add voice and video prompts to distinguish themselves from other applicants conference
+Facilitates calendar sharing and video conferencing to ease the interview process on the employer side
