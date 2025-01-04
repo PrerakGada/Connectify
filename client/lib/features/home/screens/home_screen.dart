@@ -1,10 +1,9 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import '../../jobs/screens/jobs_screen.dart';
 import '../../schedule/screens/calendar_screen.dart';
 import '../../bluetooth/screens/bluetooth_screen.dart';
+import '../../profile/screens/profile_screen.dart';
 
-@RoutePage()
 class HomeScreen extends StatefulWidget {
   final bool isEmployee;
 
@@ -30,14 +29,14 @@ class _HomeScreenState extends State<HomeScreen> {
       JobsScreen(isEmployee: true),
       CalendarScreen(isEmployee: true),
       BluetoothScreen(isEmployee: true),
-      // const Center(child: Text('Profile - Employee View')),
+      ProfileScreen(isEmployee: true),
     ];
 
     _employerTabs = [
       JobsScreen(isEmployee: false),
       CalendarScreen(isEmployee: false),
       BluetoothScreen(isEmployee: false),
-      // const Center(child: Text('Profile - Employer View')),
+      ProfileScreen(isEmployee: false),
     ];
   }
 
@@ -69,10 +68,10 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.bluetooth),
             label: 'Bluetooth',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.person),
-          //   label: 'Profile',
-          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
         ],
       ),
     );

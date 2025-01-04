@@ -1,10 +1,8 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:connectify/features/jobs/models/interview.dart';
 import 'package:connectify/features/jobs/models/job.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-@RoutePage()
 class CalendarScreen extends StatefulWidget {
   final bool isEmployee;
   final String? jobId;

@@ -1,9 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import '../../../core/constants/job_constants.dart';
 import '../models/job.dart';
 
-@RoutePage()
 class CreateJobScreen extends StatefulWidget {
   const CreateJobScreen({super.key});
 
@@ -121,7 +119,8 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
                       // TODO: Add job to list
 
                       // Navigate back
-                      context.router.pop();
+                      // context.router.pop();
+                      Navigator.of(context).pop();
                     }
                   },
                   child: const Text('Create Job'),

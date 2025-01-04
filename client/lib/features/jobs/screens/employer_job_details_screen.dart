@@ -1,9 +1,7 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:connectify/core/router/app_router.dart';
+import 'package:connectify/features/schedule/screens/calendar_screen.dart';
 import 'package:flutter/material.dart';
 import '../models/job.dart';
 
-@RoutePage()
 class EmployerJobDetailsScreen extends StatelessWidget {
   final Job job;
 
@@ -130,10 +128,12 @@ class EmployerJobDetailsScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
-                        context.router.push(CalendarRoute(
-                          isEmployee: false,
-                          jobId: job.id,
-                          applicantId: application.id,
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => CalendarScreen(
+                            isEmployee: false,
+                            jobId: job.id,
+                            applicantId: application.id,
+                          ),
                         ));
                       },
                       child: const Text('Schedule Interview'),

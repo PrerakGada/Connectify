@@ -1,8 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import '../models/job.dart';
 
-@RoutePage()
 class EmployeeJobDetailsScreen extends StatefulWidget {
   final Job job;
 
@@ -91,7 +89,7 @@ class _EmployeeJobDetailsScreenState extends State<EmployeeJobDetailsScreen> {
                       content: Text('Application submitted successfully!'),
                     ),
                   );
-                  context.router.pop();
+                  Navigator.of(context).pop();
                 },
                 child: const Text('Submit Application'),
               ),

@@ -1,8 +1,7 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:connectify/features/auth/screens/employee_info_screen.dart';
+import 'package:connectify/features/auth/screens/employer_info_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:connectify/core/router/app_router.dart';
 
-@RoutePage()
 class RoleSelectionScreen extends StatelessWidget {
   const RoleSelectionScreen({super.key});
 
@@ -24,7 +23,9 @@ class RoleSelectionScreen extends StatelessWidget {
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
-                context.router.push(const EmployeeInfoRoute());
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const EmployeeInfoScreen(),
+                ));
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 60),
@@ -34,7 +35,9 @@ class RoleSelectionScreen extends StatelessWidget {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                context.router.push(const EmployerInfoRoute());
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const EmployerInfoScreen(),
+                ));
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 60),

@@ -1,5 +1,6 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:connectify/core/router/app_router.dart';
+import 'package:connectify/features/jobs/screens/create_job_screen.dart';
+import 'package:connectify/features/jobs/screens/employee_job_details_screen.dart';
+import 'package:connectify/features/jobs/screens/employer_job_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../models/job.dart';
@@ -38,7 +39,11 @@ class _JobsScreenState extends State<JobsScreen> {
             title: job.role,
             snippet: job.pay,
             onTap: () {
-              context.router.push(EmployeeJobDetailsRoute(job: job));
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => EmployeeJobDetailsScreen(
+                  job: job,
+                ),
+              ));
             },
           ),
         ),
@@ -65,7 +70,9 @@ class _JobsScreenState extends State<JobsScreen> {
             IconButton(
               icon: const Icon(Icons.add),
               onPressed: () {
-                context.router.push(const CreateJobRoute());
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const CreateJobScreen(),
+                ));
               },
             ),
         ],
@@ -95,9 +102,17 @@ class _JobsScreenState extends State<JobsScreen> {
                         : Text('${job.applications.length} applications'),
                     onTap: () {
                       if (widget.isEmployee) {
-                        context.router.push(EmployeeJobDetailsRoute(job: job));
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => EmployeeJobDetailsScreen(
+                            job: job,
+                          ),
+                        ));
                       } else {
-                        context.router.push(EmployerJobDetailsRoute(job: job));
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => EmployerJobDetailsScreen(
+                            job: job,
+                          ),
+                        ));
                       }
                     },
                   ),

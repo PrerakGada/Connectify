@@ -1,12 +1,10 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:connectify/core/router/app_router.dart';
+import 'package:connectify/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../../../core/services/location_service.dart';
 
-@RoutePage()
 class EmployerInfoScreen extends StatefulWidget {
   const EmployerInfoScreen({super.key});
 
@@ -124,7 +122,9 @@ class _EmployerInfoScreenState extends State<EmployerInfoScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     // if (_formKey.currentState?.validate() ?? false) {
-                      context.router.push(HomeRoute(isEmployee: false));
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const HomeScreen(isEmployee: false),
+                    ));
                     // }
                   },
                   child: const Text('Save Profile'),
