@@ -114,6 +114,8 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
                         pay: _payController.text,
                         requiredSkills: _selectedSkills,
                         description: _descriptionController.text,
+                        latitude: 0.0,
+                        longitude: 0.0,
                       );
 
                       // TODO: Add job to list

@@ -5,7 +5,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../../../core/services/location_service.dart';
-import '../../home/screens/home_screen.dart';
 
 @RoutePage()
 class EmployerInfoScreen extends StatefulWidget {

@@ -7,6 +7,8 @@ class Job {
   final List<String> requiredSkills;
   final String description;
   final List<JobApplication> applications;
+  final double latitude;
+  final double longitude;
 
   Job({
     required this.id,
@@ -15,6 +17,8 @@ class Job {
     required this.requiredSkills,
     required this.description,
     this.applications = const [],
+    required this.latitude,
+    required this.longitude,
   });
 }
 
@@ -54,6 +58,8 @@ final List<Job> sampleJobs = [
         coverLetter: 'I am excited to apply for this position...',
       ),
     ],
+    latitude: 40.7128,
+    longitude: -74.0060,
   ),
   Job(
     id: '2',
@@ -64,5 +70,8 @@ final List<Job> sampleJobs = [
       JobConstants.technicalSkills[9],
     ],
     description: 'Join our frontend team to build amazing user experiences...',
+    applications: [],
+    longitude: -78.006,
+    latitude: 41.712,
   ),
 ];

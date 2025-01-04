@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'core/router/app_router.dart';
+import 'package:connectify/core/config/env_config.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EnvConfig.load();
   runApp(MyApp());
 }
 
