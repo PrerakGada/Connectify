@@ -1,8 +1,8 @@
 import 'package:connectify/features/auth/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:connectify/features/auth/cubits/auth_cubit.dart';
-import 'package:connectify/features/auth/models/user_model/user_model.dart';
+import 'package:connectify/features/auth/cubits/auth_cubit/auth_cubit.dart';
+import 'package:connectify/features/auth/models/auth_model/auth_model.dart';
 
 class ProfileScreen extends StatelessWidget {
   final bool isEmployee;
@@ -24,7 +24,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildProfileContent(BuildContext context, UserModel user) {
+  Widget _buildProfileContent(BuildContext context, AuthModel user) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),

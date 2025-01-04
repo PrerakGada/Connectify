@@ -1,4 +1,4 @@
-import 'package:connectify/features/auth/models/user_model/user_model.dart';
+import 'package:connectify/features/auth/models/auth_model/auth_model.dart';
 
 abstract class AuthState {}
 
@@ -7,7 +7,7 @@ class AuthInitial extends AuthState {}
 class AuthLoading extends AuthState {}
 
 class AuthAuthenticated extends AuthState {
-  final UserModel user;
+  final AuthModel user;
 
   AuthAuthenticated(this.user);
 }

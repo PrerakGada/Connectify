@@ -1,18 +1,20 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:connectify/features/auth/models/user_model/user_model.dart';
+import 'package:connectify/features/auth/models/auth_model/auth_model.dart';
+import 'package:connectify/features/auth/models/user_details_model/user_details_model.dart';
 import 'package:connectify/features/auth/repositories/auth_repository.dart';
+import 'package:connectify/core/services/api_service.dart';
+import 'dart:convert';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final String baseUrl = 'http://localhost:5000/api/auth';
-  final http.Client _client;
+  final ApiService _apiService;
 
-  AuthRepositoryImpl(this._client);
+  AuthRepositoryImpl(this._apiService);
 
   @override
   Future<UserModel> login(String email, String password) async {
-    final response = await _client.post(
-      Uri.parse('$baseUrl/login'),
+    final response = await _apiService.request(
+      endpoint: '/auth/login',
+      method: 'POST',
       body: {
         'email': email,
         'password': password,
@@ -21,16 +23,19 @@ class AuthRepositoryImpl implements AuthRepository {
 
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
-      return UserModel.fromJson(json['user']);
+      final user = AuthModel.fromJson(json['user']);
+      final userDetails = UserDetailsModel.fromJson(json['userDetails']);
+      return UserModel(auth: user, userDetails: userDetails);
     } else {
       throw Exception('Failed to login');
     }
   }
 
   @override
-  Future<UserModel> signup(String name, String email, String password) async {
-    final response = await _client.post(
-      Uri.parse('$baseUrl/signup'),
+  Future<AuthModel> signup(String name, String email, String password) async {
+    final response = await _apiService.request(
+      endpoint: '/auth/signup',
+      method: 'POST',
       body: {
         'name': name,
         'email': email,
@@ -40,9 +45,10 @@ class AuthRepositoryImpl implements AuthRepository {
 
     if (response.statusCode == 201) {
       final json = jsonDecode(response.body);
-      return UserModel.fromJson(json['user']);
+      final user = AuthModel.fromJson(json['user']);
+      return user;
     } else {
-      throw Exception('Failed to signup');
+      throw Exception(response.body);
     }
   }
 }

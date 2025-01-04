@@ -2,7 +2,7 @@ import 'package:connectify/features/auth/screens/login_screen.dart';
 import 'package:connectify/features/auth/screens/role_selection_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../cubits/auth_cubit.dart';
+import '../cubits/auth_cubit/auth_cubit.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});

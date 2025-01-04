@@ -1,30 +1,63 @@
-import 'package:connectify/features/auth/cubits/auth_cubit.dart';
-import 'package:connectify/features/auth/screens/login_screen.dart';
-import 'package:connectify/features/auth/screens/role_selection_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:connectify/features/auth/cubits/auth_cubit/auth_cubit.dart';
+import 'package:connectify/features/auth/cubits/user_details_cubit/user_details_cubit.dart';
+import 'package:connectify/features/auth/screens/role_selection_screen.dart';
+import 'package:connectify/features/auth/screens/signup_screen.dart';
+import 'package:connectify/features/home/screens/home_screen.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocListener<AuthCubit, AuthState>(
-      listener: (context, state) {
-        if (state is AuthAuthenticated) {
-          Navigator.of(context).push(MaterialPageRoute(
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _checkAuthAndNavigate();
+  }
+
+  void _checkAuthAndNavigate() {
+    Future.delayed(Duration.zero, () {
+      if (!mounted) return;
+
+      final authCubit = context.read<AuthCubit>();
+      final userDetailsCubit = context.read<UserDetailsCubit>();
+
+      if (authCubit.state is AuthUnauthenticated) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const SignupScreen(),
+          ),
+        );
+      } else if (userDetailsCubit.state is UserDetailsNotLoaded) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
             builder: (context) => const RoleSelectionScreen(),
-          ));
-        } else if (state is AuthUnauthenticated) {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const LoginScreen(),
-          ));
-        }
-      },
-      child: const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
+          ),
+        );
+      } else if (authCubit.state is AuthAuthenticated &&
+          userDetailsCubit.state is UserDetailsLoaded) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => HomeScreen(
+                isEmployee: (userDetailsCubit.state as UserDetailsLoaded)
+                    .userDetails
+                    .isEmployee),
+          ),
+        );
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
       ),
     );
   }

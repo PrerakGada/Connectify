@@ -1,11 +1,12 @@
 import express, { Request, Response, Router } from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/User";
+import { UserDetails } from "../models/UserDetails";
 
 const router: Router = express.Router();
 
 interface SignupRequestBody {
-  username: string;
+  name: string;
   email: string;
   password: string;
 }
@@ -20,7 +21,7 @@ router.post(
   "/signup",
   async (req: Request<{}, {}, SignupRequestBody>, res: Response) => {
     try {
-      const { username, email, password } = req.body;
+      const { name: username, email, password } = req.body;
 
       // Check if user already exists
       const existingUser = await User.findOne({ $or: [{ email }] });
@@ -77,6 +78,9 @@ router.post(
         return res.status(401).json({ message: "Invalid credentials" });
       }
 
+      // Get user details
+      const userDetails = await UserDetails.findOne({ userId: user._id });
+
       // Generate JWT
       const token = jwt.sign(
         { userId: user._id, username: user.username, email: user.email },
@@ -91,6 +95,7 @@ router.post(
           email: user.email,
           token,
         },
+        userDetails: userDetails || null
       });
     } catch (error) {
       res

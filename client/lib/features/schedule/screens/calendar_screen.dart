@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:connectify/features/jobs/models/interview.dart';
+import 'package:connectify/features/schedule/models/interview.dart';
 import 'package:connectify/features/jobs/models/job.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
