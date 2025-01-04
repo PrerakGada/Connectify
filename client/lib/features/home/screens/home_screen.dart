@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:connectify/core/router/app_router.dart';
 import 'package:flutter/material.dart';
 import '../../jobs/screens/jobs_screen.dart';
 import '../../schedule/screens/calendar_screen.dart';
+import '../../bluetooth/screens/bluetooth_screen.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -29,15 +29,15 @@ class _HomeScreenState extends State<HomeScreen> {
     _employeeTabs = [
       JobsScreen(isEmployee: true),
       CalendarScreen(isEmployee: true),
-      const Center(child: Text('Bluetooth - Employee View')),
-      const Center(child: Text('Profile - Employee View')),
+      BluetoothScreen(isEmployee: true),
+      // const Center(child: Text('Profile - Employee View')),
     ];
 
     _employerTabs = [
       JobsScreen(isEmployee: false),
       CalendarScreen(isEmployee: false),
-      const Center(child: Text('Bluetooth - Employer View')),
-      const Center(child: Text('Profile - Employer View')),
+      BluetoothScreen(isEmployee: false),
+      // const Center(child: Text('Profile - Employer View')),
     ];
   }
 
@@ -69,10 +69,10 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.bluetooth),
             label: 'Bluetooth',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.person),
+          //   label: 'Profile',
+          // ),
         ],
       ),
     );

@@ -1,5 +1,3 @@
-import 'job.dart';
-
 class InterviewSlot {
   final String id;
   final DateTime dateTime;
