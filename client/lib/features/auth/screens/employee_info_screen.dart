@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:connectify/core/router/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
@@ -6,6 +7,7 @@ import 'dart:io';
 import '../models/experience.dart';
 import '../models/education.dart';
 import '../../../core/services/location_service.dart';
+// import '../../home/screens/home_screen.dart';
 
 @RoutePage()
 class EmployeeInfoScreen extends StatefulWidget {
@@ -364,9 +366,9 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      // TODO: Save profile data
-                    }
+                    // if (_formKey.currentState?.validate() ?? false) {
+                    context.router.push(HomeRoute(isEmployee: true));
+                    // }
                   },
                   child: const Text('Save Profile'),
                 ),
