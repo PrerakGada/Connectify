@@ -2,6 +2,8 @@ import 'package:connectify/features/auth/cubits/auth_cubit/auth_cubit.dart';
 import 'package:connectify/features/auth/cubits/user_details_cubit/user_details_cubit.dart';
 import 'package:connectify/features/auth/repositories/auth_repository_impl.dart';
 import 'package:connectify/features/auth/repositories/user_details_repository_impl.dart';
+import 'package:connectify/features/bluetooth/cubits/nearby_jobs_cubit/nearby_jobs_cubit.dart';
+import 'package:connectify/features/bluetooth/repositories/nearby_jobs_repository_impl.dart';
 import 'package:connectify/features/home/screens/splash_screen.dart';
 import 'package:connectify/features/jobs/cubits/job_cubit/job_cubit.dart';
 import 'package:connectify/features/jobs/repositories/job_repository_impl.dart';
@@ -55,6 +57,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => VideoCallCubit(
             VideoCallRepositoryImpl(apiService),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => NearbyJobsCubit(
+            NearbyJobsRepositoryImpl(apiService),
           ),
         ),
       ],

@@ -1,5 +1,5 @@
 import express from 'express';
-import { getEmployerJobs, createJob, getJobsByDistance } from '../controllers/jobController';
+import { getEmployerJobs, createJob, getJobsByDistance, getNearbyJobs } from '../controllers/jobController';
 import { authMiddleware } from '../middleware/auth';
 import { roleMiddleware } from '../middleware/role';
 
@@ -12,5 +12,7 @@ router.post('/', roleMiddleware('employer'), createJob);
 router.get('/employer', roleMiddleware('employer'), getEmployerJobs);
 
 router.get('/distance', roleMiddleware('employee'), getJobsByDistance);
+
+router.get('/nearby/:employerId', roleMiddleware('employee'), getNearbyJobs);
 
 export default router; 

@@ -96,4 +96,45 @@ export const getJobsByDistance = async (req: RoleRequest, res: Response) => {
   } catch (error) {
     res.status(500).json({ message: 'Error fetching jobs by distance', error });
   }
+};
+
+export const getNearbyJobs = async (req: RoleRequest, res: Response) => {
+  try {
+    const { employerId } = req.params;
+    
+    if (!employerId) {
+      return res.status(400).json({ message: 'Employer ID is required' });
+    }
+
+    const userDetails = await UserDetails.findOne({ userId: req.user?.userId });
+    
+    if (!userDetails) {
+      return res.status(404).json({ message: 'User details not found' });
+    }
+
+    const jobs = await Job.find({ employerId }) as IJob[];
+    
+    const userApplications = await JobApplication.find({ employeeId: req.user?.userId });
+    const appliedJobIds = userApplications.map(app => app.jobId.toString());
+
+    const jobsWithDistance = jobs
+      .filter(job => !appliedJobIds.includes(job.toObject()._id.toString()))
+      .map(job => {
+        const distance = calculateDistance(
+          userDetails.latitude,
+          userDetails.longitude,
+          job.latitude,
+          job.longitude
+        );
+        return {
+          ...job.toObject(),
+          distance
+        };
+      })
+      .sort((a, b) => a.distance - b.distance);
+
+    return res.json({ jobs: jobsWithDistance });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching nearby jobs', error });
+  }
 }; 
