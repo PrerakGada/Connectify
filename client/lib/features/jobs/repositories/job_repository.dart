@@ -12,4 +12,9 @@ abstract class JobRepository {
     required double longitude,
   });
   Future<List<Job>> getJobsByDistance(String userId);
+  Future<void> applyToJob({
+    required String jobId,
+    required String employeeId,
+    required String coverLetter,
+  });
 }

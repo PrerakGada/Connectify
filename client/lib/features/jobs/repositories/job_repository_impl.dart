@@ -12,7 +12,7 @@ class JobRepositoryImpl implements JobRepository {
   @override
   Future<List<Job>> getEmployerJobs(String employerId) async {
     final response = await _apiService.request(
-      endpoint: '/jobs/employer/$employerId',
+      endpoint: '/jobs/employer',
       method: 'GET',
     );
     final json = jsonDecode(response.body);
@@ -55,13 +55,32 @@ class JobRepositoryImpl implements JobRepository {
   @override
   Future<List<Job>> getJobsByDistance(String userId) async {
     final response = await _apiService.request(
-      endpoint: '/jobs/distance/$userId',
+      endpoint: '/jobs/distance',
       method: 'GET',
     );
-    print(response.body);
     final json = jsonDecode(response.body);
     return (json['jobs'] as List)
         .map((jobJson) => Job.fromJson(jobJson))
         .toList();
+  }
+
+  @override
+  Future<void> applyToJob({
+    required String jobId,
+    required String employeeId,
+    required String coverLetter,
+  }) async {
+    final response = await _apiService.request(
+      endpoint: '/job-applications',
+      method: 'POST',
+      body: {
+        'jobId': jobId,
+        'employeeId': employeeId,
+        'coverLetter': coverLetter,
+      },
+    );
+    if (response.statusCode != 201) {
+      throw Exception(response.body);
+    }
   }
 }

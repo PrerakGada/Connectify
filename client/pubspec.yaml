@@ -45,10 +45,9 @@ dependencies:
   geolocator: ^13.0.4
   image_picker: ^1.1.2
   geocoding: ^3.0.0
-  table_calendar: ^3.2.0
-  syncfusion_flutter_calendar: ^29.1.38
   google_maps_flutter: ^2.12.1
   json_annotation: ^4.9.0
+  syncfusion_flutter_calendar: ^29.1.38
 
 dev_dependencies:
   flutter_test:

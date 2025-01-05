@@ -57,4 +57,28 @@ class JobCubit extends Cubit<JobState> {
       emit(JobError(e.toString()));
     }
   }
+
+  Future<void> applyToJob({
+    required String jobId,
+    required String employeeId,
+    required String coverLetter,
+  }) async {
+    try {
+      await _repository.applyToJob(
+        jobId: jobId,
+        employeeId: employeeId,
+        coverLetter: coverLetter,
+      );
+
+      // Remove the job from the list if it exists
+      if (state is JobLoaded) {
+        final currentJobs = (state as JobLoaded).jobs;
+        final updatedJobs =
+            currentJobs.where((job) => job.id != jobId).toList();
+        emit(JobLoaded(updatedJobs));
+      }
+    } catch (e) {
+      emit(JobError(e.toString()));
+    }
+  }
 }

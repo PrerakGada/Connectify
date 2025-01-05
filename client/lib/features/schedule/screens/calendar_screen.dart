@@ -1,7 +1,9 @@
+import 'package:connectify/features/auth/cubits/auth_cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:connectify/features/schedule/models/interview.dart';
-import 'package:connectify/features/jobs/models/job_model/job_model.dart';
+import 'package:connectify/features/schedule/models/interview_model.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:connectify/features/schedule/cubits/interview_cubit/interview_cubit.dart';
 
 class CalendarScreen extends StatefulWidget {
   final bool isEmployee;
@@ -9,8 +11,8 @@ class CalendarScreen extends StatefulWidget {
   final String? applicantId;
 
   const CalendarScreen({
-    super.key,
     required this.isEmployee,
+    super.key,
     this.jobId,
     this.applicantId,
   });
@@ -20,50 +22,53 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
-  late CalendarController _calendarController;
-  bool get canSchedule => widget.jobId != null && widget.applicantId != null;
+  CalendarController? _calendarController;
+  bool get canSchedule =>
+      widget.jobId != null && widget.applicantId != null && !widget.isEmployee;
   DateTime? _selectedStartTime;
   DateTime? _selectedEndTime;
+  List<InterviewModel> _interviews = [];
 
   @override
   void initState() {
     super.initState();
     _calendarController = CalendarController();
+    _loadInterviews();
+  }
+
+  Future<void> _loadInterviews() async {
+    await context.read<InterviewCubit>().getAllInterviews();
   }
 
   @override
   void dispose() {
-    _calendarController.dispose();
+    if (_calendarController != null) {
+      _calendarController!.dispose();
+    }
     super.dispose();
   }
 
-  List<Appointment> _getAppointments() {
+  List<Appointment> _getAppointments(List<InterviewModel> interviews) {
     List<Appointment> appointments = [];
-    for (var slot in sampleInterviewSlots) {
-      // Assign different colors based on status or type
-      Color appointmentColor = Colors.blue;
-      if (slot.status == 'booked') {
-        appointmentColor = Colors.green;
-      } else if (slot.status == 'pending') {
-        appointmentColor = Colors.orange;
-      } else if (slot.status == 'cancelled') {
-        appointmentColor = Colors.red;
-      }
-
+    for (var interview in interviews) {
+      print("interview.startTime");
+      print(interview.startTime);
+      print("interview.endTime");
+      print(interview.endTime);
       appointments.add(
         Appointment(
-          startTime: slot.dateTime,
-          endTime: slot.dateTime.add(const Duration(hours: 1)),
-          subject: slot.applicantId ?? 'Interview',
-          color: appointmentColor,
-          notes: slot.status, // Store status in notes for reference
+          startTime: interview.startTime,
+          endTime: interview.endTime,
+          subject: interview.otherPartyName,
+          color: Colors.blue,
+          notes: 'Interview',
         ),
       );
     }
     return appointments;
   }
 
-  Future<void> _showScheduleDialog() async {
+  Future<void> _showScheduleDialog(String currentUserId) async {
     if (_selectedStartTime == null) return;
 
     DateTime startDate = _selectedStartTime!;
@@ -152,7 +157,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         _selectedStartTime = result['startTime'];
         _selectedEndTime = result['endTime'];
       });
-      _scheduleInterview(result['startTime'], result['endTime']);
+      _scheduleInterview(currentUserId, result['startTime'], result['endTime']);
     }
   }
 
@@ -162,123 +167,147 @@ class _CalendarScreenState extends State<CalendarScreen> {
       appBar: AppBar(
         title: const Text('Calendar'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SfCalendar(
-              controller: _calendarController,
-              view: CalendarView.day,
-              showDatePickerButton: true,
-              headerHeight: 50,
-              viewHeaderHeight: 60,
-              allowViewNavigation: true,
-              allowAppointmentResize: false,
-              allowDragAndDrop: false,
-              appointmentBuilder: (context, details) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: details.appointments.first.color,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Text(
-                            details.appointments.first.subject,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
+      body: BlocBuilder<InterviewCubit, InterviewState>(
+        builder: (context, state) {
+          if (state is InterviewLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (state is InterviewError) {
+            return Center(child: Text('Error: ${state.message}'));
+          }
+
+          if (state is InterviewLoaded) {
+            _interviews = state.interviews;
+          }
+
+          return Column(
+            children: [
+              Expanded(
+                child: SfCalendar(
+                  controller: _calendarController,
+                  view: CalendarView.day,
+                  showDatePickerButton: true,
+                  headerHeight: 50,
+                  viewHeaderHeight: 60,
+                  allowViewNavigation: true,
+                  allowAppointmentResize: false,
+                  allowDragAndDrop: false,
+                  initialDisplayDate: DateTime.now(),
+                  initialSelectedDate: DateTime.now(),
+                  appointmentBuilder: (context, details) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: details.appointments.first.color,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Text(
+                                details.appointments.first.subject,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.video_call,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Joining call...'),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.video_call,
+                              color: Colors.white,
+                              size: 20,
                             ),
-                          );
-                        },
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Joining call...'),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                    ],
+                    );
+                  },
+                  // onSelectionChanged: (CalendarSelectionDetails details) {
+                  //   if (details.date != null) {
+                  //     setState(() {
+                  //       _selectedStartTime = details.date;
+                  //       _selectedEndTime =
+                  //           details.date!.add(const Duration(hours: 1));
+                  //     });
+                  //   }
+                  // },
+                  timeSlotViewSettings: const TimeSlotViewSettings(
+                    timeInterval: Duration(minutes: 60),
+                    timeFormat: 'h:mm a',
+                    startHour: 8,
+                    endHour: 20,
+                    timeIntervalHeight: 60,
+                    timeTextStyle: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12,
+                      color: Colors.black87,
+                    ),
                   ),
-                );
-              },
-              onSelectionChanged: (CalendarSelectionDetails details) {
-                if (details.date != null) {
-                  setState(() {
-                    _selectedStartTime = details.date;
-                    _selectedEndTime =
-                        details.date!.add(const Duration(hours: 1));
-                  });
-                }
-              },
-              timeSlotViewSettings: const TimeSlotViewSettings(
-                timeInterval: Duration(minutes: 60),
-                timeFormat: 'h:mm a',
-                startHour: 8,
-                endHour: 20,
-                timeIntervalHeight: 60,
-                timeTextStyle: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 12,
-                  color: Colors.black87,
+                  dataSource:
+                      _AppointmentDataSource(_getAppointments(_interviews)),
+                  onTap: (CalendarTapDetails details) {
+                    if (details.targetElement == CalendarElement.calendarCell) {
+                      if (details.date != null) {
+                        setState(() {
+                          _selectedStartTime = details.date;
+                          _selectedEndTime =
+                              details.date!.add(const Duration(hours: 1));
+                        });
+                      }
+                    }
+                  },
                 ),
               ),
-              dataSource: _AppointmentDataSource(_getAppointments()),
-              onTap: (CalendarTapDetails details) {
-                if (details.targetElement == CalendarElement.calendarCell) {
-                  if (details.date != null) {
-                    setState(() {
-                      _selectedStartTime = details.date;
-                      _selectedEndTime =
-                          details.date!.add(const Duration(hours: 1));
-                    });
-                  }
-                }
-              },
-            ),
-          ),
-          if (_selectedStartTime != null && _selectedEndTime != null)
-            Container(
-              margin: const EdgeInsets.all(16),
-              child: ElevatedButton(
-                onPressed: canSchedule ? _showScheduleDialog : null,
-                child: const Text('Schedule'),
-              ),
-            ),
-        ],
+              if (canSchedule &&
+                  _selectedStartTime != null &&
+                  _selectedEndTime != null)
+                Container(
+                  margin: const EdgeInsets.all(16),
+                  child: ElevatedButton(
+                    onPressed: canSchedule
+                        ? () {
+                            final authCubit = context.read<AuthCubit>();
+                            final currentUserId =
+                                (authCubit.state as AuthAuthenticated).user.id;
+                            _showScheduleDialog(currentUserId);
+                          }
+                        : null,
+                    child: const Text('Schedule'),
+                  ),
+                ),
+            ],
+          );
+        },
       ),
     );
   }
 
-  void _scheduleInterview(DateTime startTime, DateTime endTime) {
+  void _scheduleInterview(
+      String currentUserId, DateTime startTime, DateTime endTime) {
     if (!canSchedule) return;
 
-    // Find the job and application
-    final job = [].firstWhere((j) => j.id == widget.jobId);
-    final application =
-        job.applications.firstWhere((a) => a.id == widget.applicantId);
+    final istStartTime =
+        startTime.toUtc().add(const Duration(hours: 5, minutes: 30));
+    final istEndTime =
+        endTime.toUtc().add(const Duration(hours: 5, minutes: 30));
 
-    // Create new interview slot
-    final newSlot = InterviewSlot(
-      id: DateTime.now().toString(),
-      dateTime: startTime,
-      interviewerId: 'employer1', // TODO: Get from auth
-      applicantId: application.id,
-      jobId: job.id,
-      status: 'booked',
-    );
-
-    // TODO: Add to list/database
+    context.read<InterviewCubit>().scheduleInterview(
+          employeeId: widget.applicantId!,
+          employerId: currentUserId,
+          startTime: istStartTime,
+          endTime: istEndTime,
+        );
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

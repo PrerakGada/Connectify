@@ -5,6 +5,8 @@ import 'package:connectify/features/auth/repositories/user_details_repository_im
 import 'package:connectify/features/home/screens/splash_screen.dart';
 import 'package:connectify/features/jobs/cubits/job_cubit/job_cubit.dart';
 import 'package:connectify/features/jobs/repositories/job_repository_impl.dart';
+import 'package:connectify/features/schedule/cubits/interview_cubit/interview_cubit.dart';
+import 'package:connectify/features/schedule/repositories/interview_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
@@ -41,6 +43,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => JobCubit(
             JobRepositoryImpl(apiService),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => InterviewCubit(
+            InterviewRepositoryImpl(apiService),
           ),
         ),
       ],

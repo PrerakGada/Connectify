@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../models/job_model/job_model.dart';
+import '../../cubits/job_cubit/job_cubit.dart';
+import '../../../auth/cubits/auth_cubit/auth_cubit.dart';
 
 class EmployeeJobDetailsScreen extends StatefulWidget {
   final Job job;
@@ -83,7 +86,13 @@ class _EmployeeJobDetailsScreenState extends State<EmployeeJobDetailsScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // TODO: Implement job application submission
+                  final auth =
+                      (context.read<AuthCubit>().state) as AuthAuthenticated;
+                  context.read<JobCubit>().applyToJob(
+                        jobId: widget.job.id,
+                        employeeId: auth.user.id,
+                        coverLetter: _coverLetterController.text,
+                      );
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Application submitted successfully!'),

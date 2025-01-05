@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes';
 import userDetailsRoutes from './routes/userDetailsRoutes';
 import jobRoutes from './routes/jobRoutes';
+import jobApplicationRoutes from './routes/jobApplicationRoutes';
+import interviewRoutes from './routes/interviewRoutes';
 
 dotenv.config();
 
@@ -18,6 +20,8 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/user-details', userDetailsRoutes);
 app.use('/api/jobs', jobRoutes);
+app.use('/api/job-applications', jobApplicationRoutes);
+app.use('/api/interviews', interviewRoutes);
 
 // MongoDB Connection
 const MONGODB_URI: string = process.env.MONGODB_URI || "";

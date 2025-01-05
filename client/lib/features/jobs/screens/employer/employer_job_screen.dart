@@ -54,7 +54,7 @@ class _EmployerJobScreenState extends State<EmployerJobScreen> {
                   child: ListTile(
                     title: Text(job.role),
                     subtitle: Text(job.pay),
-                    trailing: Text('0 applications'),
+                    trailing: Text('${job.applications.length} applications'),
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => EmployerJobDetailsScreen(

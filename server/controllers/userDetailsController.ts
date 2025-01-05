@@ -4,7 +4,7 @@ import { AuthRequest } from '../middleware/auth';
 
 export const updateUserDetails = async (req: AuthRequest, res: Response) => {
   try {
-    const userId = req.user!._id;
+    const userId = req.user!.userId;
     const userDetails = await UserDetails.findOne({ userId });
 
     if (!userDetails) {
@@ -32,7 +32,7 @@ export const updateUserDetails = async (req: AuthRequest, res: Response) => {
 
 export const getUserDetails = async (req: AuthRequest, res: Response) => {
   try {
-    const userId = req.user!._id;
+    const userId = req.user!.userId;
     const userDetails = await UserDetails.findOne({ userId });
     if (!userDetails) {
       return res.status(404).json({ message: 'User details not found' });

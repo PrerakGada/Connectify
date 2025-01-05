@@ -1,3 +1,4 @@
+import 'package:connectify/features/auth/models/user_details_model/user_details_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'job_model.g.dart';
@@ -13,6 +14,7 @@ class Job with EquatableMixin {
   final String employerId;
   final double latitude;
   final double longitude;
+  final List<JobApplication> applications;
 
   Job({
     required this.id,
@@ -23,6 +25,7 @@ class Job with EquatableMixin {
     required this.employerId,
     required this.latitude,
     required this.longitude,
+    this.applications = const [],
   });
 
   factory Job.fromJson(Map<String, dynamic> json) => _$JobFromJson(json);
@@ -37,35 +40,83 @@ class Job with EquatableMixin {
         description,
         employerId,
         latitude,
-        longitude
+        longitude,
+        applications,
       ];
 }
 
-class JobApplication {
+@JsonSerializable()
+class JobApplication with EquatableMixin {
+  @JsonKey(name: '_id')
   final String id;
-  final String applicantId;
-  final String applicantName;
-  final String applicantEmail;
+  final String jobId;
+  final String employeeId;
   final String coverLetter;
-  final String status; // 'pending', 'interviewed', 'rejected', 'accepted'
+  final String status;
+  final ApplicantDetails? applicantDetails;
 
   JobApplication({
     required this.id,
-    required this.applicantId,
-    required this.applicantName,
-    required this.applicantEmail,
+    required this.jobId,
+    required this.employeeId,
     required this.coverLetter,
     this.status = 'pending',
+    this.applicantDetails,
   });
 
-  factory JobApplication.fromJson(Map<String, dynamic> json) {
-    return JobApplication(
-      id: json['_id'],
-      applicantId: json['applicantId'],
-      applicantName: json['applicantName'],
-      applicantEmail: json['applicantEmail'],
-      coverLetter: json['coverLetter'],
-      status: json['status'],
-    );
-  }
+  factory JobApplication.fromJson(Map<String, dynamic> json) =>
+      _$JobApplicationFromJson(json);
+  Map<String, dynamic> toJson() => _$JobApplicationToJson(this);
+
+  @override
+  List<Object?> get props => [
+        id,
+        jobId,
+        employeeId,
+        coverLetter,
+        status,
+        applicantDetails,
+      ];
+}
+
+@JsonSerializable()
+class ApplicantDetails with EquatableMixin {
+  final String email;
+  final String address;
+  final String? contactNumber;
+  final List<ExperienceModel>? experiences;
+  final List<EducationModel>? education;
+  final List<String>? skills;
+  final String? extraCurriculars;
+  final String? achievements;
+  final String? portfolioLinks;
+
+  ApplicantDetails({
+    required this.email,
+    required this.address,
+    this.contactNumber,
+    this.experiences,
+    this.education,
+    this.skills,
+    this.extraCurriculars,
+    this.achievements,
+    this.portfolioLinks,
+  });
+
+  factory ApplicantDetails.fromJson(Map<String, dynamic> json) =>
+      _$ApplicantDetailsFromJson(json);
+  Map<String, dynamic> toJson() => _$ApplicantDetailsToJson(this);
+
+  @override
+  List<Object?> get props => [
+        email,
+        address,
+        contactNumber,
+        experiences,
+        education,
+        skills,
+        extraCurriculars,
+        achievements,
+        portfolioLinks,
+      ];
 }
