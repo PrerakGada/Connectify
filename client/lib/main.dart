@@ -7,6 +7,8 @@ import 'package:connectify/features/jobs/cubits/job_cubit/job_cubit.dart';
 import 'package:connectify/features/jobs/repositories/job_repository_impl.dart';
 import 'package:connectify/features/schedule/cubits/interview_cubit/interview_cubit.dart';
 import 'package:connectify/features/schedule/repositories/interview_repository_impl.dart';
+import 'package:connectify/features/video_call/cubits/video_call_cubit/video_call_cubit.dart';
+import 'package:connectify/features/video_call/repositories/video_call_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
@@ -48,6 +50,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => InterviewCubit(
             InterviewRepositoryImpl(apiService),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => VideoCallCubit(
+            VideoCallRepositoryImpl(apiService),
           ),
         ),
       ],

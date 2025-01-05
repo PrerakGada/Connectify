@@ -36,7 +36,6 @@ class UserDetailsRepositoryImpl implements UserDetailsRepository {
       final json = jsonDecode(response.body);
       return UserDetailsModel.fromJson(json);
     } else {
-      print(response.body);
       throw Exception(response.body);
     }
   }

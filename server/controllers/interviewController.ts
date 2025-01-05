@@ -68,13 +68,10 @@ export const returnAllInterviews = async (req: RoleRequest, res: Response) => {
         interview.employeeId.toString()
       );
     }
-    console.log(otherPartyIds);
     const otherPartyUsers = await User.find({ _id: { $in: otherPartyIds } });
-    console.log(otherPartyUsers);
     const userMap = new Map(
       otherPartyUsers.map((user) => [user.id.toString(), user.username])
     );
-    console.log(userMap);
 
     const transformedInterviews = interviews.map((interview) => {
       const otherPartyId = user.isEmployee
@@ -87,7 +84,6 @@ export const returnAllInterviews = async (req: RoleRequest, res: Response) => {
         otherPartyName,
       };
     });
-    console.log(transformedInterviews);
     res.status(200).json(transformedInterviews);
   } catch (error) {
     res.status(500).json({ message: "Error fetching interviews", error });

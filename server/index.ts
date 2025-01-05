@@ -7,6 +7,7 @@ import userDetailsRoutes from './routes/userDetailsRoutes';
 import jobRoutes from './routes/jobRoutes';
 import jobApplicationRoutes from './routes/jobApplicationRoutes';
 import interviewRoutes from './routes/interviewRoutes';
+import videoCallRoutes from './routes/videoCallRoutes';
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use('/api/user-details', userDetailsRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/job-applications', jobApplicationRoutes);
 app.use('/api/interviews', interviewRoutes);
+app.use('/api/video-call', videoCallRoutes);
 
 // MongoDB Connection
 const MONGODB_URI: string = process.env.MONGODB_URI || "";

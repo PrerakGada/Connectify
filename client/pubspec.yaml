@@ -48,6 +48,8 @@ dependencies:
   google_maps_flutter: ^2.12.1
   json_annotation: ^4.9.0
   syncfusion_flutter_calendar: ^29.1.38
+  agora_rtc_engine: ^6.3.0
+  permission_handler: ^11.3.0
 
 dev_dependencies:
   flutter_test:

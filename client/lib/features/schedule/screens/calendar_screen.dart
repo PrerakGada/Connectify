@@ -4,6 +4,9 @@ import 'package:connectify/features/schedule/models/interview_model.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:connectify/features/schedule/cubits/interview_cubit/interview_cubit.dart';
+import 'package:connectify/features/video_call/screens/video_call_screen.dart';
+import 'package:connectify/features/video_call/cubits/video_call_cubit/video_call_cubit.dart';
+import 'dart:async';
 
 class CalendarScreen extends StatefulWidget {
   final bool isEmployee;
@@ -28,6 +31,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   DateTime? _selectedStartTime;
   DateTime? _selectedEndTime;
   List<InterviewModel> _interviews = [];
+  StreamSubscription? _videoCallSubscription;
 
   @override
   void initState() {
@@ -45,16 +49,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
     if (_calendarController != null) {
       _calendarController!.dispose();
     }
+    _videoCallSubscription?.cancel();
     super.dispose();
   }
 
   List<Appointment> _getAppointments(List<InterviewModel> interviews) {
     List<Appointment> appointments = [];
     for (var interview in interviews) {
-      print("interview.startTime");
-      print(interview.startTime);
-      print("interview.endTime");
-      print(interview.endTime);
       appointments.add(
         Appointment(
           startTime: interview.startTime,
@@ -161,6 +162,56 @@ class _CalendarScreenState extends State<CalendarScreen> {
     }
   }
 
+  void _handleVideoCall(InterviewModel interview) async {
+    final authCubit = context.read<AuthCubit>();
+    final authState = authCubit.state;
+    if (authState is! AuthAuthenticated) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please login to join the call'),
+        ),
+      );
+      return;
+    }
+
+    final videoCallCubit = context.read<VideoCallCubit>();
+    await videoCallCubit.generateToken(
+      channelName: interview.id,
+      uid: authState.user.id,
+      token: authState.user.token,
+    );
+
+    if (!mounted) return;
+
+    _videoCallSubscription = videoCallCubit.stream.listen((state) {
+      if (state is VideoCallTokenGenerated) {
+        if (!mounted) return;
+        debugPrint('Navigating to video call screen');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => VideoCallScreen(
+              channelName: interview.id,
+              token: state.token.token,
+              appId: state.token.appId,
+              isHost: widget.isEmployee,
+            ),
+          ),
+        ).then((_) {
+          _videoCallSubscription?.cancel();
+          _videoCallSubscription = null;
+        });
+      } else if (state is VideoCallError) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(state.message),
+          ),
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -221,12 +272,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
                               color: Colors.white,
                               size: 20,
                             ),
-                            onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Joining call...'),
-                                ),
+                            onPressed: () async {
+                              final interview = _interviews.firstWhere(
+                                (i) =>
+                                    i.startTime ==
+                                    details.appointments.first.startTime,
                               );
+                              _handleVideoCall(interview);
                             },
                           ),
                         ],
