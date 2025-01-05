@@ -1,4 +1,38 @@
-import mongoose from 'mongoose';
+import mongoose, { Document, Model, Schema } from 'mongoose';
+
+export interface IUserDetails extends Document {
+  userId: mongoose.Types.ObjectId;
+  isEmployee: boolean;
+  email: string;
+  latitude: number;
+  longitude: number;
+  address: string;
+  imageLink: string;
+  contactNumber?: string;
+  experiences?: {
+    role: string;
+    company: string;
+    duration: string;
+    location: string;
+    description: string;
+  }[];
+  education?: {
+    instituteName: string;
+    duration: string;
+    type: string;
+    courseName: string;
+  }[];
+  skills?: string[];
+  desiredRoles?: string[];
+  extraCurriculars?: string;
+  achievements?: string;
+  portfolioLinks?: string;
+  companyName?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface IUserDetailsModel extends Model<IUserDetails> {}
 
 const userDetailsSchema = new mongoose.Schema({
   userId: {
@@ -68,4 +102,7 @@ userDetailsSchema.pre('save', function(next) {
   next();
 });
 
-export const UserDetails = mongoose.model('UserDetails', userDetailsSchema); 
+export const UserDetails: IUserDetailsModel = mongoose.model<IUserDetails, IUserDetailsModel>(
+  "UserDetails",
+  userDetailsSchema
+);

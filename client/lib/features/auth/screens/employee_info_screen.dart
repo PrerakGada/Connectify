@@ -1,3 +1,4 @@
+import 'package:connectify/core/constants/job_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -65,54 +66,6 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
     'Other'
   ];
 
-  // Predefined lists
-  final List<String> _technicalSkills = [
-    'JavaScript',
-    'Python',
-    'Java',
-    'C++',
-    'Ruby',
-    'PHP',
-    'Swift',
-    'Kotlin',
-    'React',
-    'Angular',
-    'Vue.js',
-    'Node.js',
-    'Django',
-    'Flask',
-    'Spring',
-    'AWS',
-    'Azure',
-    'GCP',
-    'Docker',
-    'Kubernetes',
-    'SQL',
-    'NoSQL',
-    'Machine Learning',
-    'AI',
-    'Data Science',
-    'DevOps',
-    'UI/UX Design'
-  ];
-
-  final List<String> _possibleRoles = [
-    'Software Engineer',
-    'Frontend Developer',
-    'Backend Developer',
-    'Full Stack Developer',
-    'DevOps Engineer',
-    'Data Scientist',
-    'Machine Learning Engineer',
-    'Product Manager',
-    'UI/UX Designer',
-    'Mobile Developer',
-    'QA Engineer',
-    'System Administrator',
-    'Cloud Architect',
-    'Security Engineer',
-    'Technical Lead'
-  ];
 
   Future<void> _getCurrentLocation() async {
     final position = await LocationService.getCurrentLocation();
@@ -413,7 +366,7 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
                         TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 Wrap(
                   spacing: 8.0,
-                  children: _technicalSkills.map((skill) {
+                  children: JobConstants.technicalSkills.map((skill) {
                     return FilterChip(
                       label: Text(skill),
                       selected: _selectedSkills.contains(skill),
@@ -437,7 +390,7 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
                         TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 Wrap(
                   spacing: 8.0,
-                  children: _possibleRoles.map((role) {
+                  children: JobConstants.possibleRoles.map((role) {
                     return FilterChip(
                       label: Text(role),
                       selected: _selectedRoles.contains(role),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/job.dart';
+import '../../models/job_model/job_model.dart';
 
 class EmployeeJobDetailsScreen extends StatefulWidget {
   final Job job;

@@ -1,11 +1,8 @@
-import express from 'express';
+import { Response } from 'express';
 import { UserDetails } from '../models/UserDetails';
-import { authMiddleware, AuthRequest } from '../middleware/auth';
+import { AuthRequest } from '../middleware/auth';
 
-const router = express.Router();
-
-// Update user details
-router.put('/', authMiddleware, async (req: AuthRequest, res) => {
+export const updateUserDetails = async (req: AuthRequest, res: Response) => {
   try {
     const userId = req.user!._id;
     const userDetails = await UserDetails.findOne({ userId });
@@ -31,10 +28,9 @@ router.put('/', authMiddleware, async (req: AuthRequest, res) => {
       res.status(400).json({ message: 'An unknown error occurred' });
     }
   }
-});
+};
 
-// Get user details
-router.get('/', authMiddleware, async (req: AuthRequest, res) => {
+export const getUserDetails = async (req: AuthRequest, res: Response) => {
   try {
     const userId = req.user!._id;
     const userDetails = await UserDetails.findOne({ userId });
@@ -49,6 +45,4 @@ router.get('/', authMiddleware, async (req: AuthRequest, res) => {
       res.status(400).json({ message: 'An unknown error occurred' });
     }
   }
-});
-
-export default router; 
+}; 

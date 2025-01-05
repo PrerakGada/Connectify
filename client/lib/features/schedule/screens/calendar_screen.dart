@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:connectify/features/schedule/models/interview.dart';
-import 'package:connectify/features/jobs/models/job.dart';
+import 'package:connectify/features/jobs/models/job_model/job_model.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class CalendarScreen extends StatefulWidget {
@@ -264,7 +264,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     if (!canSchedule) return;
 
     // Find the job and application
-    final job = sampleJobs.firstWhere((j) => j.id == widget.jobId);
+    final job = [].firstWhere((j) => j.id == widget.jobId);
     final application =
         job.applications.firstWhere((a) => a.id == widget.applicantId);
 

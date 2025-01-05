@@ -1,6 +1,6 @@
 import 'package:connectify/features/schedule/screens/calendar_screen.dart';
 import 'package:flutter/material.dart';
-import '../models/job.dart';
+import '../../models/job_model/job_model.dart';
 
 class EmployerJobDetailsScreen extends StatelessWidget {
   final Job job;
@@ -56,21 +56,21 @@ class EmployerJobDetailsScreen extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            ...job.applications.map((application) {
-              return Card(
-                child: ListTile(
-                  title: Text(application.applicantName),
-                  subtitle: Text(application.applicantEmail),
-                  trailing: Chip(
-                    label: Text(application.status),
-                    backgroundColor: _getStatusColor(application.status),
-                  ),
-                  onTap: () {
-                    _showApplicationDetails(context, application);
-                  },
-                ),
-              );
-            }).toList(),
+            // ...job.applications.map((application) {
+            //   return Card(
+            //     child: ListTile(
+            //       title: Text(application.applicantName),
+            //       subtitle: Text(application.applicantEmail),
+            //       trailing: Chip(
+            //         label: Text(application.status),
+            //         backgroundColor: _getStatusColor(application.status),
+            //       ),
+            //       onTap: () {
+            //         _showApplicationDetails(context, application);
+            //       },
+            //     ),
+            //   );
+            // }).toList(),
           ],
         ),
       ),

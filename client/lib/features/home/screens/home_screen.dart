@@ -1,5 +1,6 @@
+import 'package:connectify/features/jobs/screens/employer/employer_job_screen.dart';
 import 'package:flutter/material.dart';
-import '../../jobs/screens/jobs_screen.dart';
+import '../../jobs/screens/employee/employee_job_screen.dart';
 import '../../schedule/screens/calendar_screen.dart';
 import '../../bluetooth/screens/bluetooth_screen.dart';
 import '../../profile/screens/profile_screen.dart';
@@ -26,14 +27,14 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _employeeTabs = [
-      JobsScreen(isEmployee: true),
+      EmployeeJobScreen(),
       CalendarScreen(isEmployee: true),
       BluetoothScreen(isEmployee: true),
       ProfileScreen(isEmployee: true),
     ];
 
     _employerTabs = [
-      JobsScreen(isEmployee: false),
+      EmployerJobScreen(),
       CalendarScreen(isEmployee: false),
       BluetoothScreen(isEmployee: false),
       ProfileScreen(isEmployee: false),

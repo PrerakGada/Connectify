@@ -1,6 +1,10 @@
+import 'package:connectify/features/auth/cubits/auth_cubit/auth_cubit.dart';
+import 'package:connectify/features/auth/cubits/user_details_cubit/user_details_cubit.dart';
 import 'package:flutter/material.dart';
-import '../../../core/constants/job_constants.dart';
-import '../models/job.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:connectify/core/constants/job_constants.dart';
+import 'package:connectify/features/jobs/models/job_model/job_model.dart';
+import 'package:connectify/features/jobs/cubits/job_cubit/job_cubit.dart';
 
 class CreateJobScreen extends StatefulWidget {
   const CreateJobScreen({super.key});
@@ -105,21 +109,23 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState?.validate() ?? false) {
-                      // Create new job
-                      final newJob = Job(
-                        id: DateTime.now().toString(),
-                        role: _selectedRole!,
-                        pay: _payController.text,
-                        requiredSkills: _selectedSkills,
-                        description: _descriptionController.text,
-                        latitude: 0.0,
-                        longitude: 0.0,
-                      );
+                      final userDetails = (context
+                          .read<UserDetailsCubit>()
+                          .state) as UserDetailsLoaded;
+                      final auth = (context.read<AuthCubit>().state)
+                          as AuthAuthenticated;
 
-                      // TODO: Add job to list
+                      context.read<JobCubit>().createJob(
+                            role: _selectedRole!,
+                            pay: _payController.text,
+                            requiredSkills: _selectedSkills,
+                            description: _descriptionController.text,
+                            employerId: auth.user.id,
+                            latitude: userDetails.userDetails.latitude,
+                            longitude: userDetails.userDetails.longitude,
+                          );
 
                       // Navigate back
-                      // context.router.pop();
                       Navigator.of(context).pop();
                     }
                   },
