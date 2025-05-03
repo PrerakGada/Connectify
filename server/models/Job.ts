@@ -53,15 +53,4 @@ const jobSchema = new mongoose.Schema(
   }
 );
 
-// Sanitize input before saving
-jobSchema.pre("save", function (next) {
-  const doc = this.toObject();
-  for (const [key, value] of Object.entries(doc)) {
-    if (typeof value === "string") {
-      this.set(key, value.trim());
-    }
-  }
-  next();
-});
-
 export const Job: IJobModel = mongoose.model<IJob, IJobModel>("Job", jobSchema);

@@ -50,18 +50,20 @@ class _LoginScreenState extends State<LoginScreen> {
         BlocListener<UserDetailsCubit, UserDetailsState>(
           listener: (context, state) {
             if (state is UserDetailsLoaded) {
-              Navigator.of(context).pushReplacement(
+              Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
                   builder: (context) => HomeScreen(
                     isEmployee: state.userDetails.isEmployee,
                   ),
                 ),
+                (route) => false,
               );
             } else if (state is UserDetailsNotLoaded) {
-              Navigator.of(context).pushReplacement(
+              Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
                   builder: (context) => const RoleSelectionScreen(),
                 ),
+                (route) => false,
               );
             }
           },

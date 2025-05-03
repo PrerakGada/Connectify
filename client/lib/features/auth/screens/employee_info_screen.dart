@@ -25,6 +25,7 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
   final _extraCurricularsController = TextEditingController();
   final _achievementsController = TextEditingController();
   final _portfolioLinksController = TextEditingController();
+  final _locationController = TextEditingController();
   File? _image;
   Position? _currentPosition;
   String? _currentAddress;
@@ -66,7 +67,6 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
     'Other'
   ];
 
-
   Future<void> _getCurrentLocation() async {
     final position = await LocationService.getCurrentLocation();
     if (position != null) {
@@ -78,6 +78,7 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
       if (address != null) {
         setState(() {
           _currentAddress = address;
+          _locationController.text = address;
         });
       }
     } else {
@@ -108,6 +109,7 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
     _extraCurricularsController.dispose();
     _achievementsController.dispose();
     _portfolioLinksController.dispose();
+    _locationController.dispose();
     for (var controllers in _experienceControllers) {
       controllers.values.forEach((controller) => controller.dispose());
     }
@@ -122,12 +124,13 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
     return BlocListener<UserDetailsCubit, UserDetailsState>(
       listener: (context, state) {
         if (state is UserDetailsLoaded) {
-          Navigator.of(context).pushReplacement(
+          Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
               builder: (context) => HomeScreen(
                 isEmployee: state.userDetails.isEmployee,
               ),
             ),
+            (route) => false,
           );
         } else if (state is UserDetailsError) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -174,9 +177,10 @@ class _EmployeeInfoScreenState extends State<EmployeeInfoScreen> {
                   children: [
                     Expanded(
                       child: TextFormField(
+                        controller: _locationController,
                         decoration: InputDecoration(
                           labelText: 'Location',
-                          hintText: _currentAddress ?? 'Click to get location',
+                          hintText: 'Click to get location',
                         ),
                         readOnly: true,
                       ),

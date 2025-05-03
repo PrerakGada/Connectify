@@ -25,27 +25,53 @@ class ApiService {
     final authModel = authBox.get(0);
     if (authModel != null) {
       headers['Authorization'] = 'Bearer ${authModel.token}';
+      print('Using token: ${authModel.token.substring(0, 10)}...'); // Debug log
+    } else {
+      print('No auth token found in Hive'); // Debug log
     }
 
-    switch (method.toUpperCase()) {
-      case 'GET':
-        return await _client.get(uri, headers: headers);
-      case 'POST':
-        return await _client.post(
-          uri,
-          headers: headers,
-          body: body != null ? jsonEncode(body) : null,
-        );
-      case 'PUT':
-        return await _client.put(
-          uri,
-          headers: headers,
-          body: body != null ? jsonEncode(body) : null,
-        );
-      case 'DELETE':
-        return await _client.delete(uri, headers: headers);
-      default:
-        throw Exception('Unsupported HTTP method: $method');
+    print('Making $method request to $uri'); // Debug log
+    print('Headers: $headers'); // Debug log
+    if (body != null) {
+      print('Body: $body'); // Debug log
+    }
+
+    try {
+      switch (method.toUpperCase()) {
+        case 'GET':
+          final response = await _client.get(uri, headers: headers);
+          print('Response status: ${response.statusCode}'); // Debug log
+          print('Response body: ${response.body}'); // Debug log
+          return response;
+        case 'POST':
+          final response = await _client.post(
+            uri,
+            headers: headers,
+            body: body != null ? jsonEncode(body) : null,
+          );
+          print('Response status: ${response.statusCode}'); // Debug log
+          print('Response body: ${response.body}'); // Debug log
+          return response;
+        case 'PUT':
+          final response = await _client.put(
+            uri,
+            headers: headers,
+            body: body != null ? jsonEncode(body) : null,
+          );
+          print('Response status: ${response.statusCode}'); // Debug log
+          print('Response body: ${response.body}'); // Debug log
+          return response;
+        case 'DELETE':
+          final response = await _client.delete(uri, headers: headers);
+          print('Response status: ${response.statusCode}'); // Debug log
+          print('Response body: ${response.body}'); // Debug log
+          return response;
+        default:
+          throw Exception('Unsupported HTTP method: $method');
+      }
+    } catch (e) {
+      print('Error making request: $e'); // Debug log
+      rethrow;
     }
   }
 }

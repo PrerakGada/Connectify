@@ -37,16 +37,6 @@ const interviewSchema = new mongoose.Schema(
   }
 );
 
-interviewSchema.pre("save", function (next) {
-  const doc = this.toObject();
-  for (const [key, value] of Object.entries(doc)) {
-    if (typeof value === "string") {
-      this.set(key, (value as string).trim());
-    }
-  }
-  next();
-});
-
 export const Interview: IInterviewModel = mongoose.model<
   IInterview,
   IInterviewModel

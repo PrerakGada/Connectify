@@ -28,26 +28,29 @@ class _SplashScreenState extends State<SplashScreen> {
       final userDetailsCubit = context.read<UserDetailsCubit>();
 
       if (authCubit.state is AuthUnauthenticated) {
-        Navigator.of(context).pushReplacement(
+        Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) => const SignupScreen(),
           ),
+          (route) => false,
         );
       } else if (userDetailsCubit.state is UserDetailsNotLoaded) {
-        Navigator.of(context).pushReplacement(
+        Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) => const RoleSelectionScreen(),
           ),
+          (route) => false,
         );
       } else if (authCubit.state is AuthAuthenticated &&
           userDetailsCubit.state is UserDetailsLoaded) {
-        Navigator.of(context).pushReplacement(
+        Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) => HomeScreen(
                 isEmployee: (userDetailsCubit.state as UserDetailsLoaded)
                     .userDetails
                     .isEmployee),
           ),
+          (route) => false,
         );
       }
     });

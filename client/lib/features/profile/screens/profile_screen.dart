@@ -34,9 +34,12 @@ class ProfileScreen extends StatelessWidget {
             onPressed: () async {
               await context.read<AuthCubit>().logout();
               if (context.mounted) {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => const LoginScreen(),
-                ));
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => const LoginScreen(),
+                  ),
+                  (route) => false,
+                );
               }
             },
           ),

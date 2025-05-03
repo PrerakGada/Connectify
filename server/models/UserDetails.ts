@@ -91,17 +91,6 @@ const userDetailsSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Sanitize input before saving
-userDetailsSchema.pre('save', function(next) {
-  const doc = this.toObject();
-  for (const [key, value] of Object.entries(doc)) {
-    if (typeof value === 'string') {
-      this.set(key, value.trim());
-    }
-  }
-  next();
-});
-
 export const UserDetails: IUserDetailsModel = mongoose.model<IUserDetails, IUserDetailsModel>(
   "UserDetails",
   userDetailsSchema

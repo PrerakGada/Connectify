@@ -27,6 +27,7 @@ class _BluetoothScreenState extends State<BluetoothScreen> {
   StreamSubscription? _scanSubscription;
   StreamSubscription? _adapterStateSubscription;
   Set<String> receivedUserIds = {};
+  final Map<BluetoothDevice, StreamSubscription> _connectionSubscriptions = {};
 
   @override
   void initState() {
@@ -42,7 +43,7 @@ class _BluetoothScreenState extends State<BluetoothScreen> {
 
     _adapterStateSubscription =
         FlutterBluePlus.adapterState.listen((BluetoothAdapterState state) {
-      if (state == BluetoothAdapterState.on) {
+      if (state == BluetoothAdapterState.on && mounted) {
         _startScanning();
       }
     });
@@ -56,7 +57,7 @@ class _BluetoothScreenState extends State<BluetoothScreen> {
     try {
       var subscription =
           device.connectionState.listen((BluetoothConnectionState state) async {
-        if (state == BluetoothConnectionState.disconnected) {
+        if (state == BluetoothConnectionState.disconnected && mounted) {
           setState(() {
             connectedDevices.remove(device);
           });
@@ -64,6 +65,8 @@ class _BluetoothScreenState extends State<BluetoothScreen> {
               "${device.disconnectReason?.code} ${device.disconnectReason?.description}");
         }
       });
+
+      _connectionSubscriptions[device] = subscription;
 
       await device.connect();
       List<BluetoothService> services = await device.discoverServices();
@@ -81,6 +84,7 @@ class _BluetoothScreenState extends State<BluetoothScreen> {
 
             await characteristic.setNotifyValue(true);
             characteristic.onValueReceived.listen((value) {
+              if (!mounted) return;
               final receivedId = String.fromCharCodes(value);
               setState(() {
                 receivedUserIds.add(receivedId);
@@ -95,9 +99,11 @@ class _BluetoothScreenState extends State<BluetoothScreen> {
         }
       }
 
-      setState(() {
-        connectedDevices.add(device);
-      });
+      if (mounted) {
+        setState(() {
+          connectedDevices.add(device);
+        });
+      }
 
       device.cancelWhenDisconnected(subscription, delayed: true);
     } catch (e) {
@@ -107,13 +113,15 @@ class _BluetoothScreenState extends State<BluetoothScreen> {
 
   Future<void> _startScanning() async {
     try {
-      setState(() {
-        isScanning = true;
-        scanResults = [];
-      });
+      if (mounted) {
+        setState(() {
+          isScanning = true;
+          scanResults = [];
+        });
+      }
 
       _scanSubscription = FlutterBluePlus.onScanResults.listen((results) {
-        if (results.isNotEmpty) {
+        if (results.isNotEmpty && mounted) {
           setState(() {
             scanResults = results;
           });
@@ -128,9 +136,11 @@ class _BluetoothScreenState extends State<BluetoothScreen> {
     } catch (e) {
       debugPrint('Error starting scan: $e');
     } finally {
-      setState(() {
-        isScanning = false;
-      });
+      if (mounted) {
+        setState(() {
+          isScanning = false;
+        });
+      }
     }
   }
 
@@ -270,7 +280,15 @@ class _BluetoothScreenState extends State<BluetoothScreen> {
   void dispose() {
     _scanSubscription?.cancel();
     _adapterStateSubscription?.cancel();
+
+    for (var device in connectedDevices) {
+      device.disconnect();
+      _connectionSubscriptions[device]?.cancel();
+    }
+    _connectionSubscriptions.clear();
+
     FlutterBluePlus.stopScan();
+
     super.dispose();
   }
 }
